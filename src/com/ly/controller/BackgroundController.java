@@ -188,6 +188,9 @@ public class BackgroundController {
     }
 
     /**
+     * 07.Homepage center_left
+     * 获取后台所有目录名，并转换成一级目录、二级目录
+     *
      * @return
      * @throws Exception
      */
@@ -199,8 +202,11 @@ public class BackgroundController {
         } else {
             rs = resourcesService.findAccountResourcess(Common.findUserSessionId(request));
         }
+        // Menu [id=119, name=快递员管理, parentId=109, parentName=物流管理, resKey=courier,
+        // resUrl=/background/Express/courierList.html, level=null, type=2, description=courier, children=[]]
+
         List<TreeObject> treeObjects = new ArrayList<TreeObject>();
-        for (Resources res : rs) {//转换为树对象
+        for (Resources res : rs) {
             TreeObject t = new TreeObject();
             try {
                 PropertyUtils.copyProperties(t, res);
@@ -213,19 +219,21 @@ public class BackgroundController {
             }
             treeObjects.add(t);
         }
+        // parentId
         List<TreeObject> ns = TreeUtil.getChildResourcess(treeObjects, 0);
         model.addAttribute("resourceslists", ns);
         return Common.BACKGROUND_PATH + "/homepage/left";
     }
 
     /**
+     * 08.center_right
+     *
      * @return
      * @throws Exception
      */
     @RequestMapping("right")
     public String right(Model model) {
-        //return Common.BACKGROUND_PATH + "/order/list";
-        return "redirect:/background/order/list.html";
+        return Common.BACKGROUND_PATH + "/homepage/right";
     }
 
     @RequestMapping("menu")

@@ -35,16 +35,17 @@ $(function(){
 	<div class="lefttop"><span></span>菜单导航</div>
     
     <dl class="leftmenu">
+		<!-left 目录名-->
         <c:forEach items="${resourceslists}" var="treeobject" varStatus="temp">
         	<dd>
 			    <div class="title">
-			    <span><img src="${pageContext.request.contextPath}/images/leftico01.png" /></span>${treeobject.name}
+			    	<span><img src="${pageContext.request.contextPath}/images/leftico01.png" /></span>${treeobject.name}
 			    </div>
-			    	<ul class="menuson">
+				<ul class="menuson">
 			    	<c:forEach items="${treeobject.children}" var="child">
 			    		<li ><cite></cite><a href="${pageContext.request.contextPath}/${child.resUrl}" target="rightFrame">${child.name}</a><i></i></li>
 			    	</c:forEach>
-			      </ul>    
+				</ul>
 			</dd>
         </c:forEach>
     </dl>
