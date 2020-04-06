@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.GroupMapper">
+
+<!--mybatis ehcache缓存配置  -->
+<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 
+<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />-->
+<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+	<!-- 以下与实体类的中字段一致 -->
+	<sql id="selectId">
+		id,
+		parentId,
+		name,
+		description,
+		createTime,
+		modifyTime,
+		remove,
+		removeTime,
+		level
+	</sql>
+	
+	<select id="query" resultType="Group" parameterType="java.util.HashMap">
+		select
+		<include refid="selectId" />
+		from sys_group
+	</select>
+	
+	<select id="getGroupByParentId" resultType="Group" parameterType="java.lang.Integer">
+		select
+		<include refid="selectId" />
+		from sys_group
+		<where>
+			parentId=#{pId}
+		</where>
+	</select>
+	
+	<select id="add" parameterType="Group">
+		insert into sys_group(parentId,name,description,createtime,level)
+		values(#{parentId},#{name},#{description},now(),#{level})
+	</select>
+	
+	<select id="delete" parameterType="String">
+		delete from sys_group where id=#{id}
+	</select>
+	
+	
+	<select id="getById" parameterType="String" resultType="Group">
+		select
+		<include refid="selectId" />
+		from sys_group
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="update" parameterType="Group">
+		update sys_group
+		<set>
+			<if test="name!=null and name!=''">
+				name=#{name},
+			</if>
+			<if test="parentId!=null and parentId!=''">
+				parentId=#{parentId},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			<if test="level!=null and level!=''">
+				level=#{level},
+			</if>
+			modifyTime=now()
+		</set>
+		where id=#{id}
+	</select>
+	
+	<select id="getGroupsById" parameterType="String" resultType="Group">
+	    
+	    select 
+	    <include refid="selectId" />
+	    from sys_group
+	    
+	    where id = #{id} or parentId = #{id}
+	    
+	</select>
+	
+	<!-- 通过组织名称查询信息  -->
+	<select id="getNameToInfo" parameterType="String" resultType="Group">
+	    select * from sys_group where name = #{0}
+	</select>
+	
+	<select id="getChildId" parameterType="Long" resultType="Long">
+	    select id from sys_group where parentId = #{0}
+	</select>
+	
+</mapper>

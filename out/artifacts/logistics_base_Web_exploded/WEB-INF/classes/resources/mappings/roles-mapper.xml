@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.RolesMapper">
+
+<!--mybatis ehcache缓存配置  -->
+<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 
+<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />-->
+<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+	<!-- 以下与实体类的中字段一致 -->
+	<sql id="selectId">
+		id,
+		enable,
+		name,
+		roleKey,
+		description,
+		groupId
+	</sql>
+	
+	<!--resultType="Roles" 每返回一条结果封装到Account里 -->
+	<select id="query" resultType="Roles" parameterType="java.util.HashMap">
+		select
+		<include refid="selectId" />
+		,(select name from sys_group where sys_role.groupId=id) groupName
+		from sys_role
+		<where>
+			<if test="t.name != null and t.name != ''">
+				name like '%${t.name}%'
+			</if>			
+			<!-- <if test="t.groupId != null and t.groupId != ''">
+				groupId in (select id from sys_group where sys_role.groupId=sys_group.id and 
+				(sys_group.id=#{t.groupId} or sys_group.parentId=#{t.groupId} ) )
+			</if>   -->
+		</where>
+	</select>
+	
+	<select id="queryByGroupId" resultType="Roles" parameterType="java.util.HashMap">
+		select
+		<include refid="selectId" />
+		,(select name from sys_group where sys_role.groupId=id) groupName
+		from sys_role
+		<where>
+			<if test="t.groupId != null and t.groupId != ''">
+				groupId=#{t.groupId}
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryAll" resultType="Roles" parameterType="Roles">
+		select
+		<include refid="selectId" />
+		from sys_role
+		<where>
+			<if test="name != null and name != ''">
+				name like '%${name}%'
+			</if>
+		</where>
+	</select>
+	<select id="isExist" resultType="Roles" parameterType="String">
+		select
+		<include refid="selectId" />
+		from sys_role
+		where name = #{name}
+	</select>
+	
+	<insert id="add" parameterType="Roles">
+		insert into sys_role (enable,name,roleKey,description,groupId)
+		values (#{enable},#{name}, #{roleKey},#{description},#{groupId})
+	</insert>
+	<delete id="delete" parameterType="String">
+		delete from sys_role where
+		id=#{id}
+	</delete>
+	<select id="getById" parameterType="String" resultType="Roles">
+		select
+		<include refid="selectId" />
+		from sys_role where id=#{id}
+	</select>
+	<update id="update" parameterType="Roles">
+		update sys_role
+		<set>
+			<if test="name != null and name != ''">
+				name=#{name},
+			</if>
+			<if test="enable != null and enable != ''">
+				enable=#{enable},
+			</if>
+			<if test="description != null and description != ''">
+				description=#{description},
+			</if>
+			<if test="roleKey != null and roleKey != ''">
+				roleKey=#{roleKey},
+			</if>
+			<if test="groupId != null and groupId != ''">
+				groupId=#{groupId}
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	<select id="findbyAccountRole" parameterType="String" resultType="Roles">
+	  select 
+	  <include refid="selectId" /> 
+	  from sys_role where id in (SELECT role_id FROM sys_acc_role WHERE acc_id=#{accountId}) 
+  </select>
+  <delete id="deleteAccountRole" parameterType="String">
+		delete from sys_acc_role
+		where acc_id=#{accountId}
+	</delete>
+  <insert id="addAccRole" parameterType="RoleAccount">
+	insert into sys_acc_role (acc_id,role_id) value (#{accountId},#{roleId})
+	</insert>
+</mapper>

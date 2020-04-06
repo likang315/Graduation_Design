@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.ActivityMapper">
+
+	<!-- 以下与实体类的中字段一致 -->
+	<sql id="selectId">
+		id,
+		title,
+		content,
+		start_time,
+		end_time,
+		Is_handle,
+		is_delete,
+		create_user,
+		create_time,
+		modify_time,
+		modify_user,
+		delete_time,
+		delete_user,
+		description,
+		counts,
+		activity_type,
+		mold,
+		priority
+	</sql>
+
+	<!-- 查询出政策的条数 -->
+	<select id="findActivityCount" resultType="java.lang.Integer">
+		select
+		count(*)
+		from myd_activity_info
+		order by Is_handle asc,priority DESC,Start_time DESC
+	</select>
+	<!-- 查询出政策信息 -->
+	<select id="findActivityByPage" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		select * from myd_activity_info
+		order by Is_handle asc,priority DESC,Start_time DESC limit #{start},#{size}
+	</select>
+
+	<select id="findActivityCountByTime" resultType="java.lang.Integer"
+		parameterType="java.util.Map">
+		select
+		count(*)
+		from myd_activity_info where start_time &gt;= #{starttime} and end_time
+		&lt; #{endtime}
+		order by Is_handle asc,priority DESC,Start_time DESC
+	</select>
+
+	<select id="findActivityByPageByTime" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		select * from myd_activity_info where start_time &gt;= #{starttime} and
+		end_time &lt; #{endtime}
+		order by Is_handle asc,priority DESC,Start_time DESC limit #{start},#{size}
+	</select>
+
+
+	<!-- delete 后台删除政策 -->
+	<update id="delete" parameterType="String">
+		update myd_activity_info set Is_handle = '2' where id = #{0}
+	</update>
+
+	<!-- top 后台置顶政策 -->
+	<update id="top" parameterType="String">
+		update myd_activity_info set priority = '2' where id = #{0}
+	</update>
+
+	<!-- 后台置顶政策 -->
+	<update id="cancelTop" parameterType="String">
+		update myd_activity_info set priority = '0' where id = #{0}
+	</update>
+
+	<!-- add 后台发布政策 -->
+	<insert id="add" parameterType="ActivityInfo">
+		insert into
+		myd_activity_info(id,title,description,content,start_time,end_time,groupId,activity_type,create_user,counts,is_handle,mold)
+		values(#{id},#{title},#{description},#{content},#{start_time},#{end_time},#{groupId},#{activity_type},#{create_user},#{counts},#{is_handle},#{mold})
+	</insert>
+
+	<!-- 后台 getActivityInfo -->
+	<select id="getActivityInfo" parameterType="String" resultType="ActivityInfo">
+		select
+		<include refid="selectId" />
+		from myd_activity_info where id = #{0}
+	</select>
+
+	<select id="getAllGroupId" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		select queryChildrenAreaInfo(#{groupId})
+	</select>
+
+	<select id="readAll" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(0) from (
+		select a.id,
+		a.title,
+		a.start_time,
+		a.end_time,
+		sum(case when b.Policy_id is not null then 1 else 0 end) readcounts,
+		a.counts
+		from myd_activity_info as a
+		left join
+		myd_activity_read as b
+		on a.id = b.Policy_id
+		where FIND_IN_SET(a.groupid,#{gid})
+
+		group by a.id,a.title,a.End_time,a.counts) A
+	</select>
+
+
+	<!-- readList 后台 -->
+	<select id="findPolicyByPage" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select a.id,
+		a.title,
+		a.start_time,
+		a.end_time,
+		sum(case when
+		b.Policy_id is not null then 1 else 0 end) readcounts,
+		a.counts
+		from
+		myd_activity_info as a
+		left join
+		myd_activity_read as b
+		on a.id = b.Policy_id
+		where FIND_IN_SET(a.groupid,#{gid})
+		group by
+		a.id,a.title,a.End_time,a.counts limit #{start},#{size}
+	</select>
+
+
+	<!-- 后台这次 按日期查询 -->
+	<select id="findCountActivityByTime" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(0) from(
+		select a.id,
+		a.title,
+		a.End_time,
+		sum(case when b.Policy_id is not null then 1 else 0 end) readcounts,
+		a.counts
+		from myd_activity_info as a
+		left join
+		myd_activity_read as b
+		on a.id = b.Policy_id
+		where a.start_time &gt;= #{starttime} and a.end_time &lt; #{endtime}
+		and FIND_IN_SET(a.groupid,#{gid})
+		group by a.id,a.title,a.End_time,a.counts
+		)A
+	</select>
+
+	<select id="findActivityByTime" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select a.id,
+		a.title,
+		a.End_time,
+		sum(case when b.Policy_id is not null then 1 else 0 end) readcounts,
+		a.counts
+		from myd_activity_info as a
+		left join
+		myd_activity_read as b
+		on a.id = b.Policy_id
+		where a.start_time &gt;= #{starttime} and a.end_time &lt; #{endtime}
+		and FIND_IN_SET(a.groupid,#{gid})
+		group by a.id,a.title,a.End_time,a.counts limit #{start},#{size}
+	</select>
+
+	<!-- updateReadCounts -->
+	<update id="updateReadCounts" parameterType="String">
+		update myd_activity_info set counts = #{1} where id = #{0}
+	</update>
+
+	<!-- 过期处理 -->
+	<update id="isHand" parameterType="String">
+		update myd_activity_info set Is_handle = '2' where id = #{0}
+	</update>
+
+	<!-- getReadInfo 后台 -->
+	<select id="getReadInfo" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT a.*,case when a.count != 0 then
+		CONCAT((truncate(a.readcounts/a.count,2))*100,'%') else '0.00%' end as
+		percent from(
+		SELECT
+		a.title,a.start_time,a.end_time,a.name,a.gid,a.count,sum(case when
+		a.id is not null then 1 else 0 end) readcounts from (
+		SELECT
+		a.title,
+		a.start_time,
+		a.end_time,
+		(SELECT name from sys_group where id = #{currentid}) as name,
+		(SELECT id from sys_group where id = #{currentid}) as gid,
+		(SELECT count(1) from sys_account where groupid in
+		<foreach collection="groupsid" item="groupsid" index="index"
+			open="(" close=")" separator=",">
+			#{groupsid}
+		</foreach>
+		) as count,
+		c.id
+
+
+		from myd_activity_info as a
+		left join (select * from myd_activity_read where read_user in(SELECT id
+		from sys_account where groupid in
+		<foreach collection="groupsid2" item="groupsid2" index="index"
+			open="(" close=")" separator=",">
+			#{groupsid2}
+		</foreach>
+		) ) as c on a.id = c.policy_id
+		where a.id = #{id}
+		) as a
+		GROUP BY
+		a.gid,a.title,a.start_time,a.end_time,a.name,a.count) as a
+	</select>
+	
+	<!-- 阅读清单 -->
+	<select id="getReadList" parameterType="java.util.Map" resultType="java.util.Map">
+	   SELECT a.accountName,
+	   	case when b.policy_id is not null then b.read_time else null end read_time,
+		case when b.policy_id is not null then 1 else 0 end flag
+		from sys_account as a 
+			left join (select * from myd_activity_read where policy_id = #{id})as b 
+			on a.id = b.policy_id
+		where groupid = #{groupid}
+	</select>
+	
+	<!-- 片区清单 -->
+	<select id="getAeraData" parameterType="java.util.Map" resultType="java.util.Map">
+	    
+		SELECT a.title,a.accountName,b.read_time
+		
+		from 
+		(SELECT '0ace7fa9-14d0-4cf6-88cd-a82837b1d42b' as pid,
+		(SELECT title from myd_activity_info where id = #{id}) as title ,a.* 
+		from sys_account as a where a.groupid = #{groupid}) as a 
+		left join (select * from myd_activity_read where policy_id = #{id})as b on a.id = b.read_user
+
+	</select>
+	
+	
+	<!-- excel 报表 -->
+	<select id="getReadReport" parameterType="java.util.Map" resultType="java.util.Map">
+	    select a.*,date_format(b.read_time,'%Y-%c-%d %h:%i:%s') as read_time,c.name as groupname
+	    from sys_account as a left join (select * from myd_activity_read where policy_id = #{id}) as b on a.id = b.read_user
+	    left join sys_group as c on a.groupid = c.id
+	    where groupid in
+	    <foreach collection="gs" item="item" index="index" open="(" close=")" separator=",">
+	        #{item}
+		</foreach>
+	</select>
+	
+	
+	<!-- getAll -->
+	<select id="getGovAll" parameterType="java.util.Map" resultType="ActivityInfo">
+		select
+		a.id,
+		a.title,
+		a.content,
+		left(a.start_time,16) as start_time,
+		a.end_time,
+		a.Is_handle,
+		a.is_delete,
+		a.create_user,
+		a.create_time,
+		a.modify_time,
+		a.modify_user,
+		a.delete_time,
+		a.delete_user,
+		a.description,
+		a.counts,
+		a.activity_type,
+		case when b.Policy_id is null then 1 else 0 end as flag
+		from myd_activity_info as a
+		left join (select * from myd_activity_read where read_user = #{userid}) as b
+		on a.id = b.Policy_id
+		where a.Is_handle = '1' AND
+		(FIND_IN_SET(convert(#{groupid} using utf8),
+		getParentId(a.groupid)) OR FIND_IN_SET(
+		convert(#{groupid} using utf8),
+		queryChildrenAreaInfo(a.groupid)))
+		and a.mold &lt;&gt; 'C'
+		order by case when b.Policy_id is null then 1 else 0 end desc, (CASE priority WHEN 2 THEN 2 ELSE 0 END)DESC,Start_time DESC
+	</select>
+	
+	
+	<!--获取知识库信息-->
+	<select id="getKnowledge" parameterType="java.util.Map" resultType="ActivityInfo">
+		select
+		a.id,
+		a.title,
+		a.content,
+		left(a.start_time,16) as start_time,
+		a.end_time,
+		a.Is_handle,
+		a.is_delete,
+		a.create_user,
+		a.create_time,
+		a.modify_time,
+		a.modify_user,
+		a.delete_time,
+		a.delete_user,
+		a.description,
+		a.counts,
+		a.activity_type,
+		case when b.Policy_id is null then 1 else 0 end as flag
+		from myd_activity_info as a
+		left join (select * from myd_activity_read where read_user = #{userid}) as b
+		on a.id = b.Policy_id
+		where a.Is_handle = '1' AND
+		(FIND_IN_SET(convert(#{groupid} using utf8),
+		getParentId(a.groupid)) OR FIND_IN_SET(
+		convert(#{groupid} using utf8),
+		queryChildrenAreaInfo(a.groupid)))
+		and a.mold = 'C'
+		order by case when b.Policy_id is null then 1 else 0 end desc, (CASE priority WHEN 2 THEN 2 ELSE 0 END)DESC,Start_time DESC
+	</select>
+	
+	
+	<select id="getChildId" parameterType="Long" resultType="Long">
+	    select id from sys_group where parentId = #{0}
+	</select>
+	
+	<!-- getByUserid -->
+	<select id="getByUserid" parameterType="String" resultType="ActivityRead">
+	    select * from myd_activity_read where Read_user = #{0} and Policy_id = #{1}
+	</select>
+	
+	<!-- updateRead -->
+	<insert id="updateRead" parameterType="ActivityRead"> 
+	    insert into myd_activity_read(id,Read_time,Policy_id,Read_user) 
+	    values(#{id},#{read_time},#{policy_id},#{read_user}) 
+	</insert>
+	
+	<!-- getById -->
+	<select id="getById" parameterType="String" resultType="ActivityInfo">
+	    select
+			<include refid="selectId" />
+	    from myd_activity_info where id = #{0}
+	</select>
+	
+	<!-- app 搜索-->
+	
+	<select id="search" parameterType="java.util.Map" resultType="java.util.Map">
+	   	select 
+						b.Policy_id,
+						a.id,
+						a.title,
+						a.content,
+						a.groupId,
+						a.start_time,
+						a.end_time,
+						a.Is_handle,
+						a.is_delete,
+						a.create_user,
+						a.create_time,
+						a.modify_time,
+						a.modify_user,
+						a.delete_time,
+						a.delete_user,
+						a.description,
+						a.counts,
+						a.activity_type,
+						a.mold,
+	  	case when b.Policy_id is null then 1 else 0 end  as flag
+	    from myd_activity_info as a 
+	    left join (select * from myd_activity_read where read_user = #{userid}) as b
+	    on a.id = b.Policy_id
+	    where a.Is_handle = '1' and a.title LIKE CONCAT('%',#{keyword},'%' ) and FIND_IN_SET( a.groupid,#{groupid})
+		order by case when b.Policy_id is null then 1 else 0 end desc
+	</select>
+	
+	 <select id="getGroups" parameterType="String" resultType="java.lang.String">
+	   select queryChildrenAreaInfo(#{groupId})	 
+	</select> 
+	
+	<select id="getGroup" parameterType="String" resultType="java.lang.String">
+	   select CONCAT(CONCAT(queryChildrenAreaInfo(#{groupId}),','),getParentId(#{groupId})) 
+	</select> 
+
+
+</mapper>
