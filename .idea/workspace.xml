@@ -39,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ly/controller/BackgroundController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="191" column="24" lean-forward="true" selection-start-line="191" selection-start-column="24" selection-end-line="191" selection-end-column="24" />
+            <state relative-caret-position="81">
+              <caret line="179" column="21" lean-forward="true" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
               <folding>
                 <element signature="method#login#0;class#BackgroundController#0" expanded="true" />
                 <element signature="e#2430#2446#0" expanded="true" />
@@ -165,6 +165,7 @@
     <option name="width" value="1886" />
     <option name="height" value="1063" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <flattenPackages ProjectPane="false" />
@@ -418,16 +419,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585967612630</updated>
-      <workItem from="1585967614412" duration="25805000" />
+      <workItem from="1585967614412" duration="26511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25805000" />
+    <option name="totallyTimeSpent" value="26511000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Designer" />
       <window_info id="Image Layers" />
@@ -435,8 +435,8 @@
       <window_info id="UI Designer" />
       <window_info id="Web" side_tool="true" />
       <window_info id="Favorites" side_tool="true" weight="0.3297568" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.185836" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.24964234" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49841774" visible="true" weight="0.185836" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.50158226" side_tool="true" visible="true" weight="0.185836" />
       <window_info anchor="bottom" id="Application Servers" weight="0.32914925" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" weight="0.32953367" />
@@ -878,8 +878,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/controller/BackgroundController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="191" column="24" lean-forward="true" selection-start-line="191" selection-start-column="24" selection-end-line="191" selection-end-column="24" />
+        <state relative-caret-position="81">
+          <caret line="179" column="21" lean-forward="true" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
           <folding>
             <element signature="method#login#0;class#BackgroundController#0" expanded="true" />
             <element signature="e#2430#2446#0" expanded="true" />
