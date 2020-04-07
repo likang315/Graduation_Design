@@ -26,7 +26,7 @@ $(function(){
     	<!--
     	 <a href="javascript:void(0)" target="_parent"><img src="${pageContext.request.contextPath}/images/loginlogo.png" title="系统首页"  style="margin-top: 20px;"/></a>
         -->
-        <h1 style="font-size:200%;color:orange">物流后台管理系统~</h1>
+        <h1 style="font-size:150%;color:orange">Logistics Management System</h1>
 
     </div>
              

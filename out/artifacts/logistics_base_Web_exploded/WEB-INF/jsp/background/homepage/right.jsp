@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-        <img src="${pageContext.request.contextPath}/images/right.png" alt="No image!!!" style="position:fixed;top:10%;left:5%; width:90%; height:80%"/>
+<img src="${pageContext.request.contextPath}/images/right.png" alt="No image!!!"
+     style="position:fixed;top:10%;left:5%; width:90%; height:80%"/>
 </body>
 </html>

@@ -45,14 +45,17 @@ import com.ly.util.TreeUtil;
  */
 @Controller
 @RequestMapping("/")
-public class BackgroundController {
+public class BackHomepageController {
+
     @Autowired
     private AccountService accountService;
+
     @Autowired
     private AuthenticationManager myAuthenticationManager;
 
     @Inject
     private UserLoginService userLoginService;
+
     @Autowired
     private ResourcesService resourcesService;
 
@@ -234,11 +237,6 @@ public class BackgroundController {
     @RequestMapping("right")
     public String right(Model model) {
         return Common.BACKGROUND_PATH + "/homepage/right";
-    }
-
-    @RequestMapping("menu")
-    public String menu(Model model) {
-        return Common.BACKGROUND_PATH + "/framework/menu";
     }
 
     /**
