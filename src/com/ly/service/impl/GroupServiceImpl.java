@@ -68,7 +68,6 @@ public class GroupServiceImpl implements GroupService {
         Group g = groupMapper.getById(String.valueOf(t.getParentId()));
         t.setLevel(g.getLevel() + 1);
         groupMapper.add(t);
-
     }
 
     @Override
@@ -140,17 +139,21 @@ public class GroupServiceImpl implements GroupService {
         return list;
     }
 
+    /**
+     * 通过ID获取组织架构
+     *
+     * @param pageView
+     * @param group
+     * @param groupId
+     * @return
+     */
     @Override
     public PageView queryGroup(PageView pageView, Group group, int groupId) {
 
         Group g = groupMapper.getById(String.valueOf(groupId));
-
-        List<Group> res = new ArrayList<Group>();
+        List<Group> res = new ArrayList<>();
         res.add(g);
-
         addGroupByParent(g, res);
-
-        // pageView.setRecords(res);
         pageView.setRowCount(res.size());
 
         if (pageView.getStartPage() > res.size())
@@ -164,11 +167,15 @@ public class GroupServiceImpl implements GroupService {
                         res.subList(pageView.getStartPage(), pageView.getStartPage() + pageView.getPageSize()));
         }
 
-        // pageView.setRecords(res.subList(pageView.getStartPage(),
-        // res.size()));
         return pageView;
     }
 
+    /**
+     * 通过parent_Id获取子目录
+     *
+     * @param g
+     * @param groups
+     */
     private void addGroupByParent(Group g, List<Group> groups) {
         List<Group> group = groupMapper.getGroupByParentId(Integer.parseInt(g.getId()));
         for (Group group2 : group) {

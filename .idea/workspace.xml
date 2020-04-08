@@ -7,16 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8af70565-15df-4457-8c0f-fdc6f056ae30" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupList.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/ly/controller/GroupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/ly/controller/GroupController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/ly/controller/ResourcesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/ly/controller/ResourcesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/ly/service/impl/GroupServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/com/ly/service/impl/GroupServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/resources/mappings/resources-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/resources/mappings/resources-mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/resources/mappings/roles-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/classes/resources/mappings/roles-mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/resource/permissioUser.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/resource/permissionUser.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleadd.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleAdd.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/rolemodify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleModify.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/common/common-js.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/common/common-js.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupadd.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupAdd.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/grouplist.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupmodify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupModify.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/permissioUser.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/permissionUser.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/classes/META-INF/logistics_base.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/classes/resources/FTPConnect.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/classes/resources/config.properties" beforeDir="false" />
@@ -120,7 +117,7 @@
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/express/expressadd.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/forms/dishiHandleForms.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/group/groupadd.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/group/grouplist.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/group/grouplist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/group/grouplist.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/group/groupmodify.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/group/permissioUser.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/homepage/center.jsp" beforeDir="false" />
@@ -140,13 +137,11 @@
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/report/orderReport.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/report/reportTotal.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/report/toReportTotal.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/resource/permissioUser.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/resource/permissionUser.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/resource/resourceadd.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/resource/resourcelist.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/resource/resourcemodify.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/role/roleadd.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/role/roleadd.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/role/rolelist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/role/rolelist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/role/rolemodify.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/role/roleModify.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/role/show.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/store/storeList.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/WEB-INF/jsp/background/store/storeadd.jsp" beforeDir="false" />
@@ -1304,13 +1299,9 @@
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/menu.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/upload/activity/不要删除这个文件" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ly/controller/GroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ly/controller/GroupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ly/controller/ResourcesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ly/controller/ResourcesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ly/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ly/controller/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ly/mapper/ResourcesMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ly/mapper/ResourcesMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ly/service/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ly/service/GroupService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ly/service/impl/GroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ly/service/impl/GroupServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/mappings/resources-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/mappings/resources-mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/mappings/roles-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/mappings/roles-mapper.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -1333,41 +1324,13 @@
     <select />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="logisitics_prod" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleList.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="61" column="93" selection-start-line="61" selection-start-column="87" selection-end-line="61" selection-end-column="93" />
-              <folding>
-                <element signature="n#style#0;n#a#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/ly/controller/RoleController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="113" column="6" lean-forward="true" selection-start-line="113" selection-start-column="6" selection-end-line="113" selection-end-column="6" />
-              <folding>
-                <element signature="method#addUI#0;class#RoleController#0" expanded="true" />
-                <element signature="method#editUI#0;class#RoleController#0" expanded="true" />
-                <element signature="method#update#0;class#RoleController#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1380,9 +1343,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loginCheck.html</find>
-      <find>loginCheck</find>
-      <find>submitlogin</find>
       <find>index.html</find>
       <find>login</find>
       <find>securityMetadataSource</find>
@@ -1410,6 +1370,9 @@
       <find>editUI</find>
       <find>editUI.html</find>
       <find>rolemodify</find>
+      <find>addGroup</find>
+      <find>permissionRole</find>
+      <find>tree</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background</dir>
@@ -1421,11 +1384,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/resources/jdbc.properties" />
-        <option value="$PROJECT_DIR$/src/com/ly/util/AlipayNotify.java" />
-        <option value="$PROJECT_DIR$/src/com/ly/base/ViewBase.java" />
-        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/main/main.jsp" />
-        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/main/s.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/main/center.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/main/left.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/express/courierList.jsp" />
@@ -1458,11 +1416,8 @@
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/homepage/yonghu_01.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/login/login.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleadd.jsp" />
-        <option value="$PROJECT_DIR$/src/com/ly/service/GroupService.java" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleAdd.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/common/common-js.jsp" />
-        <option value="$PROJECT_DIR$/src/com/ly/controller/GroupController.java" />
-        <option value="$PROJECT_DIR$/src/com/ly/service/impl/GroupServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/resources/mappings/resources-mapper.xml" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/resource/permissionUser.jsp" />
         <option value="$PROJECT_DIR$/src/com/ly/mapper/ResourcesMapper.java" />
@@ -1470,7 +1425,16 @@
         <option value="$PROJECT_DIR$/src/com/ly/controller/ResourcesController.java" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleList.jsp" />
         <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleModify.jsp" />
+        <option value="$PROJECT_DIR$/src/com/ly/service/GroupService.java" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/grouLlist.jsp" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/grouList.jsp" />
+        <option value="$PROJECT_DIR$/src/com/ly/service/impl/GroupServiceImpl.java" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupAdd.jsp" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/permissionUser.jsp" />
+        <option value="$PROJECT_DIR$/src/com/ly/controller/GroupController.java" />
         <option value="$PROJECT_DIR$/src/com/ly/controller/RoleController.java" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupModify.jsp" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupList.jsp" />
       </list>
     </option>
   </component>
@@ -1487,11 +1451,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1447" />
-    <option name="y" value="7" />
-    <option name="width" value="1881" />
-    <option name="height" value="1060" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="832" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -1505,6 +1468,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1554,12 +1518,6 @@
               <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="WebRoot" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="WebRoot" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1576,30 +1534,11 @@
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="jsp" type="462c0819:PsiDirectoryNode" />
               <item name="background" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="WebRoot" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="jsp" type="462c0819:PsiDirectoryNode" />
-              <item name="background" type="462c0819:PsiDirectoryNode" />
-              <item name="resource" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="WebRoot" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="jsp" type="462c0819:PsiDirectoryNode" />
-              <item name="background" type="462c0819:PsiDirectoryNode" />
-              <item name="role" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -1642,53 +1581,6 @@
   <component name="RunManager" selected="Tomcat Server.prod">
     <configuration name="denied.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/logistics_base_Web_exploded/denied.html">
       <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="logistics_base" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <module name="logistics_base" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="prod" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.40" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/logistics_base_Web_exploded/" />
@@ -1765,8 +1657,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Tomcat Server.prod" />
       <item itemvalue="JavaScript Debug.denied.html" />
+      <item itemvalue="Tomcat Server.prod" />
     </list>
     <recent_temporary>
       <list>
@@ -1784,90 +1676,140 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585967612630</updated>
-      <workItem from="1585967614412" duration="45935000" />
+      <workItem from="1585967614412" duration="46725000" />
+      <workItem from="1586327076579" duration="5097000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45935000" />
+    <option name="totallyTimeSpent" value="51822000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1440" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="832" extended-state="0" />
     <layout>
-      <window_info id="Designer" />
-      <window_info id="Image Layers" />
-      <window_info id="Capture Tool" />
-      <window_info id="UI Designer" />
-      <window_info id="Web" sideWeight="0.50067294" side_tool="true" weight="0.185836" />
-      <window_info id="Favorites" sideWeight="0.50162864" side_tool="true" weight="0.185836" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992908" visible="true" weight="0.185836" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992908" visible="true" weight="0.17412141" />
       <window_info id="Structure" order="1" sideWeight="0.50070924" side_tool="true" weight="0.185836" />
-      <window_info anchor="bottom" id="Application Servers" weight="0.3284974" />
-      <window_info anchor="bottom" id="Spring" weight="0.32953367" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32953367" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.20621762" />
-      <window_info anchor="bottom" id="Java Enterprise" weight="0.32953367" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" weight="0.32953367" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.50162864" side_tool="true" weight="0.185836" />
+      <window_info id="Web" order="7" sideWeight="0.50067294" side_tool="true" weight="0.185836" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33989638" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.44663212" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.35440415" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Maven" weight="0.32960597" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Word Book" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Database" weight="0.32960597" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32953367" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3284974" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32953367" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.7419689" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.20621762" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.32953367" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.63834196" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24973376" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.32960597" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Word Book" order="6" side_tool="true" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32960597" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
     </layout>
     <layout-to-restore>
-      <window_info id="Designer" order="0" />
-      <window_info id="Image Layers" order="1" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="UI Designer" order="3" />
-      <window_info id="Favorites" order="4" sideWeight="0.5006553" side_tool="true" weight="0.185836" />
-      <window_info id="Web" order="5" sideWeight="0.50067294" side_tool="true" weight="0.185836" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" sideWeight="0.49932706" visible="true" weight="0.185836" />
-      <window_info id="Structure" order="7" sideWeight="0.50067294" side_tool="true" weight="0.185836" />
-      <window_info anchor="bottom" id="Application Servers" order="0" weight="0.32914925" />
-      <window_info anchor="bottom" id="Spring" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="2" weight="0.32953367" />
-      <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="5" weight="0.20621762" />
-      <window_info anchor="bottom" id="Java Enterprise" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Message" order="9" />
-      <window_info anchor="bottom" id="Find" order="10" />
-      <window_info anchor="bottom" id="Run" order="11" weight="0.36787564" />
-      <window_info anchor="bottom" id="Debug" order="12" weight="0.373057" />
-      <window_info anchor="bottom" id="Cvs" order="13" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="14" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="15" />
-      <window_info anchor="right" id="Maven" order="0" weight="0.32960597" />
-      <window_info anchor="right" id="Palette" order="1" />
-      <window_info anchor="right" id="Word Book" order="2" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="right" id="Database" order="4" weight="0.32960597" />
-      <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="8" weight="0.24973376" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992908" visible="true" weight="0.17412141" />
+      <window_info id="Structure" order="1" sideWeight="0.50070924" side_tool="true" weight="0.185836" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.50162864" side_tool="true" weight="0.185836" />
+      <window_info id="Web" order="7" sideWeight="0.50067294" side_tool="true" weight="0.185836" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1388601" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.35440415" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32953367" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3284974" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32953367" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.7419689" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.20621762" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.32953367" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.63834196" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24973376" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.32960597" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Word Book" order="6" side_tool="true" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32960597" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1900,81 +1842,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/ly/base/BaseService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/pulgin/mybatis/plugin/PageView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2400">
-          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
-          <folding>
-            <element signature="method#PageView#1;class#PageView#0" expanded="true" />
-            <element signature="method#PageView#2;class#PageView#0" expanded="true" />
-            <element signature="method#setPageNow#0;class#PageView#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/pulgin/mybatis/plugin/PagePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1280">
-          <caret line="209" column="14" lean-forward="true" selection-start-line="209" selection-start-column="14" selection-end-line="209" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-aop-3.1.2.RELEASE.jar!/org/springframework/aop/framework/Cglib2AopProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="263" selection-start-line="263" selection-end-line="263" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/spring-web-3.1.2.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/grouplist.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-461">
-          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
-          <folding>
-            <element signature="e#2611#2916#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/homepage/top.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/AccountController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
-          <folding>
-            <element signature="method#list#0;class#AccountController#0" expanded="true" />
-            <element signature="method#query#0;class#AccountController#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/ActivityController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/util/Common.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -2065,13 +1932,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/mapper/GroupMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/service/vo/TreeVo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -2083,20 +1943,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="2" selection-start-line="2" selection-end-line="5" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/service/GroupService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/mappings/group-mapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="40" column="9" lean-forward="true" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -2124,28 +1970,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/service/impl/GroupServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="method#getById#0;class#GroupServiceImpl#0" expanded="true" />
-            <element signature="method#getTreeGroup#0;class#GroupServiceImpl#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/controller/SearchController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleAdd.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -2156,33 +1984,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/GroupController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
-          <folding>
-            <element signature="method#getGroopTree#0;class#GroupController#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/js/ligerUI/ligerTree.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="150" column="8" lean-forward="true" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="8" />
-          <folding>
-            <element signature="e#4880#5339#0" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2217,21 +2022,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/resource/permissionUser.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
-          <folding>
-            <element signature="e#956#1387#0#HTML" expanded="true" />
-            <element signature="e#1428#1439#0#HTML" expanded="true" />
-            <element signature="e#2317#2561#0#HTML" expanded="true" />
-            <element signature="e#2821#2916#0#HTML" expanded="true" />
-            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/resource/resourcelist.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -2253,13 +2043,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/base/Base.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/service/impl/RolesServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
@@ -2268,23 +2051,6 @@
             <element signature="method#update#0;class#RolesServiceImpl#0" expanded="true" />
             <element signature="method#getById#0;class#RolesServiceImpl#0" expanded="true" />
             <element signature="method#add#0;class#RolesServiceImpl#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleModify.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/ResourcesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-226">
-          <caret line="36" column="14" lean-forward="true" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
-          <folding>
-            <element signature="method#saveRoleRescours#0;class#ResourcesController#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2303,25 +2069,193 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleModify.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="79" column="72" selection-start-line="79" selection-start-column="72" selection-end-line="79" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/ResourcesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="78" column="50" selection-start-line="78" selection-start-column="42" selection-end-line="78" selection-end-column="50" />
+          <folding>
+            <element signature="method#saveRoleRescours#0;class#ResourcesController#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/service/GroupService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/artifacts/logistics_base_Web_exploded/js/kindeditor/plugins/emoticons/images/56.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/pulgin/mybatis/plugin/PageView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+          <folding>
+            <element signature="e#145#187#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/entity/background/Group.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/mappings/group-mapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/mapper/GroupMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/service/impl/GroupServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+          <folding>
+            <element signature="method#delete#0;class#GroupServiceImpl#0" expanded="true" />
+            <element signature="method#getById#0;class#GroupServiceImpl#0" expanded="true" />
+            <element signature="method#add#0;class#GroupServiceImpl#0" expanded="true" />
+            <element signature="method#getTreeGroup#0;class#GroupServiceImpl#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/base/Base.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1829">
+          <caret line="17905" column="12" selection-start-line="17905" selection-start-column="12" selection-end-line="17905" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/js/ligerUI/ligerTree.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
+          <folding>
+            <element signature="e#4880#5339#0" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/resource/permissionUser.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding>
+            <element signature="e#1531#2983#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/permissionUser.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="82" column="7" lean-forward="true" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupAdd.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1300">
+          <caret line="78" column="48" lean-forward="true" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleList.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="61" column="93" selection-start-line="61" selection-start-column="87" selection-end-line="61" selection-end-column="93" />
-          <folding>
-            <element signature="n#style#0;n#a#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state>
+          <caret line="125" column="17" lean-forward="true" selection-start-line="125" selection-start-column="17" selection-end-line="125" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/controller/RoleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="113" column="6" lean-forward="true" selection-start-line="113" selection-start-column="6" selection-end-line="113" selection-end-column="6" />
+        <state relative-caret-position="340">
+          <caret line="32" column="6" lean-forward="true" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
           <folding>
+            <element signature="method#query#0;class#RoleController#0" expanded="true" />
             <element signature="method#addUI#0;class#RoleController#0" expanded="true" />
             <element signature="method#editUI#0;class#RoleController#0" expanded="true" />
             <element signature="method#update#0;class#RoleController#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupModify.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/activity/add.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="133" column="88" selection-start-line="133" selection-start-column="88" selection-end-line="133" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/GroupController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+          <folding>
+            <element signature="method#list#0;class#GroupController#0" expanded="true" />
+            <element signature="method#addGroup#0;class#GroupController#0" expanded="true" />
+            <element signature="method#getGroopTree#0;class#GroupController#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/group/groupList.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="76" column="10" lean-forward="true" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="10" />
+          <folding>
+            <element signature="e#2389#2677#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8300#8306#0#HTML" expanded="true" />
+            <element signature="e#8306#8312#0#HTML" expanded="true" />
+            <element signature="e#8348#8354#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#form#0;n#div#0;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/jsp/background/role/roleAdd.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
         </state>
       </provider>
     </entry>

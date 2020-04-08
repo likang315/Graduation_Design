@@ -39,7 +39,7 @@ public interface GroupService extends BaseService<Group> {
      */
     public List<TreeVo> getTreeGroup(int groupId, int userGroupid);
 
-    public PageView queryGroup(PageView pageView, Group group, int groupId);
+    PageView queryGroup(PageView pageView, Group group, int groupId);
 
     public List<Group> getGroupsById(String id);
 

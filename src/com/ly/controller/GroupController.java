@@ -35,66 +35,81 @@ public class GroupController extends BaseController {
     @Autowired
     private ResourcesService resourcesService;
 
+    /**
+     * 01.组织架构管理-index
+     *
+     * @param mode
+     * @param pageNow
+     * @param pageSize
+     * @param t
+     * @param request
+     * @return
+     */
     @RequestMapping("list")
-    public String list(Model mode, String pageNow, String pageSize, Group t,
-                       HttpServletRequest request) {
-        /*
-         * PageView pageView = groupService.query(getPageView(pageNow,
-         * pageSize), t);
-         */
-
-        Account account = (Account) request.getSession().getAttribute(
-                "userSession");
-        PageView pageView = groupService.queryGroup(
-                getPageView(pageNow, pageSize), t, account.getGroupId());
+    public String list(Model mode, String pageNow, String pageSize, Group t, HttpServletRequest request) {
+        Account account = (Account) request.getSession().getAttribute("userSession");
+        PageView pageView = groupService.queryGroup(getPageView(pageNow, pageSize), t, account.getGroupId());
         mode.addAttribute("pageView", pageView);
-        return Common.BACKGROUND_PATH + "/group/grouplist";
+        return Common.BACKGROUND_PATH + "/group/groupList";
     }
 
     /**
-     * 跳转添加组织机构
+     * 02.新增组织机构
      *
      * @param model
      * @return
      */
     @RequestMapping("addGroup")
     public String addGroup(Model model) {
-        return Common.BACKGROUND_PATH + "/group/groupadd";
+        return Common.BACKGROUND_PATH + "/group/groupAdd";
     }
 
-    @RequestMapping("tree")
-    @ResponseBody
-    public Object getGroopTree(HttpServletRequest request) {
-        Account account = (Account) request.getSession().getAttribute(
-                "userSession");
-        List<TreeVo> res = groupService.getTreeGroup(account.getGroupId());
-        return res;
-    }
-
-    @RequestMapping("treeUser")
-    @ResponseBody
-    public Object getUserGroupTree(HttpServletRequest request, int groupId) {
-        Account account = (Account) request.getSession().getAttribute(
-                "userSession");
-        List<TreeVo> res = groupService.getTreeGroup(groupId,
-                account.getGroupId());
-        return res;
-    }
-
+    /**
+     * 03. 新增组织机构-入库
+     *
+     * @param group
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("add")
     public String add(Group group, Model model) throws Exception {
         groupService.add(group);
         return "redirect:list.html";
     }
 
-    @RequestMapping(value = "permissioRole")
+    /**
+     * 04.删除组织机构
+     *
+     * @param id 组织编号
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("delete")
+    public String delete(String id) {
+        String result = "ok";
+        try {
+            groupService.delete(id);
+        } catch (Exception e) {
+            result = "删除失败";
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 05.组织机构-分配资源
+     * 获取原有资源展示
+     *
+     * @param model
+     * @param groupId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "permissionRole")
     public String permissioRole(Model model, String groupId,
                                 HttpServletRequest request) {
-        // List<Resources> resources =
-        // resourcesService.getUserResources(roleId);
-
-        List<Resources> resources = resourcesService
-                .getResourcesByGroupId(groupId);
+        List<Resources> resources = resourcesService.getResourcesByGroupId(groupId);
         List<Resources> allRes = null;
 
         Account acc = getAccount(request);
@@ -130,8 +145,59 @@ public class GroupController extends BaseController {
         }
         model.addAttribute("groupId", groupId);
         model.addAttribute("resources", sb);
-        return Common.BACKGROUND_PATH + "/group/permissioUser";
+        return Common.BACKGROUND_PATH + "/group/permissionUser";
     }
+
+    /**
+     * 06.组织机构-修改信息
+     *
+     * @param model
+     * @param groupId
+     * @return
+     */
+    @RequestMapping("editUI")
+    public String editUI(Model model, String groupId) {
+        Group g = groupService.getById(groupId);
+        model.addAttribute("group", g);
+        return Common.BACKGROUND_PATH + "/group/groupModify";
+    }
+
+    /**
+     * 07.组织机构-修改信息-修改入库信息
+     * 重定向到组织机构—index
+     *
+     * @param group
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("edit")
+    public String edit(Group group) throws Exception {
+        groupService.update(group);
+        return "redirect:list.html";
+    }
+
+
+    @RequestMapping("tree")
+    @ResponseBody
+    public Object getGroopTree(HttpServletRequest request) {
+        Account account = (Account) request.getSession().getAttribute(
+                "userSession");
+        List<TreeVo> res = groupService.getTreeGroup(account.getGroupId());
+        return res;
+    }
+
+    @RequestMapping("treeUser")
+    @ResponseBody
+    public Object getUserGroupTree(HttpServletRequest request, int groupId) {
+        Account account = (Account) request.getSession().getAttribute(
+                "userSession");
+        List<TreeVo> res = groupService.getTreeGroup(groupId,
+                account.getGroupId());
+        return res;
+    }
+
+
+
 
     @ResponseBody
     @RequestMapping(value = "saveGroupRescours")
@@ -148,31 +214,9 @@ public class GroupController extends BaseController {
         return errorCode;
     }
 
-    @RequestMapping("editUI")
-    public String editUI(Model model, String groupId) {
-        Group g = groupService.getById(groupId);
-        model.addAttribute("group", g);
-        return Common.BACKGROUND_PATH + "/group/groupmodify";
-    }
 
-    @RequestMapping("edit")
-    public String edit(Group group) throws Exception {
-        groupService.update(group);
-        return "redirect:list.html";
-    }
 
-    @ResponseBody
-    @RequestMapping("delete")
-    public String delete(String id) {
-        String result = "ok";
 
-        try {
-            groupService.delete(id);
-        } catch (Exception e) {
-            result = "删除失败";
-            e.printStackTrace();
-        }
-        return result;
-    }
+
 
 }
