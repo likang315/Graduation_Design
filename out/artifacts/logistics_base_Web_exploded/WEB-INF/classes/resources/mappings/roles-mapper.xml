@@ -67,15 +67,19 @@
 		insert into sys_role (enable,name,roleKey,description,groupId)
 		values (#{enable},#{name}, #{roleKey},#{description},#{groupId})
 	</insert>
+
+
 	<delete id="delete" parameterType="String">
 		delete from sys_role where
 		id=#{id}
 	</delete>
+
 	<select id="getById" parameterType="String" resultType="Roles">
 		select
 		<include refid="selectId" />
 		from sys_role where id=#{id}
 	</select>
+
 	<update id="update" parameterType="Roles">
 		update sys_role
 		<set>
@@ -97,6 +101,7 @@
 		</set>
 		where id=#{id}
 	</update>
+
 	<select id="findbyAccountRole" parameterType="String" resultType="Roles">
 	  select 
 	  <include refid="selectId" /> 

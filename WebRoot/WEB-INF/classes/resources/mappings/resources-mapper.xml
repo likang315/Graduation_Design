@@ -198,7 +198,7 @@
 		WHERE acc_id=id and accountName=#{username}))
 	</select>
 	
-	<!-- 根据角色Id获取该角色的权限-->
+	<!-- 根据role_Id获取该角色的权限-->
 	<select id="getResourcesByRoleId" parameterType="String" resultType="Resources">
 		SELECT 
 		<include refid="selectId" />

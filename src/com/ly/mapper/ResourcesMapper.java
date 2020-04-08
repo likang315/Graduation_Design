@@ -16,17 +16,17 @@ public interface ResourcesMapper extends BaseMapper<Resources> {
 
     void updateSortOrder(Resources resources);
 
-    public Resources isExist(String name);
+    Resources isExist(String name);
 
-    public int getMaxLevel();
+    int getMaxLevel();
 
     // <!-- 根据账号Id获取该用户的权限-->
-    public List<Resources> findAccountResourcess(String accountId);
+    List<Resources> findAccountResourcess(String accountId);
 
     /**
      * @return
      */
-    public List<Resources> findRoleRes(String roleId);
+    List<Resources> findRoleRes(String roleId);
 
     public List<Resources> queryByParentId(Resources resources);
 
@@ -35,7 +35,7 @@ public interface ResourcesMapper extends BaseMapper<Resources> {
      */
     public void addRoleRes(ResourcesRole rr);
 
-    public void deleteResourcesRole(String roleId);
+    void deleteResourcesRole(String roleId);
 
     public Resources findResourceById(String id);
 
@@ -48,12 +48,12 @@ public interface ResourcesMapper extends BaseMapper<Resources> {
     //<!-- 根据用户名获取该用户的权限-->
     public List<Resources> getResourcesByUserName(String username);
 
-    public void saveRoleRescours(ResourcesRole resourcesRole);
+    void saveRoleRescours(ResourcesRole resourcesRole);
 
     public List<Resources> findAll();
 
     //根据角色id查找资源
-    public List<Resources> getResourcesByRoleId(String roleId);
+    List<Resources> getResourcesByRoleId(String roleId);
 
     /**
      * 根据组织id获取资源

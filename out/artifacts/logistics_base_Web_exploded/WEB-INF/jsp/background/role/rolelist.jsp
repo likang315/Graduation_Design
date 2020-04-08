@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>无标题文档</title>
+    <title>基础设置-角色管理</title>
     <%@include file="/common/common-css.jsp" %>
     <%@include file="/common/common-js.jsp" %>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
@@ -62,9 +62,9 @@
             window.location.href = "${pageContext.request.contextPath}/background/role/editUI.html?roleId=" + roleId;
         }
 
-        function permissio(id, groupId) {
+        function permission(id, groupId) {
 
-            var url = "${pageContext.servletContext.contextPath }/background/resources/permissioRole.html?roleId=" + id + "&groupId=" + groupId;
+            var url = "${pageContext.servletContext.contextPath }/background/resources/permissionRole.html?roleId=" + id + "&groupId=" + groupId;
             var h_sp1 = 400;
             var w_sp1 = 350;
             //兼容IE，firefox,google.模态窗口居中问题
@@ -161,13 +161,13 @@
                                         <font color="red">禁用</font>
                                     </c:if>
                                     <c:if test="${role.enable eq '1'}">
-                                        <font color="blue">正常</font
+                                        <font color="#006400">正常</font
                                     </c:if>
                                 </td>
                                 <td>${role.description}</td>
                                 <td>
-                                    <a href="javascript:void(0);" onclick="permissio('${role.id}','${role.groupId}')" style="margin-left:20%; color: green">分配权限</a>&nbsp;&nbsp;
-                                    <a href="javascript:void(0);" onclick="modifyRole('${role.id}')" style="margin-left:10%; color: red">编辑</a>
+                                    <a href="javascript:void(0);" onclick="permission('${role.id}','${role.groupId}')" style="margin-left:20%; color: green">分配权限</a>&nbsp;&nbsp;
+                                    <a href="javascript:void(0);" onclick="modifyRole('${role.id}')" style="margin-left:10%; color: red">修改信息</a>
                                 </td>
                             </tr>
                         </c:forEach>

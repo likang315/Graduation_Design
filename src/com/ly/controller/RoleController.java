@@ -55,7 +55,75 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("addUI")
     public String addUI() {
-        return Common.BACKGROUND_PATH + "/role/roleadd";
+        return Common.BACKGROUND_PATH + "/role/roleAdd";
+    }
+
+    /**
+     * 03. 添加角色，保存数据
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("add")
+    public String add(Roles role, HttpServletRequest request) {
+        try {
+            roleService.add(role);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:query.html";
+    }
+
+    /**
+     * 04. 批量删除角色
+     * 实现方式较为低级，并没有真正的实现批量
+     *
+     * @param check
+     * @param model
+     * @return
+     */
+    @RequestMapping("deleteAll")
+    public String deleteAll(String[] check, Model model) {
+        for (String id : check) {
+            try {
+                roleService.delete(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:query.html";
+    }
+
+
+    /**
+     * 06. 角色—修改
+     * 获取角色信息
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("editUI")
+    public String editUI(Model model, String roleId) {
+        Roles role = roleService.getById(roleId);
+        model.addAttribute("role", role);
+        return Common.BACKGROUND_PATH + "/role/roleModify";
+    }
+
+    /**
+     * 07. 角色修改之后保存
+     *
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("update")
+    public String update(Model model, Roles role) {
+        try {
+            roleService.update(role);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:query.html";
     }
 
     /**
@@ -79,56 +147,6 @@ public class RoleController extends BaseController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("roles", roleService.queryAll(role));
         return map;
-    }
-
-    /**
-     * 获取未科组匹配账号
-     *
-     * @param account
-     * @param pageNow
-     * @param pagesize
-     * @return
-     */
-    // @ResponseBody
-    // @RequestMapping("queryNoMatch")
-    // public PageView queryNoMatch(Roles role,String pageNow,String pagesize) {
-    // pageView = roleService.queryNoMatch(role, getPageView(pageNow,pagesize));
-    // return pageView;
-    // }
-
-    /**
-     * 保存数据
-     *
-     * @param model
-     * @param videoType
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("add")
-    public String add(Roles role, HttpServletRequest request) {
-        try {
-			/*Account account = getAccount(request);
-			role.setGroupId(account.getGroupId());*/
-            roleService.add(role);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:query.html";
-    }
-
-
-
-    /**
-     * 跑到新增界面
-     *
-     * @param model
-     * @return
-     */
-    @RequestMapping("editUI")
-    public String editUI(Model model, String roleId) {
-        Roles role = roleService.getById(roleId);
-        model.addAttribute("role", role);
-        return Common.BACKGROUND_PATH + "/role/rolemodify";
     }
 
     /**
@@ -172,65 +190,6 @@ public class RoleController extends BaseController {
             map.put("flag", "false");
         }
         return map;
-    }
-
-    @RequestMapping("deleteAll")
-    public String deleteAll(String[] check, Model model) {
-        for (String id : check) {
-            try {
-                roleService.delete(id);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return "redirect:query.html";
-    }
-
-    /**
-     * 删除
-     *
-     * @param model
-     * @param videoTypeId
-     * @return
-     * @throws Exception
-     */
-    // @ResponseBody
-    // @RequestMapping("updateState")
-    // public Map<String, Object> updateState(Model model, String ids,String
-    // state) {
-    // Map<String, Object> map = new HashMap<String, Object>();
-    // try {
-    // String id[] = ids.split(",");
-    // for (String string : id) {
-    // if(!Common.isEmpty(string)){
-    // Account account = new Account();
-    // account.setId(Integer.parseInt(string));
-    // account.setState(state);
-    // accountService.update(account);
-    // }
-    // }
-    // map.put("flag", "true");
-    // } catch (Exception e) {
-    // map.put("flag", "false");
-    // }
-    // return map;
-    // }
-
-    /**
-     * 更新类型
-     *
-     * @param model
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("update")
-    public String update(Model model, Roles role) {
-        try {
-            roleService.update(role);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:query.html";
     }
 
     @ResponseBody

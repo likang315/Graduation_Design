@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>角色管理-添加角色</title>
+    <title>角色管理-角色-修改信息</title>
     <%@include file="/common/common-css.jsp" %>
     <%@include file="/common/common-js.jsp" %>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
@@ -36,7 +36,7 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#addForm").validate({
+            $("#editForm").validate({
                 rules: {
                     name: "required",
                     roleKey: "required",
@@ -58,22 +58,22 @@
     <span>位置：</span>
     <ul class="placeul">
         <li><a href="#">首页</a></li>
-        <li><a href="#">角色管理</a></li>
-        <li><a href="#">添加角色</a></li>
+        <li><a href="#">我的CRM</a></li>
+        <li><a href="#">修改角色</a></li>
     </ul>
 </div>
 <div class="formbody">
     <div id="usual1" class="usual">
         <div class="itab_nav">
             <ul>
-                <li><a href="#tab1" class="selected">角色添加</a></li>
+                <li><a href="#tab1" class="selected">角色修改</a></li>
             </ul>
         </div>
         <div class="line">
             <div id="tab2" class="tabson">
                 <div class="toolbar1"></div>
                 <div class="toolbar1"></div>
-                <form id="addForm" action="${pageContext.servletContext.contextPath }/background/role/add.html"
+                <form id="editForm" action="${pageContext.servletContext.contextPath }/background/role/update.html"
                       method="post">
                     <table border="0" cellpadding="0" cellspacing="0" bgcolor="#66CCFF" class="tablelist_left">
                         <tr>
@@ -82,10 +82,12 @@
                             </td>
                             <td height="38" bgcolor="#FFFFFF">
                                 <div align="left">
-                                    <input name="name" id="name" class="dfinput"/>
+                                    <input name="name" class="dfinput" value="${role.name}"/>
+                                    <input type="hidden" name="id" value="${role.id }"/>
                                 </div>
                             </td>
                         </tr>
+
                         <tr>
                             <td width="10%" height="38" align="center" bgcolor="#F0F5F7">
                                 <div>角色KEY：</div>
@@ -93,7 +95,7 @@
                             <td height="38" bgcolor="#FFFFFF">
                                 <div align="left">
                                     <div align="left">
-                                        <input name="roleKey" id="roleKey" class="dfinput"/>
+                                        <input name="roleKey" class="dfinput" value="${role.roleKey}"/>
                                     </div>
                                 </div>
                             </td>
@@ -106,7 +108,7 @@
                             <td height="38" bgcolor="#FFFFFF">
                                 <div align="left">
                                     <div align="left">
-                                        <input name="groupId" id="groupId" class="easyui-combotree dfinput"
+                                        <input name="groupId" class="easyui-combotree dfinput" value="${role.groupId}"
                                                data-options="url:'${pageContext.servletContext.contextPath }/background/group/tree.html',method:'get'"
                                         />
                                     </div>
@@ -119,8 +121,10 @@
                             </td>
                             <td height="38" bgcolor="#FFFFFF">
                                 <div align="left">
-                                    <input name="enable" type="radio" value="2"/>禁用
-                                    <input name="enable" type="radio" value="1" checked/>启用
+                                    <input name="enable" type="radio" value="2"
+                                           <c:if test="${role.enable==2}">checked</c:if>/>禁用
+                                    <input name="enable" type="radio" value="1"
+                                           <c:if test="${role.enable==1}">checked</c:if>/>启用
                                 </div>
                             </td>
                         </tr>
@@ -131,7 +135,7 @@
                             <td height="38" bgcolor="#FFFFFF">
                                 <div align="left">
                                     <div align="left">
-                                        <input name="description" class="dfinput"/>
+                                        <input name="description" class="dfinput" value="${role.description }"/>
                                     </div>
                                 </div>
                             </td>
@@ -140,11 +144,9 @@
                             <td height="54" bgcolor="#FFFFFF">
                                 <div align="center"></div>
                             </td>
-                            <td height="54" bgcolor="#FFFFFF">
-                                <input type="submit" value="　保　存　" class="scbtn"/>
+                            <td height="54" bgcolor="#FFFFFF"><input type="submit" value="　保　存　" class="scbtn"/>
                                 <input onclick="javascript:window.location.href='javascript:history.go(-1)'" id="backBt"
-                                       type="button" value="　返　回　" class="scbtn"/>
-                            </td>
+                                       type="button" value="　返　回　" class="scbtn"/></td>
                         </tr>
                     </table>
                 </form>

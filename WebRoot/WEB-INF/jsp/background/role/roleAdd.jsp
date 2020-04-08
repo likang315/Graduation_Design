@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>无标题文档</title>
+    <title>角色管理-添加角色</title>
     <%@include file="/common/common-css.jsp" %>
     <%@include file="/common/common-js.jsp" %>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
@@ -58,7 +58,7 @@
     <span>位置：</span>
     <ul class="placeul">
         <li><a href="#">首页</a></li>
-        <li><a href="#">我的CRM</a></li>
+        <li><a href="#">角色管理</a></li>
         <li><a href="#">添加角色</a></li>
     </ul>
 </div>
@@ -140,9 +140,11 @@
                             <td height="54" bgcolor="#FFFFFF">
                                 <div align="center"></div>
                             </td>
-                            <td height="54" bgcolor="#FFFFFF"><input type="submit" value="　保　存　" class="scbtn"/>
+                            <td height="54" bgcolor="#FFFFFF">
+                                <input type="submit" value="　保　存　" class="scbtn"/>
                                 <input onclick="javascript:window.location.href='javascript:history.go(-1)'" id="backBt"
-                                       type="button" value="　返　回　" class="scbtn"/></td>
+                                       type="button" value="　返　回　" class="scbtn"/>
+                            </td>
                         </tr>
                     </table>
                 </form>
