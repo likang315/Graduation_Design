@@ -176,16 +176,21 @@ public class GroupController extends BaseController {
         return "redirect:list.html";
     }
 
-
+    /**
+     * account_03.index 列表选择组织机构时，获取树形列表  账户管理
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping("tree")
     @ResponseBody
     public Object getGroopTree(HttpServletRequest request) {
-        Account account = (Account) request.getSession().getAttribute(
-                "userSession");
+        Account account = (Account) request.getSession().getAttribute("userSession");
         List<TreeVo> res = groupService.getTreeGroup(account.getGroupId());
         return res;
     }
 
+    // -----------------------------------------------------------------------------------------
     @RequestMapping("treeUser")
     @ResponseBody
     public Object getUserGroupTree(HttpServletRequest request, int groupId) {

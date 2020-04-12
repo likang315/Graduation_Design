@@ -239,6 +239,7 @@ public class BackHomepageController {
         return Common.BACKGROUND_PATH + "/homepage/right";
     }
 
+    // ------------------------------------------------------------------------------------------
     /**
      * 获取某个用户的权限资源
      */

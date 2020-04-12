@@ -1,116 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
-<%-- <%@include file="/common/common-css.jsp" %>
-<%@include file="/common/common-js.jsp" %> --%>
+<%@include file="/common/common-css.jsp" %>
+<%@include file="/common/common-js.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>组织机构_index</title>
+    <title></title>
     <link href="${pageContext.servletContext.contextPath }/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.servletContext.contextPath }/css/select.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.servletContext.contextPath }/css/pagination.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="${pageContext.servletContext.contextPath }/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="${pageContext.servletContext.contextPath }/js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="${pageContext.servletContext.contextPath }/js/jquery.idTabs.min.js"></script>
-    <script type="text/javascript" src="${pageContext.servletContext.contextPath }/js/jquery.pagination.js"></script>
 
 
     <script type="text/javascript">
+        $(document).ready(function (e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+        });
 
-        function addGroup() {
-            window.location.href = "${pageContext.request.contextPath}/background/group/addGroup.html";
+        function modifyUser(id) {
+            window.location.href = "${pageContext.request.contextPath}/background/account/editUI.html?accountId=" + id;
         }
 
-        function deleteGroup(flag) {
-            var checks = document.getElementsByName("check");
-            if (result(checks) != false) {
-                alert(" 请 选 择 你 要 操 作 的 项 ！");
-                return;
-            }
-            var values = morecheck(checks);
-            //执行产出操作
-            if (flag == 1) {
-                $.ajax({
-                    type: "POST",
-                    url: "${pageContext.request.contextPath}/background/group/delete.html",
-                    data: "id=" + values,
-                    success: function (msg) {
-                        if (msg == "ok") {
-                            window.location.href = "${pageContext.request.contextPath}/background/group/list.html";
-                        } else {
-                            alert("删除失败");
-                        }
-                    }
-                });
-            } else {
-                //执行修改操作
-                window.location.href = "${pageContext.request.contextPath}/background/resources/editUI.html?resourcesId=" + values;
-            }
-
+        function addUser() {
+            window.location.href = "${pageContext.request.contextPath}/background/account/addUI.html";
         }
 
-        function showRole(id) {
-            var url = "${pageContext.servletContext.contextPath }/background/group/permissionRole.html?groupId=" + id;
+        function assignRole(groupId, id) {
+            var url = "${pageContext.servletContext.contextPath }/background/role/queryforuser.html?groupId=" + groupId + "&userId=" + id;
             var h_sp1 = 400;
-            var w_sp1 = 350;
+            var w_sp1 = 800;
             //兼容IE，firefox,google.模态窗口居中问题
             var iTop2 = (window.screen.availHeight - 20 - h_sp1) / 2;
             var iLeft2 = (window.screen.availWidth - 10 - w_sp1) / 2;
             var params = 'menubar:no;dialogHeight=' + h_sp1 + 'px;dialogWidth=' + w_sp1 + 'px;dialogLeft=' + iLeft2 + 'px;dialogTop=' + iTop2 + 'px;resizable=yes;scrollbars=0;resizeable=0;center=yes;location:no;status:no;scroll:no'
+            // window.showModalDialog(url, window, params);
             window.open(url, window, params);
-        }
-
-        function modifyUser(id) {
-            window.location.href = "${pageContext.request.contextPath}/background/group/editUI.html?groupId=" + id;
-        }
-
-        //点击删除时是否有勾选
-        function result(checks) {
-            for (var i = 0; i < checks.length; i++) {
-                if (checks[i].checked == true) {
-                    return false;
-                }
-            }
-
-        }
-
-        //删除一个
-        function morecheck(checks) {
-            var j = 0;
-            var values;
-            for (var i = 0; i < checks.length; i++) {
-                if (checks[i].checked) {
-                    values = checks[i].value;
-                    j++;
-                }
-            }
-            if (j > 1) {
-                alert("请选择一条数据进行操作！");
-                return false;
-            } else {
-                return values;
-            }
-        }
-
-        function selectAllCheckBox() {
-            var chose;
-            if (document.getElementById("chose").checked) {
-                chose = document.getElementById("chose").checked;
-            }
-
-            var checkboxArray = document.getElementsByName("check");
-            if (checkboxArray != null) {
-                for (var i = 0; i < checkboxArray.length; i++) {
-                    checkboxArray[i].checked = chose;
-                }
-                ;
-            }
-            ;
+            //location.href=url;
         }
 
         function pageSubmit(pageNow) {
-            var pageCount =${pageView.pageCount };
-            var pageCur =${pageView.pageNow };
+            var pageCount = "${pageView.pageCount }";
+            var pageCur = "${pageView.pageNow }";
 
             $('#pageNow').val(pageNow);
             if (pageNow < 1)
@@ -125,10 +64,10 @@
             $('#fenye').submit();
         }
 
-
+        function modifyPassword(userId) {
+            window.location.href = "${pageContext.request.contextPath}/background/account/modifyPassword.html?userId=" + userId;
+        }
     </script>
-
-
 </head>
 
 <body>
@@ -136,46 +75,72 @@
     <span>位置：</span>
     <ul class="placeul">
         <li><a href="#">首页</a></li>
-        <li><a href="#">基础管理</a></li>
-        <li><a href="#">组织机构</a></li>
+        <li><a href="#">营销中心账号管理</a></li>
+        <li><a href="#">账号列表</a></li>
     </ul>
+</div>
+<div style="background:#000;position:fixed;top:0;left:0; width:100%; height:100%; opacity:0.2; z-index:9999;display:none; "
+     id="modalmb"></div>
+<div style="z-index:9999;position:fixed;top:100px; width:100%; display:none;" id="modalnr">
+    <div class="modal-dialog" style=" margin:auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="closeFork" style="margin-top: -13px;">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+
+                </h4>
+            </div>
+            <div class="modal-body" id="hintContext">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="closeButton">关闭
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="formbody">
     <div id="usual1" class="usual">
         <div class="toolbar1">
             <ul class="toolbar">
-                <a href="javascript:addGroup()">
+                <a href="javascript:addUser()">
                     <li class="click">
-     <span>
-     <img src="${pageContext.request.contextPath}/images/t01.png"/>
-     </span>新增组织机构
+		     <span>
+		     <img src="${pageContext.request.contextPath}/images/t01.png"/>
+		     </span>新增用户
                     </li>
                 </a>
-                <a href="javascript:deleteGroup(1)">
-                    <li><span><img src="${pageContext.servletContext.contextPath}/images/t03.png"/></span>删除组织机构</li>
+                <a href="javascript:deleteAll()">
+                    <li><span><img src="${pageContext.servletContext.contextPath}/images/t03.png"/></span>删除用户</li>
                 </a>
             </ul>
         </div>
         <div class="itab_nav">
             <ul>
-                <li><a href="#tab1" class="selected">组织机构列表</a></li>
+                <li><a href="#tab1" class="selected">客户列表</a></li>
             </ul>
         </div>
         <div class="line">
             <div id="tab2" class="tabson">
                 <div class="toolbar1"></div>
                 <form id="fenye" name="fenye"
-                      action="${pageContext.servletContext.contextPath}/background/group/list.html" method="post">
+                      action="${pageContext.servletContext.contextPath }/background/account/list.html" method="post">
                     <table class="tablelist">
                         <thead>
                         <tr>
                             <th width="3%">
                                 <input id="chose" type="checkbox" name="checkbox" onclick="selectAllCheckBox()"/>
                             </th>
-                            <th width="6%">组织编号</th>
-                            <th width="15%">组织名</th>
-                            <th width="16%">父级名</th>
+                            <th width="6%">用户编号</th>
+                            <th width="10%">用户名</th>
+                            <th width="10%">组织机构</th>
+                            <th width="10%">所属角色</th>
+                            <th width="14%">账号状态</th>
                             <th width="13%">描述</th>
+                            <th width="16%">注册时间</th>
                             <th width="15%">操作</th>
                         </tr>
                         </thead>
@@ -186,20 +151,34 @@
                                     <input type="checkbox" name="check" value="${key.id}"/>
                                 </td>
                                 <td>${key.id}</td>
-                                <td>${key.name}</td>
-                                <td>${key.parentId}</td>
-                                <td>${key.description}</td>
-
+                                <td>${key.accountName}</td>
+                                <td>${key.groupName}</td>
+                                <td>${key.roleName}</td>
                                 <td>
-                                    <a href="javascript:void(0);" onclick="showRole('${key.id}')" style="margin-left:20%; color: green">分配资源</a>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <a href="javascript:void(0);" onclick="modifyUser('${key.id}')" style="margin-left:10%; color: red">修改信息</a>
+                                    <c:choose>
+                                        <c:when test="${key.state==1}" >
+                                            <font color="green">正常</font>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <font color="red">禁用</font>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                        ${key.description}
+                                </td>
+                                <td>
+                                    <fmt:formatDate value="${key.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0);" onclick="modifyUser('${key.id}')" style="margin-left:10%; color: green">修改信息</a>
+                                    <a href="javascript:void(0);" onclick="assignRole('${key.groupId}',${key.id })" style="margin-left:10%; color: blue">分配角色</a>
+                                    <a href="javascript:void(0);" onclick="modifyPassword(${key.id })" style="margin-left:15%; color: red">变更密码</a>
                                 </td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
-
 
                     <div class="pagin">
                         <div class="message">共<i class="blue">${pageView.rowCount }</i>条记录，当前显示第&nbsp;<i
@@ -208,13 +187,6 @@
                         <ul class="paginList">
                             <li class="paginItem"><a href="javascript:pageSubmit(${pageView.pageNow-1 });"><span
                                     class="pagepre"></span></a></li>
-                            <!--  <li class="paginItem"><a href="javascript:;">1</a></li>
-                             <li class="paginItem current"><a href="javascript:;">2</a></li>
-                             <li class="paginItem"><a href="javascript:;">3</a></li>
-                             <li class="paginItem"><a href="javascript:;">4</a></li>
-                             <li class="paginItem"><a href="javascript:;">5</a></li>
-                             <li class="paginItem more"><a href="javascript:;">...</a></li>
-                             <li class="paginItem"><a href="javascript:;">10</a></li> -->
 
                             <c:forEach var="x" begin="${pageView.prePageStart }" end="${pageView.prePageEnd }">
                                 <c:choose>
@@ -243,11 +215,9 @@
                             <li class="paginItem"><a href="javascript:pageSubmit(${pageView.pageNow+1 });"><span
                                     class="pagenxt"></span></a></li>
                         </ul>
-
+                        <input type="hidden" name="pageSize" value="${pageView.pageSize}"/>
+                        <input type="hidden" name="pageNow" value="${pageView.pageNow}" id="pageNow"/>
                     </div>
-                    <input type="hidden" name="pageSize" value="${pageView.pageSize}"/>
-                    <input type="hidden" name="pageNow" value="${pageView.pageNow}" id="pageNow"/>
-                    <div id="Pagination" class="scott"></div>
                 </form>
             </div>
         </div>
@@ -259,7 +229,15 @@
     <script type="text/javascript">
         $('.tablelist tbody tr:odd').addClass('odd');
     </script>
-
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    var info = '${info}';
+
+    if (info != null && info != "") {
+        $("#modalmb").show();
+        $("#modalnr").show();
+        $("#hintContext").html(info);
+    }
+</script>

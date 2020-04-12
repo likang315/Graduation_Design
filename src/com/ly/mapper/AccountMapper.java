@@ -69,8 +69,8 @@ public interface AccountMapper extends BaseMapper<Account> {
      *
      * @param account
      */
-    public void add(Account account);
-
+    @Override
+    void add(Account account);
     /**
      * 查询县级
      *

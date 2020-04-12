@@ -127,20 +127,26 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * @param model 存放返回界面的model
+     * 查询角色列表
+     *
+     * @param model
+     * @param role
+     * @param pageNow
+     * @param pagesize
+     * @param request
+     * @param userId
      * @return
      */
     @RequestMapping("queryforuser")
     public String queryforuser(Model model, Roles role, String pageNow,
                                String pagesize, HttpServletRequest request, String userId) {
-		/*Account account = getAccount(request);
-		role.setGroupId(account.getGroupId());*/
         pageView = roleService.query(getPageView(pageNow, pagesize), role);
         model.addAttribute("pageView", pageView);
         model.addAttribute("userId", userId);
-        return Common.BACKGROUND_PATH + "/account/showrole";
+        return Common.BACKGROUND_PATH + "/account/showRole";
     }
 
+    // -------------------------------------------------------------------------
     @ResponseBody
     @RequestMapping("queryAll")
     public Map<String, Object> queryAll(Roles role) {

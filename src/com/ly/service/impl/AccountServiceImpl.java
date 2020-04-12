@@ -26,6 +26,13 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
+    /**
+     * 只查出id, parentID 为112的账户
+     *
+     * @param pageView
+     * @param account
+     * @return
+     */
     public PageView query(PageView pageView, Account account) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("paging", pageView);
