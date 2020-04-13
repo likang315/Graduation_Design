@@ -26,6 +26,8 @@ import com.ly.util.TreeObject;
 import com.ly.util.TreeUtil;
 
 /**
+ * 无批量删除功能，每次操作一条数据
+ *
  * @Author kangkang.li@qunar.com
  * @Date 2020-04-08 11:05
  */
@@ -101,6 +103,140 @@ public class ResourcesController extends BaseController {
         return errorCode;
     }
 
+    /**
+     * 01.查询资源列表
+     *
+     * @param model
+     * @param resources
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("resourceList")
+    public String resourcess(Model model, Resources resources, HttpServletRequest request) throws Exception {
+        List<Resources> rs;
+        if (PropertiesUtils.findPropertiesKey("rootName").equals(Common.findAuthenticatedUsername())) {
+            rs = resourcesService.queryAll(resources);
+        } else {
+            rs = resourcesService.findAccountResourcess(Common.findUserSessionId(request));
+        }
+        List<TreeObject> treeObjects = new ArrayList<TreeObject>();
+        for (Resources res : rs) {//转换为树对象
+            TreeObject t = new TreeObject();
+            PropertyUtils.copyProperties(t, res);
+            treeObjects.add(t);
+        }
+        List<TreeObject> ns = TreeUtil.getChildResourcess(treeObjects, 0);
+        model.addAttribute("resourceList", ns);
+        model.addAttribute("pageView", pageView);
+
+        return Common.BACKGROUND_PATH + "/resource/resourceList";
+    }
+
+    /**
+     * 02.跳转到新增界面
+     *
+     * @return
+     */
+    @RequestMapping("addUI")
+    public String addUI(Model model) {
+        List<Resources> resources = resourcesService.queryAll(new Resources());
+        Resources r = new Resources();
+        r.setId(0);
+        r.setName("system");
+        resources.add(r);
+        model.addAttribute("resources", resources);
+        return Common.BACKGROUND_PATH + "/resource/resourceAdd";
+    }
+
+    /**
+     * 03.新增资源入库
+     *
+     * @param resources
+     * @return Map
+     */
+    @RequestMapping("add")
+    public String add(Resources resources) {
+        try {
+            // 判断是否为目录(目录的parentId为0)
+            if (-1 == resources.getParentId()) {
+                resources.setParentId(0);
+            }
+            resourcesService.add(resources);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:resourceList.html";
+    }
+
+    /**
+     * 04.跳转到修改资源列表界面
+     *
+     * @param model
+     * @param resourcesId 修改资源信息ID
+     * @return
+     */
+    @RequestMapping("editUI")
+    public String editUI(Model model, String resourcesId) {
+        Resources resources = resourcesService.getById(resourcesId);
+        model.addAttribute("resources", resources);
+        return Common.BACKGROUND_PATH + "/resource/resourceModify";
+    }
+
+    /**
+     * 05.修改资源入库
+     *
+     * @return
+     */
+    @RequestMapping("edit")
+    public String update(Resources resources) {
+        try {
+            resourcesService.update(resources);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:resourceList.html";
+    }
+
+    /**
+     * 06.删除资源列表时 先查找父资源，看是否关联
+     *
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("findResourceById")
+    public String findResourceById(String id) {
+        String key = "";
+        Resources resource = resourcesService.findResourceById(id);
+        if (resource != null) {
+            key = resource.getName();
+        }
+        return key;
+    }
+
+    /**
+     * 07.删除资源列表
+     *
+     * @param id 资源ID
+     * @return
+     */
+    @RequestMapping("delete")
+    public String delete(String id) {
+        try {
+            resourcesService.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:resourceList.html";
+    }
+
+
+
+
+
+
+
     @ResponseBody
     @RequestMapping("perm")
     public Map<String, Object> perm(Model model) {
@@ -133,16 +269,6 @@ public class ResourcesController extends BaseController {
         return resourcesService.findRoleRes(roleId);
     }
 
-    @ResponseBody
-    @RequestMapping("findResourceById")
-    public String findResourceById(String id) {
-        String key = "";
-        Resources resource = resourcesService.findResourceById(id);
-        if (resource != null) {
-            key = resource.getName();
-        }
-        return key;
-    }
 
     /**
      * @param model 存放返回界面的model
@@ -170,36 +296,7 @@ public class ResourcesController extends BaseController {
         return Common.BACKGROUND_PATH + "/resources/list";
     }
 
-    /**
-     * 查找资源信息
-     *
-     * @param model
-     * @param resources
-     * @param request
-     * @return
-     * @throws Exception
-     */
 
-    @RequestMapping("resources")
-    public String resourcess(Model model, Resources resources, HttpServletRequest request) throws Exception {
-        List<Resources> rs;
-        if (PropertiesUtils.findPropertiesKey("rootName").equals(Common.findAuthenticatedUsername())) {
-
-            rs = resourcesService.queryAll(resources);
-        } else {
-            rs = resourcesService.findAccountResourcess(Common.findUserSessionId(request));
-        }
-        List<TreeObject> treeObjects = new ArrayList<TreeObject>();
-        for (Resources res : rs) {//转换为树对象
-            TreeObject t = new TreeObject();
-            PropertyUtils.copyProperties(t, res);
-            treeObjects.add(t);
-        }
-        List<TreeObject> ns = TreeUtil.getChildResourcess(treeObjects, 0);
-        model.addAttribute("resourceList", ns);
-        model.addAttribute("pageView", pageView);
-        return Common.BACKGROUND_PATH + "/resource/resourcelist";
-    }
 
     @ResponseBody
     @RequestMapping("queryAll")
@@ -224,35 +321,6 @@ public class ResourcesController extends BaseController {
         // resourcesService.updateMeunOrder(params.getResourcess());
     }
 
-    /**
-     * 跳转到修改界面
-     *
-     * @param model
-     * @param resourcesId 修改菜单信息ID
-     * @return
-     */
-    @RequestMapping("editUI")
-    public String editUI(Model model, String resourcesId) {
-        Resources resources = resourcesService.getById(resourcesId);
-        model.addAttribute("resources", resources);
-        return Common.BACKGROUND_PATH + "/resource/resourcemodify";
-    }
-
-    /**
-     * 跳转到新增界面
-     *
-     * @return
-     */
-    @RequestMapping("addUI")
-    public String addUI(Model model) {
-        List<Resources> resources = resourcesService.queryAll(new Resources());
-        Resources r = new Resources();
-        r.setId(0);
-        r.setName("system");
-        resources.add(r);
-        model.addAttribute("resources", resources);
-        return Common.BACKGROUND_PATH + "/resource/resourceadd";
-    }
 
     /**
      * 权限分配页面
@@ -265,42 +333,7 @@ public class ResourcesController extends BaseController {
         return Common.BACKGROUND_PATH + "/resources/permissions";
     }
 
-    /**
-     * 添加菜单
-     *
-     * @param resources
-     * @return Map
-     */
-    @RequestMapping("add")
-    public String add(Resources resources) {
-        try {
-            // 判断是否为目录(目录的parentId为0)
-            if (-1 == resources.getParentId()) {
-                resources.setParentId(0);
-            }
-            resourcesService.add(resources);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:resources.html";
-    }
 
-    /**
-     * 更新菜单
-     *
-     * @param model
-     * @param Map
-     * @return
-     */
-    @RequestMapping("edit")
-    public String update(Model model, Resources resources) {
-        try {
-            resourcesService.update(resources);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:resources.html";
-    }
 
     /**
      * 根据ID删除菜单
@@ -364,19 +397,5 @@ public class ResourcesController extends BaseController {
         return map;
     }
 
-    /**
-     * 删除菜单
-     *
-     * @param name
-     * @return
-     */
-    @RequestMapping("delete")
-    public String delete(String id) {
-        try {
-            resourcesService.delete(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:resources.html";
-    }
+
 }

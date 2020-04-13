@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ly.mapper.BackExpressMapper">
 
@@ -57,7 +57,7 @@ and id = #{id}
 	where 1=1
 	and s.accountType = '2'
 	and s.auth_flag = '2'
-
+	and s.state = 1
 </select>
 
 
@@ -80,19 +80,17 @@ and id = #{id}
 
 
 <select id="getCompany" resultType="java.util.Map">
-	 select mec.id,
-			mec.company_name from  mkl_express_company mec
+	select mec.id, mec.company_name from mkl_express_company mec
 	where 1=1
 	and mec.delete_flag = '0'
-	GROUP BY mec.company_name
-
+	GROUP BY mec.company_name, mec.id
 </select>
 
 
 <select id="cheackCourier" resultType="java.lang.Integer">
 	select count(1) from sys_account s
 	where 1=1
-	and s.accountName = #{accountName}
+	and s.real_name = #{real_name}
 	and s.auth_flag = '2'
 	and s.accountType ='2'
 </select>
@@ -115,7 +113,7 @@ and id = #{id}
 	#{real_name},
 	#{createTime},
 	#{company},
-	'4QrcOUm6Wau+VuBX8g+IPg==',
+	'ICy5YqxZB1uWSwcVLSNLcA==',
 	'2',
 	'1',
 	'112',
@@ -228,18 +226,15 @@ GROUP BY mct.accountName
 	where 1=1
 	and s.id = #{id}
  </select>
- 
+
  <!-- 修改快递员信息 -->
  <update id="modifyCourier" parameterType="java.util.Map">
-	 update sys_account 
+	 	update sys_account
 		SET accountName = #{accountName},
 		real_name = #{real_name},
 		company = #{company}
 		where 1=1
 		and id = #{id}
  </update>
- 
- 
-
 
 </mapper>

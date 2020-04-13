@@ -13,13 +13,13 @@ public interface Base<T> {
      * @param t
      * @return
      */
-    public List<T> queryAll(T t);
+    List<T> queryAll(T t);
 
-    public void delete(String id) throws Exception;
+    void delete(String id) throws Exception;
 
-    public void update(T t) throws Exception;
+    void update(T t) throws Exception;
 
-    public T getById(String id);
+    T getById(String id);
 
-    public void add(T t) throws Exception;
+    void add(T t) throws Exception;
 }

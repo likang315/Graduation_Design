@@ -177,6 +177,7 @@
 	<select id="findResourceById" parameterType="String" resultType="Resources">
 		SELECT * FROM sys_resources WHERE parentId=#{id} limit 1
 	</select>
+
 	<!-- 根据用户Id获取该用户的权限-->
 	<select id="getUserResources" parameterType="String" resultType="Resources">
 		SELECT 

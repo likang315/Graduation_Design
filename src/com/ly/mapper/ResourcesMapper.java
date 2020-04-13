@@ -37,7 +37,7 @@ public interface ResourcesMapper extends BaseMapper<Resources> {
 
     void deleteResourcesRole(String roleId);
 
-    public Resources findResourceById(String id);
+    Resources findResourceById(String id);
 
     //<!-- 根据用户Id获取该用户的权限-->
     public List<Resources> getUserResources(String userId);
