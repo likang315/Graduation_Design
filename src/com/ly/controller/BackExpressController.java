@@ -75,7 +75,6 @@ public class BackExpressController {
     /**
      * 跳转到新增快递公司页面
      *
-     * @param model
      * @return
      */
     @RequestMapping("/addUI")
@@ -86,9 +85,9 @@ public class BackExpressController {
     @RequestMapping("/add")
     public String add(@RequestParam Map expressInfo, RedirectAttributes redirectAttributes, HttpSession session) {
         if (backExpressService.addExpress(expressInfo, session)) {
-            redirectAttributes.addAttribute("info", "信息维护成功!");
+            redirectAttributes.addAttribute("info", "Successful!");
         } else {
-            redirectAttributes.addAttribute("info", "信息维护失败,请核对数据是否符合规范，或该信息是否存在!");
+            redirectAttributes.addAttribute("info", "Failture!");
         }
         return "redirect:companyList.html";
     }
@@ -99,15 +98,14 @@ public class BackExpressController {
      * @param id
      * @param attributes
      * @return
-     * @author 殷瑜泰 2017年3月21日下午4:56:52
      */
     @RequestMapping("/deleteExpress")
     public String deleteExpress(String id, RedirectAttributes attributes) {
         //根据id删除快递信息
         if (backExpressService.deleteStore(id)) {
-            attributes.addFlashAttribute("deleteinfo", "删除成功！");
+            attributes.addFlashAttribute("deleteinfo", "Successful!");
         } else {
-            attributes.addFlashAttribute("deleteinfo", "删除失败！");
+            attributes.addFlashAttribute("deleteinfo", "Failture!");
         }
         return "redirect:companyList.html";
     }
@@ -200,9 +198,9 @@ public class BackExpressController {
     public String deleteCourier(String id, RedirectAttributes redirectAttributes) {
         // 执行删除操作
         if (backExpressService.deleteCourier(id)) {
-            redirectAttributes.addAttribute("deleteInfo", "信息删除成功!");
+            redirectAttributes.addAttribute("deleteInfo", "Successful!");
         } else {
-            redirectAttributes.addAttribute("deleteInfo", "信息删除失败!");
+            redirectAttributes.addAttribute("deleteInfo", "Failture!");
         }
 
         return "redirect:courierList.html";
@@ -235,9 +233,9 @@ public class BackExpressController {
     @RequestMapping("/modifyCourier")
     public String modifyCourier(@RequestParam Map courierInfo, RedirectAttributes attributes) {
         if (backExpressService.modifyCourier(courierInfo)) {
-            attributes.addAttribute("modifyInfo", "信息修改成功");
+            attributes.addAttribute("modifyInfo", "Successful!");
         } else {
-            attributes.addAttribute("modifyInfo", "信息修改失败,请核实该信息是否已存在！");
+            attributes.addAttribute("modifyInfo", "Failture!");
         }
 
         return "redirect:courierList.html";
