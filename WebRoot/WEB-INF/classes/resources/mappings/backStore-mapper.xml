@@ -19,7 +19,8 @@
 		<select id="selectVendorList" resultType="java.util.Map">
 		select * from mkl_vendor m where 1=1 and m.delete_flag = '0'	
 		</select>
-		<!-- 单条店面信息的维护 -->
+
+	    <!-- 单条店面信息的维护 -->
 		<insert id="insertSigleStore" parameterType="java.util.Map">
 		INSERT INTO mkl_store_info 
 			(store_name,
@@ -49,6 +50,7 @@
 			 #{type}
 				)
 		</insert>
+
 		<!-- 单个门店信息维护 -->
 		<insert id="addStoreAccount" parameterType="java.util.Map">
 			INSERT INTO sys_account
@@ -71,7 +73,7 @@
 			#{store_shopowner_name},
 			#{create_time},
 			#{channel_code},
-			'4QrcOUm6Wau+VuBX8g+IPg==',
+			'ICy5YqxZB1uWSwcVLSNLcA==',
 			'2',
 			'1',
 			'436',
@@ -82,6 +84,7 @@
 			#{area}
 			)
 		</insert>
+
 <!-- 获取厂商信息 -->
 <select id="getVendor" resultType="java.util.Map">
 	SELECT

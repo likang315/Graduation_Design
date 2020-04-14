@@ -5,6 +5,11 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import net.sf.json.JSONObject;
+
+/**
+ * 获取经纬度
+ *
+ */
 public class CourierNumber {
 	
 	public static void main(String[] args) throws IOException {
