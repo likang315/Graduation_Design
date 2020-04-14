@@ -14,16 +14,29 @@ import org.springframework.web.multipart.MultipartFile;
  * @Date 2020-04-13 16:49
  */
 public interface BackExpressService {
-    //获取快递公司的清单
+    /**
+     * 获取快递公司的清单
+     */
     List<Map<String, Object>> getCompanyList(Map param);
 
-    //添加公司信息
+    /**
+     * 获取快递公司的清单
+     */
     boolean addExpress(Map<String, Object> expressInfo, HttpSession session);
 
-    //删除快递信息
+    /**
+     * 删除快递信息
+     *
+     * @param id
+     * @return
+     */
     boolean deleteStore(String id);
 
-    //获取快递公司的总数量
+    /**
+     * 获取快递公司的总数量
+     *
+     * @return
+     */
     Integer getCompanycount();
 
     /**

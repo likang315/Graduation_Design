@@ -35,7 +35,7 @@ import com.ly.service.BackStoreService;
 import com.ly.util.FTPLinuxUtils;
 
 /**
- * 门店的后台处理 实现
+ * 快递公司的后台处理 实现
  *
  * @Author kangkang.li@qunar.com
  * @Date 2020-04-13 16:49
@@ -67,7 +67,7 @@ public class BackExpressServiceImpl implements BackExpressService {
         Account account = (Account) session.getAttribute("userSession");
         String createPhone = account.getAccountName();
         uuid = uuid.replace("-", "");
-        //查询是否存在
+        // 查询是否存在
         if (!this.checkExist(expressInfo)) {
             expressInfo.put("id", uuid);
             expressInfo.put("create_time", createTime);
@@ -86,7 +86,6 @@ public class BackExpressServiceImpl implements BackExpressService {
      *
      * @param expressInfo
      * @return
-     * @author 殷瑜泰 2017年3月21日下午3:21:05
      */
     public boolean checkExist(Map<String, Object> expressInfo) {
         boolean flag = false;

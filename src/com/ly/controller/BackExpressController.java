@@ -20,7 +20,7 @@ import com.ly.service.BackExpressService;
 import com.ly.util.Common;
 
 /**
- * 快递员，快递公司后台控制
+ * 快递员，快递公司后台控制器
  *
  * @Author kangkang.li@qunar.com
  * @Date 2020-04-13 16:49
@@ -32,7 +32,7 @@ public class BackExpressController {
     private BackExpressService backExpressService;
 
     /**
-     * 查询跳转到公司的清单
+     * 01.express_index
      *
      * @param model
      * @return
@@ -42,20 +42,16 @@ public class BackExpressController {
         if (pageNow == null || "".equals(pageNow)) {
             pageNow = "0";
         }
-        Map<String, Object> parame = new HashMap<String, Object>();
+        Map<String, Object> parame = new HashMap<>(16);
 
-        //查询出快递公司的总数量
+        // 查询出快递公司的总数量
         Integer totalPage = backExpressService.getCompanycount();
-
         NowPage<Map<String, Object>> page = new NowPage<>(pageNow, totalPage, 10);
-
         parame.put("size", 10);
         parame.put("start", page.getStart());
-
-
         model.addAttribute("page", page);
 
-        //查询出快递公司的信息
+        // 查询出快递公司的信息
         List<Map<String, Object>> ls = backExpressService.getCompanyList(parame);
         try {
             if (info != null && info != "") {
@@ -73,15 +69,23 @@ public class BackExpressController {
     }
 
     /**
-     * 跳转到新增快递公司页面
+     * 02.express_跳转到新增快递公司页面
      *
      * @return
      */
     @RequestMapping("/addUI")
     public String addUI() {
-        return Common.BACKGROUND_PATH + "/express/expressadd";
+        return Common.BACKGROUND_PATH + "/express/expressAdd";
     }
 
+    /**
+     * 03.express_新增快递公司入库
+     *
+     * @param expressInfo
+     * @param redirectAttributes
+     * @param session
+     * @return
+     */
     @RequestMapping("/add")
     public String add(@RequestParam Map expressInfo, RedirectAttributes redirectAttributes, HttpSession session) {
         if (backExpressService.addExpress(expressInfo, session)) {
@@ -93,7 +97,7 @@ public class BackExpressController {
     }
 
     /**
-     * 删除快递信息
+     * 04.express_删除快递信息
      *
      * @param id
      * @param attributes

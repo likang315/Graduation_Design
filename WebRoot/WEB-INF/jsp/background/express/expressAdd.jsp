@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>快递员管理-Add Courier</title>
+    <title>快递公司新增页面-Add Courier</title>
     <%@include file="/common/common-css.jsp" %>
     <%@include file="/common/common-js.jsp" %>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
@@ -38,15 +38,15 @@
     <span>位置：</span>
     <ul class="placeul">
         <li><a href="#">首页</a></li>
-        <li><a href="#">物流管理</a></li>
-        <li><a href="#">快递公司维护</a></li>
+        <li><a href="#">快递公司管理</a></li>
+        <li><a href="#">新增快递公司</a></li>
     </ul>
 </div>
 <div class="formbody">
     <div id="usual1" class="usual">
         <div class="itab_nav">
             <ul>
-                <li><a href="#tab1" id="sigStore" class="selected">快递公司维护</a></li>
+                <li><a href="#tab1" id="sigStore" class="selected">新增快递公司</a></li>
             </ul>
         </div>
         <div class="line">

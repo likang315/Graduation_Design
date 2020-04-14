@@ -12,19 +12,40 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface BackExpressMapper {
 
-    //获得快递公司清单
+    /**
+     * 获得快递公司清单
+     */
     List<Map<String, Object>> getCompanyList(Map param);
 
-    //新增快递公司信息
+    /**
+     * 新增快递公司信息
+     *
+     * @param expressInfo
+     * @return
+     */
     int addExpress(Map<String, Object> expressInfo);
 
-    //判断当前填写的快递公司在库中是否存在
+    /**
+     * 判断当前填写的快递公司在库中是否存在
+     *
+     * @param expressInfo
+     * @return
+     */
     int checkExise(Map<String, Object> expressInfo);
 
-    //删除快递公司信息
+    /**
+     * 删除快递公司信息
+     *
+     * @param id
+     * @return
+     */
     int deleteExpress(@Param("id") String id);
 
-    //获取快递公司的总数量
+    /**
+     * 获取快递公司的总数量
+     *
+     * @return
+     */
     Integer getCompanycount();
 
     /**
