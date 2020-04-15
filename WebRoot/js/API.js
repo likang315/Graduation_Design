@@ -5,11 +5,11 @@ var API={
 		}
 };
 (function(window){
-	API.httpserver = "http://192.168.31.134/logistics";
+	API.httpserver = "http://localhost/logistics";
 
 	//线上服务器
 	if(API.config.server){
-		API.httpserver = "http://120.25.86.157:8080/logistics";
+		API.httpserver = "http://localhost:8080/logistics";
 		API.imgserver = "";
 	}
 	
