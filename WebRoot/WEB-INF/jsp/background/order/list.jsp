@@ -265,14 +265,15 @@
                 <li style="margin-right:10px;" id="liAll">
                     <select id="isSeach" style="color:#000;opacity:1;height:100%;width:100%;background-color:#F2F6F8">
                         <option value="0">全部</option>
-                        <c:choose>
-                            <c:when test="${state == 1 }">
-                                <option value="1" selected>待发货</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="1">待发货</option>
-                            </c:otherwise>
-                        </c:choose>
+
+<%--                    待发货统一在待完善信息列表展示    <c:choose>--%>
+<%--                            <c:when test="${state == 1 }">--%>
+<%--                                <option value="1" selected>待发货</option>--%>
+<%--                            </c:when>--%>
+<%--                            <c:otherwise>--%>
+<%--                                <option value="1">待发货</option>--%>
+<%--                            </c:otherwise>--%>
+<%--                        </c:choose>--%>
 
                         <c:choose>
                             <c:when test="${state == 2}">
@@ -308,7 +309,7 @@
 
         <div class="toolbar1" id="toolDiv1" style="display: none; ">
             <div class="input-group pull-right" style="width:400px; text-align: right;">
-                <input type="button" id="peisong" class="btn btn-success" value="批量派送"/>
+                <input type="button" id="peisong" class="btn btn-success" value="批量发货"/>
                 <input type="button" id="shanchu" class="btn btn-warning" value="批量删除" --%>
 
             </div>
@@ -406,26 +407,20 @@
 
                             <td><c:choose>
                                 <c:when test="${key.state==0}">
-                                    <p style="color:red ">待发货
-                                    </p>
-
+                                    <p style="color:red ">待发货</p>
                                 </c:when>
                                 <c:when test="${key.state==1}">
-                                    <p style="color:#000 ">已发货
-                                    </p>
-
-                                </c:when>
-                                <c:when test="${ key.state==4}">
-                                    <p style="color:blue ">配送中
-                                    </p>
-                                </c:when>
-                                <c:when test="${key.state==5 or key.state==6}">
-                                    <p style="color:green; "> 配送完成</p>
+                                    <p style="color:#000 ">已发货</p>
                                 </c:when>
                                 <c:when test="${key.state==2 or key.state==3}">
                                     <p style="color:orange;  ">派单中</p>
                                 </c:when>
-
+                                <c:when test="${ key.state==4}">
+                                    <p style="color:blue ">配送中</p>
+                                </c:when>
+                                <c:when test="${key.state==5 or key.state==6}">
+                                    <p style="color:green; "> 配送完成</p>
+                                </c:when>
                             </c:choose></td>
                             <td><c:choose>
 
@@ -706,15 +701,7 @@
         location.href = "${pageContext.request.contextPath}/background/order/addOrderUI.html"
     }
 
-    function searchPhone1() {
-        var searchphone = $("#searchPhone1").val();
-        if (searchphone == "") {
-            alert("请输入用户号码及订单号");
-        } else {
-            window.location.href = "${pageContext.request.contextPath}/background/order/search.html?phone=" + searchphone;
-        }
-    }
-
+    // 订单搜索
     function searchPhone() {
         var searchphone = $("#searchPhone").val();
         if (searchphone == "") {
@@ -730,7 +717,7 @@
         window.location.href = "${pageContext.request.contextPath}/background/order/list.html?state=" + state;
     });
 
-    //  配送完成,下载清单
+    // 配送完成,下载清单
     $("#download1").click(function () {
         window.location.href = 'downLogistics.html';
     });
@@ -740,7 +727,7 @@
         window.location.href = "${pageContext.request.contextPath}/background/order/findByLogistics.html?id=" + id;
     };
 
-    // 显示地图传过去经纬度
+    // 显示地图传过去快递员编号（电话）门店经纬度
     function display(id, courierPhone, store_longitude, store_latitude) {
         window.location.href = "${pageContext.request.contextPath}/background/order/displayMap.html?id=" + id
             + "&&courier_Phone=" + courierPhone + "&&store_longitude=" + store_longitude + "&&store_latitude=" + store_latitude;
@@ -778,7 +765,6 @@
         });
     });
 
-
     // 批量配送
     $("#peisong").click(function () {
         //判断至少写了一项
@@ -810,7 +796,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "${pageContext.request.contextPath}/background/order/distribution.html",
+                url: "${pageContext.request.contextPath}/background/order/sendOrder.html",
                 data: "id=" + checkedList.toString(),
                 success: function (result) {
                     if (result.state == "ok") {
@@ -824,6 +810,7 @@
         }
 
     });
+
 
 
     $("#page_demo").twbsPagination({

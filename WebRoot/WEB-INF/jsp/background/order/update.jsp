@@ -112,6 +112,7 @@
                 </td>
             </tr>
 
+<%--        // TODO(likang):不需要填 --%>
             <tr>
                 <td width="10%" height="38" align="center" bgcolor="#F0F5F7">
                     <div>快递员姓名：</div>
@@ -135,6 +136,7 @@
                     </div>
                 </td>
             </tr>
+
             <tr>
                 <td width="10%" height="38" align="center" bgcolor="#F0F5F7">
                     <div>收货具体地址：</div>

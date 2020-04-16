@@ -404,35 +404,33 @@ public class LogisticsOrderServiceImpl implements LogisticsOrderService {
         return logisticsOrderMapper.getCourierLs(companyId);
     }
 
+
     @Override
-    public Map<String, Object> sendOrder(String orderName, String[] seleCourier) {
-        Map<String, Object> m = new HashMap<String, Object>();
-        m.put("orderInfo", "维护异常！");
-        //转数组
+    public Map<String, Object> sendOrder(String orderName, String[] selectCourier) {
+        Map<String, Object> m = new HashMap<>();
+        m.put("orderInfo", "order Exception!");
         String[] orderId = orderName.split(",");
         if (orderId.length > 0) {
             //遍历订单
             for (int i = 0; i < orderId.length; i++) {
+                String phone = selectCourier[0];
                 //创建map
-                Map<String, Object> map = new HashMap<String, Object>();
-                //获取订单数量最少的快递员
-                List<Map<String, Object>> orderNum = logisticsOrderMapper.getMixOrderNum(seleCourier);
+                Map<String, Object> map = new HashMap<>();
                 //设置订单id
                 map.put("id", orderId[i]);
                 //为订单设置快递员电话
-                map.put("courierPhone", orderNum.get(0).get("phone"));
+                map.put("courierPhone", phone);
                 //添加发货时间
                 map.put("shipTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 //为订单设置快递员姓名
-                map.put("courierName", logisticsOrderMapper.getCourierName((String) orderNum.get(0).get("phone")));
+                map.put("courierName", logisticsOrderMapper.getCourierName(phone));
                 //将匹配完成的订单进行配送操作
                 logisticsOrderMapper.finishOrder(map);
-                m.put("orderInfo", "派送成功！");
+                m.put("orderInfo", "delivery successful!");
             }
         } else {
-            m.put("orderInfo", "未获取到需要维护的订单信息！");
+            m.put("orderInfo", "Not find Order info！");
         }
-
 
         return m;
     }

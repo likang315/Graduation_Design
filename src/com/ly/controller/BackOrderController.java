@@ -41,8 +41,10 @@ import com.ly.util.Common;
 import com.ly.util.WorkSheet;
 
 /**
+ * TODO(likang)：订单状态，上传订单信息等courier操作完之后再弄...
  *
  * 订单列表查询，订单状态：0，2，3，4，6
+ * 发货状态（默认0：待发货，1：已发货（废弃），2：已发货且快递员接收订单，3快递员已收货,4订单派送中,5货物已送达，6已签收,7拒签,8快递员返货中，9返货成功，10需求审核中）
  */
 @RequestMapping("/background/order/")
 @Controller
@@ -205,6 +207,7 @@ public class BackOrderController {
 
     /**
      * 05.调用百度地图计算出坐标距离，时间
+     * 门店的经纬度，快递员当前坐标实时计算配送时间
      *
      */
     @RequestMapping(value = "displayMap")
@@ -212,9 +215,9 @@ public class BackOrderController {
         Map<String, Object> m = new HashMap<>();
         m.put("id", id);
         m.put("courier_Phone", courier_Phone);
-        // 获取收获目的地坐标
+        // 获取快递员当前地坐标
         Map<String, Object> maplist = logisticsOrderService.getDisplayMap(m);
-        // 获取总部坐标
+        // 获取订单门店坐标
         Map<String, Object> maplist1 = logisticsOrderService.getDisplayMap1(m);
 
         model.addAttribute("maplist", maplist);
@@ -245,29 +248,20 @@ public class BackOrderController {
     }
 
     /**
-     * 07.订单批量配送
+     * 07.添加快递员信息，派送订单
+     *
+     * @param orderName
+     * @param seleCourier
+     * @param attributes
+     * @return
      */
-    @RequestMapping(value = "distribution")
-    @ResponseBody
-    public Object distribution(MailInformation mailInformation, String ids, HttpServletRequest request) {
+    @RequestMapping("sendOrder")
+    public String sendOrder(String orderName, String[] seleCourier, RedirectAttributes attributes) {
+        // 派送处理订单
+        attributes.addAttribute("orderInfo", logisticsOrderService.sendOrder(orderName, seleCourier).get("orderInfo"));
+        return "redirect:list.html";
 
-        Map<String, Object> result = new HashMap<>();
-        Map<String, Object> map = new HashMap<>();
-        map.put("mailInformation", mailInformation);
-        map.put("ids", ids);
-        map.put("shipTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        boolean flag = logisticsOrderService.distribution(map);
-
-        if (flag) {
-            result.put("state", "ok");
-        }
-        else {
-            result.put("state", "no");
-        }
-
-        return result;
     }
-
 
     /**
      * 08.配送完成后下载清单
@@ -411,19 +405,4 @@ public class BackOrderController {
         //根据传入的快递公司的ID信息查询出归属快递员
         return logisticsOrderService.getCourierLs(companyId);
     }
-
-    /**
-     * 派送订单
-     *
-     * @return
-     */
-    @RequestMapping("sendOrder")
-    public String sendOrder(String orderName, String[] seleCourier, RedirectAttributes attributes) {
-        //派送处理订单
-        attributes.addAttribute("orderInfo", logisticsOrderService.sendOrder(orderName, seleCourier).get("orderInfo"));
-        return "redirect:list.html";
-
-    }
-
-
 }

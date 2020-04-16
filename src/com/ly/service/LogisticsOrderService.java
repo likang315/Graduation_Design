@@ -32,7 +32,7 @@ public interface LogisticsOrderService {
     List<Map<String, Object>> getSearchPhone(Map<String, Object> map);
 
     /**
-     * 获取收获目的地坐标
+     * 获取收获目的地坐标：门店
      *
      * @param map
      * @return
@@ -79,7 +79,13 @@ public interface LogisticsOrderService {
     //根据公司id查询出快递员信息
     List<Map<String, Object>> getCourierLs(String[] companyId);
 
-    //派送订单
+    /**
+     * 添加快递员信息，派送订单
+     *
+     * @param orderName
+     * @param seleCourier
+     * @return
+     */
     Map<String, Object> sendOrder(String orderName, String[] seleCourier);
 
 }

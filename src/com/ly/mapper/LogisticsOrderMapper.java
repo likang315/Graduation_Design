@@ -3,6 +3,7 @@ package com.ly.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.ly.entity.background.Account;
 import org.apache.ibatis.annotations.Param;
 
 import com.ly.entity.app.MailInformation;
@@ -19,7 +20,6 @@ public interface LogisticsOrderMapper {
     List<Map<String, Object>> getSearchPhone(Map<String, Object> map);
 
     Map<String, Object> getDisplayMap(Map<String, Object> map);
-
 
     Map<String, Object> getDisplayMap1(Map<String, Object> map);
 
@@ -66,13 +66,20 @@ public interface LogisticsOrderMapper {
     //
     List<Map<String, Object>> getCourierLs(String[] companyId);
 
-    //快递员姓名
+    /**
+     * 快递员姓名
+     *
+     * @param phone
+     * @return
+     */
     String getCourierName(@Param("phone") String phone);
 
-    //获取订单数量最少的快递员
-    List<Map<String, Object>> getMixOrderNum(String[] phone);
-
-    //维护派送完成的订单
+    /**
+     * 维护派送完成的订单
+     *
+     * @param ls
+     * @return
+     */
     Integer finishOrder(Map<String, Object> ls);
 
 
