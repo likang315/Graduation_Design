@@ -60,7 +60,7 @@ public class SmsSend {
 				.resource("http://sms-api.luosimao.com/v1/send.json");
 		MultivaluedMapImpl formData = new MultivaluedMapImpl();
 		formData.add("mobile", mobile);
-		formData.add("message", msg + "【马卡鲁科技】");
+		formData.add("message", msg + "【西安邮电大学】");
 		ClientResponse response = webResource.type(
 				MediaType.APPLICATION_FORM_URLENCODED).post(
 				ClientResponse.class, formData);
@@ -121,7 +121,7 @@ public class SmsSend {
 	}
 
 	public void sendSmsCustomer(String mobile, String msg, Object remote) {
-		sendSms(mobile, msg, "【马卡鲁科技】");
+		sendSms(mobile, msg, "【西安邮电大学】");
 	}
 
 }

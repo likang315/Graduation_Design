@@ -30,6 +30,12 @@ import com.ly.mapper.BackDemandAuditMapper;
 import com.ly.service.BackDemandAuditService;
 import com.ly.util.Common;
 
+/**
+ * 审核门店上报的需求 Service
+ *
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-04-17 10:05
+ */
 @Service
 public class BackDemandAuditServiceImpl implements BackDemandAuditService {
 	
@@ -38,7 +44,7 @@ public class BackDemandAuditServiceImpl implements BackDemandAuditService {
 	
 	@Override
 	public Integer getCount(String dataState, String startTime, String endTime) {
-		Map<String, Object> parameter = new HashMap<String, Object>();
+		Map<String, Object> parameter = new HashMap<>();
 		if("all".equals(dataState)){
 			dataState = null;
 		}
@@ -62,8 +68,17 @@ public class BackDemandAuditServiceImpl implements BackDemandAuditService {
 		return backDemandAuditMapper.getList(parameter);
 	}
 
+	/**
+	 * 审核结果入库且生成物流订单
+	 *
+	 * @param checkDatas
+	 * @param examine
+	 * @param examine_reason
+	 * @param request
+	 * @return
+	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public boolean updateAuditData(String[] checkDatas, String examine, String examine_reason, HttpServletRequest request) {
 		boolean flag = false;
 		//获取当前登录的信息
@@ -76,19 +91,20 @@ public class BackDemandAuditServiceImpl implements BackDemandAuditService {
 		int groupId =  ac.getGroupId();
 		//获取当前时间
 		String dateNow = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		
+
 		Map<String, Object> parameter = new HashMap<String, Object>();
+		// 门店需求列表ID
 		parameter.put("checkDatas", checkDatas);
 		parameter.put("examine_time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		parameter.put("examine", examine);
 		parameter.put("userName", userName);
 		parameter.put("realName", realName);
 		parameter.put("examine_reason", examine_reason);
-		//审核信息
+
+		// 审核信息
 		Integer result = backDemandAuditMapper.updateAuditData(parameter);
-		
-		if(result > 0 && !"2".equals(examine)){
-			//查询出本次通过审核的信息
+		if(result > 0 && ! "2".equals(examine)){
+			// 查询出本次通过审核的需求信息
 			List<Map<String,Object>> ls =  backDemandAuditMapper.getPassInfo(parameter);
 			//循环补全订单信息
 			for(int i = 0; i < ls.size(); i++){
@@ -110,17 +126,20 @@ public class BackDemandAuditServiceImpl implements BackDemandAuditService {
 				//订单创建时间
 				ls.get(i).put("createTime", dateNow);
 			}
-			//将循环补充完善的订单信息插入到数据库
+			// 将循环补充完善的订单信息插入到数据库
 			if(ls.size() > 0){
-				backDemandAuditMapper.addOrderInfo(ls);
-				flag = true;
+				if (backDemandAuditMapper.addOrderInfo(ls) > 0) {
+					flag = true;
+				} else {
+					flag = false;
+				}
 			} else {
 				flag = false;
 			}
-			
+
 		}
-		
-		//审核驳回给该门店发送短信回馈
+
+		// 审核驳回给该门店发送短信回馈
 		if("2".equals(examine)){
 			List<Map<String, Object>> storeUserPhones = backDemandAuditMapper.getById(checkDatas);
 			for (Map<String, Object> map : storeUserPhones) {
@@ -130,6 +149,7 @@ public class BackDemandAuditServiceImpl implements BackDemandAuditService {
 			}
 			flag = true;
 		}
+
 		return flag;
 	}
 

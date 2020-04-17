@@ -13,12 +13,9 @@
 		isdelete,
 		report_time,
 		examine_time,
-		examine_one_time,
 		expanding_demand,
 		examine,
 		examine_reason,
-		examine_one_phone,
-		examine_one_name,
 		examine_two_phone,
 		examine_two_name
 	</sql>
@@ -105,12 +102,12 @@
 			AND UNIX_TIMESTAMP(report_time) <![CDATA[<=]]> UNIX_TIMESTAMP(#{endTime})
 		</if>
 	</select>
-	<!-- 更新用户信息 -->
+
 	<select id="getPassInfo" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT m.materialContent,
+		SELECT  m.materialContent,
 				m.materialNumber,
 				msi.*
-			from mkl_store_demand m
+		FROM mkl_store_demand m
 		LEFT JOIN (
 		SELECT m.store_name,
 			m.store_address,
@@ -134,7 +131,6 @@
 		
 	</select>
 	
-	<!-- 维护订单表的数据 -->
 	<insert id="addOrderInfo" parameterType="java.util.Map">
 		INSERT INTO mkl_mail_info
 		(id, 

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.AccountMapper">
+
+    <!--mybatis ehcache缓存配置 -->
+    <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 <cache type="org.mybatis.caches.ehcache.LoggingEhcache"
+        /> -->
+    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+    <!-- 以下与实体类的中字段一致 -->
+    <sql id="selectId">
+		id,
+		accountName,
+		(select group_concat(name) from sys_role
+		where sys_role.id
+		in (SELECT role_id FROM sys_acc_role WHERE
+		acc_id=sys_account.id) ) roleName,
+		password,
+		real_name,
+		description,
+		state,
+		createTime,
+		groupId,
+		section_name,
+		code
+	</sql>
+
+    <!--resultType="Account" 每返回一条结果封装到Account里 -->
+    <select id="queryAll" resultType="Account" parameterType="com.ly.entity.background.Account">
+        select
+        <include refid="selectId"/>
+        from sys_account
+        <where>
+            <if test="accountName != null and accountName != ''">
+                accountName like '%${accountName}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="isExist" resultType="Account" parameterType="String">
+        select
+        <include refid="selectId"/>
+        from sys_account
+        where accountName = #{accountName} AND auth_flag = 2
+    </select>
+
+    <!--resultType="Account" 每返回一条结果封装到Account里 -->
+    <select id="query" resultType="Account" parameterType="java.util.HashMap">
+        select
+        <include refid="selectId"/>
+        ,
+        (select name from sys_group where sys_account.groupId=sys_group.id) groupName
+        from sys_account
+        <where>
+            <if test="t.accountName != null and t.accountName != ''">
+                accountName like '%${t.accountName}%'
+            </if>
+            <if test="t.groupId != null and t.groupId != ''">
+                groupId in (select id from sys_group where sys_account.groupId=sys_group.id and
+                (sys_group.id=112 or sys_group.parentId=112 ) )
+            </if>
+        </where>
+    </select>
+
+    <select id="queryNoMatch" resultType="Account" parameterType="java.util.HashMap">
+        select
+        a.id,
+        a.accountName,
+        a.password,
+        a.accountType,
+        a.description,
+        a.state,
+        a.createTime,
+        (SELECT dp.name from department dp where dp.id =
+        d.subdep_id) depName
+        from sys_account a LEFT JOIN dep_account d on
+        a.id=d.account_id
+        <where>
+            <if test="t.accountName != null and t.accountName != ''">
+                accountName like '%${t.accountName}%'
+            </if>
+        </where>
+    </select>
+
+    <!-- 增加用户 -->
+    <insert id="add" parameterType="Account">
+		insert into sys_account (
+		accountName,
+		password,
+		description,
+		accountType,
+		state,
+		createTime,
+		groupId,
+		area,
+		real_name,
+		id_car,
+		code,
+		section_name,
+		employeesType,
+		employeesClass,
+		auth_flag,
+		user_flag,
+		auth_reason,
+		city,
+		company)
+		values (#{accountName},
+				#{password},
+			    #{description},
+			    #{accountType},
+			    #{state},
+			    #{createTime},
+				#{groupId},
+				#{area},
+			    #{real_name},
+			    #{id_car},
+			    #{code},
+			    #{section_name},
+				#{employeesType},
+				#{employeesClass},
+				#{auth_flag},
+				#{user_flag},
+				#{auth_reason},
+				#{city},
+				#{company}
+				)
+	</insert>
+
+    <delete id="delete" parameterType="String">
+		delete from sys_account where
+		id=#{id}
+	</delete>
+
+    <select id="getById" parameterType="String" resultType="com.ly.entity.background.Account">
+        select
+        <include refid="selectId"/>
+        from sys_account where id=#{id}
+    </select>
+
+    <update id="update" parameterType="Account">
+        update sys_account
+        <set>
+            <if test="accountName != null and accountName != ''">
+                accountName=#{accountName},
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="description != null and description != ''">
+                description=#{description},
+            </if>
+            <if test="state != null and state != ''">
+                state=#{state},
+            </if>
+            <if test="createTime != null and createTime != ''">
+                createTime=#{createTime}
+            </if>
+            <if test="groupId != null and groupId != ''">
+                groupId=#{groupId}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 验证用户登陆 -->
+    <select id="countAccount" parameterType="Account" resultType="com.ly.entity.background.Account">
+        select
+        <include refid="selectId"/>
+        from sys_account where
+        accountName=#{accountName} and password=#{password}
+    </select>
+
+    <!-- 根据用户名查出id -->
+    <select id="querySingleAccount" parameterType="String"
+            resultType="com.ly.entity.background.Account">
+        select
+        <include refid="selectId"/>
+        from sys_account where accountName=#{accountName}
+    </select>
+
+    <!-- 根据分公司代号查询分公司 -->
+    <select id="getFengongsiInfo" parameterType="java.lang.Integer" resultType="java.util.Map">
+	    SELECT * FROM `code_info` WHERE fengongsiNum=#{0} GROUP BY fengongsi
+	</select>
+
+    <!-- 验证是否正确 -->
+    <select id="testCode" parameterType="String" resultType="com.ly.entity.app.Smslog">
+	    select * from sys_smslog where mobile = #{0} and code = #{1}
+	</select>
+
+    <!-- 验证是否正确 5分钟过期-->
+    <select id="testCode2" parameterType="String" resultType="com.ly.entity.app.Smslog">
+	    select * from sys_smslog where mobile = #{0} and code = #{1} and TIMESTAMPDIFF(MINUTE,createtime,#{2}) &lt; 5
+	</select>
+
+    <!-- 忘记密码 -->
+    <update id="updatePassword" parameterType="String">
+	    update sys_account set password = #{1} where accountName = #{0}
+	</update>
+
+    <!-- 验证手机号是否已注册 -->
+    <select id="validatePhoneNum" parameterType="String" resultType="com.ly.entity.background.Account">
+	    select * from sys_account where accountName = #{0} and auth_flag != 3 and deletestatus='0'
+	</select>
+
+    <!-- 修改密码 -->
+    <update id="changePassword" parameterType="String">
+	    update sys_account set password = #{0} where accountName=#{1}
+	</update>
+
+    <select id="login" parameterType="String" resultType="com.ly.entity.background.Account">
+	    select * from sys_account where accountName = #{0} and password = #{1} and auth_flag = '2'
+	</select>
+</mapper>
