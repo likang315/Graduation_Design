@@ -167,12 +167,12 @@ public class BackExpressServiceImpl implements BackExpressService {
                 //添加单个用户信息
                 map.put("createTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 if (backExpressMapper.addCourier(map) > 0) {
-                    info = "添加用户成功";
+                    info = "successful";
                 } else {
-                    info = "添加用户失败，请核实该用户是否存在，或数据是否符合规范";
+                    info = "failture";
                 }
             } else {
-                info = "添加用户失败，请核实该用户是否存在，或数据是否符合规范";
+                info = "failture";
             }
 
         } else {

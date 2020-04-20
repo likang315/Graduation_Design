@@ -6,6 +6,12 @@ import java.util.Map;
 import com.ly.entity.background.Account;
 import com.ly.entity.background.Group;
 
+/**
+ * app 前台初始化界面控制器
+ *
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-04-021 11:21
+ */
 public interface AppLoginService {
 
 	Map<String,Object> login(Account account);
