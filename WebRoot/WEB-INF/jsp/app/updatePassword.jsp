@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>修改密码</title>
+	<title>个人设置-修改密码</title>
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="${pageContext.request.contextPath }/css/cover.css" rel="stylesheet" />
 	<link href="${pageContext.request.contextPath }/css/new.css" rel="stylesheet" />

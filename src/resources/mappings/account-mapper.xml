@@ -57,7 +57,7 @@
             </if>
             <if test="t.groupId != null and t.groupId != ''">
                 groupId in (select id from sys_group where sys_account.groupId=sys_group.id and
-                (sys_group.id=112 or sys_group.parentId=112 ) )
+                (sys_group.id=1 or sys_group.parentId=1 ) )
             </if>
         </where>
     </select>

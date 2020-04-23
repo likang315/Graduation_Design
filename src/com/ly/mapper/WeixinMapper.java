@@ -17,10 +17,6 @@ public interface WeixinMapper {
 
 	int add(WeixinBinding weixinBinding);
 
-	List<Smslog> testCode(Map<String, Object> map);
-
-	void addSmslog(Smslog smslog);
-
 	int weixinDelete(String phone);
 
 	List<Account> loginAgainInWeixinBinDing(Map<String,Object> map);

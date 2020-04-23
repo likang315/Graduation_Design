@@ -42,7 +42,6 @@ import com.ly.mapper.AppFillingSingleMapper;
 import com.ly.service.AccountService;
 import com.ly.service.ActivityService;
 import com.ly.service.AppDispatchService;
-import com.ly.service.SmslogService;
 import com.ly.util.Common;
 import com.ly.util.EncodingUtil;
 import com.ly.util.FTPLinuxUtils;
@@ -64,9 +63,6 @@ public class AppDispatchServiceImpl implements AppDispatchService{
 
 	@Autowired
 	private AppDispatchMapper appDispatchMapper;
-	
-	@Autowired
-	private SmslogService smslogService;
 	
 	@Autowired
 	private AccountService accountService;
@@ -175,84 +171,6 @@ public class AppDispatchServiceImpl implements AppDispatchService{
 		return map;
 	}
 
-	/**
-	 * 获取验证码
-	 * @throws Exception 
-	 */
-	@Override
-	public Object getCode(String accountName,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> result = new HashMap<String,Object>();
-		String mobile = accountName;
-		String ip="";
-		if(request.getHeader("x-forwarded-for") == null) { 
-			 ip = request.getRemoteAddr(); 
-		}else{ 
-		     ip = request.getHeader("x-forwarded-for");  
-		}
-		response.setHeader("Content-Type", "application/x-www-form-urlencoded;charset:UTF-8");
-		response.setHeader("Accept", "text/javascript, text/html, application/xml, text/xml, */*");
-		
-		Random rand = new Random();
-		String code = "";
-		//生成六位数验证码
-		for(int i = 0;i<6;i++){
-			code += rand.nextInt(10);
-		}
-		
-		SmsSend ss = new SmsSend();
-		PropertiesUtils.findPropertiesKey("whtsufix");
-		ss.sendSmsCustomer(mobile, "您的验证码是："+code+"。");
-		
-		SmsSendlog smsSendlog = new SmsSendlog();
- 		smsSendlog.setPhone(mobile);
-		smsSendlog.setSuccess("Y");
-		smsSendlog.setContent("您的验证码是："+code);
-		smsSendlog.setRemoteAddr(ip);
-		//将验证码写入日志
-		smslogService.addSmsSendLog(smsSendlog);
-		
-		Smslog smslog = new Smslog();
-		smslog.setCode(code);
-		smslog.setMobile(mobile);
-		smslog.setDeviceId("866288029363359");
-		smslog.setMsg("您的验证码是："+code);
-		smslog.setCreatetime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
-		
-		smslogService.addSmslog(smslog);
-		
-		result.put("state","true");
-		result.put("code", code);
-		result.put("message","验证码发送成功");
-		System.out.println("===============发送成功");
-		System.out.println(code);
-	
-		return result;
-	}
-
-	/**
-	 * 验证验证码
-	 */
-	@Override
-	public Object testCode(String tellPhone, String code) {
-		Map<String, Object> map = new HashMap<String,Object>();
-		//先验证是否正确，在验证是否超时
-		if(accountService.testCode(tellPhone, code)){
-			/*map.put("state","true");
-			map.put("message","验证码正确");*/
-			if(accountService.testCode2(tellPhone, code)){
-				map.put("state","true");
-				map.put("message","验证码正确");
-			}else{
-				map.put("state","false");
-				map.put("message","验证码已过期！请重新获取");
-			}
-		} else {
-			map.put("state","false");
-			map.put("message","验证码错误");
-		}
-		System.err.println(map);
-		return map;
-	}
 
 	/**
 	 * 修改密码
@@ -432,7 +350,6 @@ public class AppDispatchServiceImpl implements AppDispatchService{
 	 * @author zhangzhi
 	 * @date 2018年5月2日下午2:19:14
 	 * @param channel_code 门店渠道编码
-	 * @param materialContent物资名称（以“，”分割）
 	 * @param materialNumber 物质数量（以“，”分割)
 	 * @param store_shopowner_phone 上报人电话
 	 * @param store_shopowner_name 上报人姓名

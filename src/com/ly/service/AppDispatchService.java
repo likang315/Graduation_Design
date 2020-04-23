@@ -42,22 +42,6 @@ public interface AppDispatchService {
 	 */
 	Object getUserInfor(@Param("accountName") String accountName);
 
-	/**
-	 * 获取验证码
-	 * @author zhangzhi
-	 * @date 2018年4月20日下午4:38:29
-	 * @param
-	 * @throws Exception 
-	 */
-	Object getCode(@Param("accountName")String accountName,HttpServletRequest request, HttpServletResponse response) throws Exception;
-
-	/**
-	 * 验证验证码
-	 * @author zhangzhi
-	 * @date 2018年4月20日下午4:56:47
-	 * @param
-	 */
-	Object testCode(@Param("tellPhone")String tellPhone,@Param("code") String code);
 
 	/**
 	 * 修改密码

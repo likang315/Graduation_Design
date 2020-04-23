@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ly.entity.SmsSend;
 import com.ly.entity.background.Account;
 import com.ly.mapper.BackDemandAuditMapper;
 import com.ly.service.BackDemandAuditService;
@@ -137,17 +136,6 @@ public class BackDemandAuditServiceImpl implements BackDemandAuditService {
 				flag = false;
 			}
 
-		}
-
-		// 审核驳回给该门店发送短信回馈
-		if("2".equals(examine)){
-			List<Map<String, Object>> storeUserPhones = backDemandAuditMapper.getById(checkDatas);
-			for (Map<String, Object> map : storeUserPhones) {
-				SmsSend send = new SmsSend();
-				String msg = "您需求上报的信息已被审核,请您尽快前往系统查看结果";
-				send.sendSms(map.get("store_shopowner_phone").toString(), msg, null);
-			}
-			flag = true;
 		}
 
 		return flag;

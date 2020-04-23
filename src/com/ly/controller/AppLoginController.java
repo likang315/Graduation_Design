@@ -49,6 +49,13 @@ public class AppLoginController {
         return Common.APP_PATH + "/login";
     }
 
+    /**
+     * app 检查用户登录
+     *
+     * @param model
+     * @param account
+     * @return
+     */
     @RequestMapping("/checkLogin")
     public String appLogin(Model model, Account account) {
 
@@ -68,18 +75,21 @@ public class AppLoginController {
             parameter.put("groupId", ((Account) result.get("info")).getGroupId());
             parameter.put("vendorId", 0);
             parameter.put("brandId", 0);
+            // 获取用户组定制菜单
             AppWxMenuShare wxMenuS = appMenuService.getWxMenuByAllInfo(parameter);
             AppWxMenu appWxMenu = null;
             if (wxMenuS != null) {
                 List<AppWxMenu> LWxMenu = new ArrayList<AppWxMenu>();
-                LWxMenu = new ArrayList<AppWxMenu>();
+                // 设置一进去之后的index
                 parameter.put("ids", wxMenuS.getIndex());
+                // 获取ids的菜单信息
                 LWxMenu = appMenuService.getWxMenuByAll(parameter);
                 appWxMenu = LWxMenu.size() > 0 ? LWxMenu.get(0) : null;
             }
 
+            // 没有设置index_address 兜底地址
             if (appWxMenu == null) {
-                model.addAttribute("appIndexUrl", "/app/grabSingle.html");
+                model.addAttribute("appIndexUrl", "/app/setup.html");
             } else {
                 model.addAttribute("appIndexUrl", appWxMenu.getAddress());
             }
@@ -89,6 +99,18 @@ public class AppLoginController {
         model.addAttribute("userName", account.getAccountName());
         return Common.APP_PATH + "/login";
     }
+
+
+    /**
+     * 得到归属快递公司
+     */
+    @RequestMapping("/getBycompanyId")
+    @ResponseBody
+    public Object getBycompanyId(String companyId) {
+        Map<String, Object> parameter = appLoginService.getBycompanyId(companyId);
+        return parameter;
+    }
+
 
     @RequestMapping("/toRegister")
     public String toRegister(Account account) {
@@ -136,13 +158,4 @@ public class AppLoginController {
         int re = appLoginService.add(account);
         return Common.APP_PATH + "/login";
     }
-
-    //得到归属快递公司
-    @RequestMapping("/getBycompanyId")
-    @ResponseBody
-    public Object getBycompanyId(String companyId) {
-        Map<String, Object> parameter = appLoginService.getBycompanyId(companyId);
-        return parameter;
-    }
-
 }

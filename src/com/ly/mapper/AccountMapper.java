@@ -42,7 +42,7 @@ public interface AccountMapper extends BaseMapper<Account> {
      * @param password
      * @return
      */
-    public Account login(String username, String password);
+    Account login(String username, String password);
 
     /**
      * 更新令牌
@@ -54,7 +54,7 @@ public interface AccountMapper extends BaseMapper<Account> {
 
     public Account loginByToken(String username, String password, String token);
 
-    public int changePassword(String md5, String username);
+    int changePassword(String md5, String username);
 
     public int getCounts(List<Integer> gid);
 

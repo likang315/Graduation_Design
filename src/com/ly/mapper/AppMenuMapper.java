@@ -18,11 +18,19 @@ public interface AppMenuMapper {
 	public void delWxMenu(String ids);
 	
 	public List<AppWxMenu> getInfoByName_wxMenu(String name);
-	
-	//获取当前用户组的菜单
-	public List<AppWxMenu>  getWxMenuByAll(Map<String,Object> parameters);
-	
-	public List<AppWxMenuShare> getWxMenuByAllInfo(Map<String,Object> parameters);
+
+	/**
+	 * 获取当前用户组的菜单
+	 */
+	List<AppWxMenu> getWxMenuByAll(Map<String,Object> parameters);
+
+	/**
+	 * 获取app定制菜单信息
+	 *
+	 * @param parameters
+	 * @return
+	 */
+	List<AppWxMenuShare> getWxMenuByAllInfo(Map<String,Object> parameters);
 	
 	public void updateWxMenuByAll(AppWxMenuShare wxMenuS);
 	
@@ -32,7 +40,13 @@ public interface AppMenuMapper {
 	public void updateIndex(AppWxMenuShare wxMenuS);
 	//修改底部菜单
 	public void updateBottonMenu(AppWxMenuShare wxMenuS);
-	
-	public String getParentId(String groupId);
+
+	/**
+	 * 获取本身parentID
+	 *
+	 * @param groupId
+	 * @return
+	 */
+	String getParentId(String groupId);
 	
 }

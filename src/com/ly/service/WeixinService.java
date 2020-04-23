@@ -14,15 +14,8 @@ public interface WeixinService {
 
 	int add(WeixinBinding weixinBinding);
 
-	List<Smslog> testCode(String tellPhone, String code);
-
-	void addSmslog(Smslog smslog);
-
-	int weixinDelete(String phone);
-
 	List<Account> loginAgainInWeixinBinDing(String username, String password);
 
 	void updateLogin(String username, String token);
-
 
 }

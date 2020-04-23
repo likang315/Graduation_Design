@@ -39,26 +39,7 @@
 							#{create_time}
 						)
 	</insert>
-	
-	<insert id="addSmslog" parameterType="com.ly.entity.Smslog">
-		insert into sys_smslog (
-						deviceId,
-						mobile,
-						msg,
-						createtime,
-						code
-					)values(
-						#{deviceId},
-						#{mobile},
-						#{msg},
-						#{createtime},
-						#{code}
-					)
-	</insert>
-	
-	<select id="testCode" parameterType="java.util.Map" resultType="com.ly.entity.Smslog">
-	    select * from sys_smslog where mobile = #{tellPhone} and code = #{code}
-	</select>
+
 	
 	<delete id="weixinDelete" parameterType="java.lang.String">
 		delete from wn_weixin_binding where userPhone = #{phone}

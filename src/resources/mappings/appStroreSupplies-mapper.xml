@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ly.mapper.APPStroreSuppliesMapper">
-	<!-- 修改状态 -->
-  	<insert id="addmaterial" parameterType="com.ly.entity.app.APPStoreSupplies">
+    <!-- 修改状态 -->
+    <insert id="addmaterial" parameterType="com.ly.entity.app.APPStoreSupplies">
 		insert into mkl_store_demand 
 			(
 				store_name,
@@ -27,114 +27,118 @@
 				#{report_time}
 			)
 	</insert>
-	
-	<!-- 查询-->
-		<select id="findtotal" parameterType="java.lang.String" resultType="java.util.Map">
-			SELECT  COUNT(1) AS num,
-			CASE examine
-			WHEN 0 THEN '未审核'
-      		WHEN 3 THEN '未审核'
-			WHEN 4 THEN '未审核'
-			WHEN 1 THEN '审核通过'
-			WHEN 2 THEN '审核不通过' 
-      		END  as 'examines'
 
- 			FROM mkl_store_demand WHERE channel_code=#{channel_code} AND isdelete=0 
- 			<if test="startTime != null and startTime != ''">
-				AND UNIX_TIMESTAMP(report_time) <![CDATA[>=]]> UNIX_TIMESTAMP(STR_TO_DATE(#{startTime},'%Y-%m-%d %H:%i:%s'))
-			</if>
-			<if test="endTime != null and endTime != ''">
-				AND UNIX_TIMESTAMP(report_time) &lt; UNIX_TIMESTAMP(DATE_ADD(STR_TO_DATE(#{endTime},'%Y-%m-%d %H:%i:%s'), INTERVAL 1 day))
-			</if>
+    <!-- 查询-->
+    <select id="findtotal" parameterType="java.lang.String" resultType="java.util.Map">
+        SELECT COUNT(1) AS num,
+        CASE examine
+        WHEN 0 THEN '未审核'
+        WHEN 3 THEN '未审核'
+        WHEN 4 THEN '未审核'
+        WHEN 1 THEN '审核通过'
+        WHEN 2 THEN '审核不通过'
+        END as 'examines'
 
-				 GROUP BY examines; 
-		</select>
-		
-	<!-- 查询需求上报列表-->
-		<select id="StoreAllTotal" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM mkl_store_demand
-		where
-	      channel_code=#{channel_code} AND isdelete=0  
-	      <if test="state!=null and  state!=''">  
-	      <if test=" state==1"> and examine=0 </if> 
-	      <if test=" state==2">and examine=1  </if> 
-	      <if test=" state==3"> and examine=2 </if> 
-	      </if>
-		<if test="startTime != null and startTime != ''">
-			AND report_time <![CDATA[>=]]> #{startTime}
-		</if>
-		<if test="endTime != null and endTime != ''">
-			AND report_time <![CDATA[<=]]> #{endTime}
-		</if>
-	      ORDER BY report_time DESC LIMIT   #{jiazai},5
-		</select>
-	<!-- 查询上报列表数量-->
-		<select id="getStoreAllTotalCount" parameterType="java.util.Map" resultType="int">
-		SELECT count(*) FROM mkl_store_demand
-		where
-	      channel_code=#{channel_code} AND isdelete=0  
-	      <if test="state!=null and  state!=''">  
-	      <if test=" state==1"> and examine=0 </if> 
-	      <if test=" state==2">and examine=1  </if> 
-	      <if test=" state==3"> and examine=2 </if> 
-	      </if>
-		<if test="startTime != null and startTime != ''">
-			AND report_time <![CDATA[>=]]> #{startTime}
-		</if>
-		<if test="endTime != null and endTime != ''">
-			AND report_time <![CDATA[<=]]> #{endTime}
-		</if>
-	      ORDER BY report_time DESC 
-		</select>
-		<!-- 查询订单列表-->
-		<select id="findStoreList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM mkl_mail_info 
-	      where
-	     channel_code=#{channel_code} and isDelete=0
-	     <if test="state != null and state != ''">
-	      <if test="state==2 ">and (state=0 or state=1 or state=2 or state=3 )  </if>
-	      <if test="state==3 ">and  state=4 </if>
-	      <if test="state==4 ">and (state=5 or state=6) </if>
-	      </if>
-	      <if test="searchMsg != null and searchMsg != ''">
-			AND id like concat(concat(#{searchMsg}),'%')
-		</if>
-		<if test="startTime != null and startTime != ''">
-			AND createTime <![CDATA[>=]]> #{startTime}
-		</if>
-		<if test="endTime != null and endTime != ''">
-			AND createTime <![CDATA[<=]]> #{endTime}
-		</if>
-	      ORDER BY shipTime DESC  LIMIT   #{jiazai},5
-		</select>
-		<!-- 查询订单列表数量-->
-		<select id="getStorelistCount" parameterType="java.util.Map" resultType="int">
-		SELECT count(*) FROM mkl_mail_info 
-	      where
-	     channel_code=#{channel_code} and isDelete=0
-	     <if test="state != null and state != ''">
-	      <if test="state==2 ">and (state=0 or state=1 or state=2 or state=3 )  </if>
-	      <if test="state==3 ">and  state=4 </if>
-	      <if test="state==4 ">and (state=5 or state=6) </if>
-	      </if>
-	      <if test="searchMsg != null and searchMsg != ''">
-			AND id like concat(concat(#{searchMsg}),'%')
-		</if>
-		<if test="startTime != null and startTime != ''">
-			AND createTime <![CDATA[>=]]> #{startTime}
-		</if>
-		<if test="endTime != null and endTime != ''">
-			AND createTime <![CDATA[<=]]> #{endTime}
-		</if>
-	      ORDER BY shipTime DESC  
-		</select>
-		
-		
-		<select id="findStoreListDetails" parameterType="java.util.Map" resultType="java.util.Map">
+        FROM mkl_store_demand WHERE channel_code=#{channel_code} AND isdelete=0
+        <if test="startTime != null and startTime != ''">
+            AND UNIX_TIMESTAMP(report_time) <![CDATA[>=]]> UNIX_TIMESTAMP(STR_TO_DATE(#{startTime},'%Y-%m-%d %H:%i:%s'))
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND UNIX_TIMESTAMP(report_time) &lt; UNIX_TIMESTAMP(DATE_ADD(STR_TO_DATE(#{endTime},'%Y-%m-%d %H:%i:%s'),
+            INTERVAL 1 day))
+        </if>
+
+        GROUP BY examines;
+    </select>
+
+    <!-- 查询需求上报列表-->
+    <select id="StoreAllTotal" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM mkl_store_demand
+        where
+        channel_code=#{channel_code} AND isdelete=0
+        <if test="state!=null and  state!=''">
+            <if test=" state==1">and examine=0</if>
+            <if test=" state==2">and examine=1</if>
+            <if test=" state==3">and examine=2</if>
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND report_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND report_time <![CDATA[<=]]> #{endTime}
+        </if>
+        ORDER BY report_time DESC LIMIT #{jiazai},5
+    </select>
+
+    <!-- 查询上报列表数量-->
+    <select id="getStoreAllTotalCount" parameterType="java.util.Map" resultType="int">
+        SELECT count(*) FROM mkl_store_demand
+        where
+        channel_code=#{channel_code} AND isdelete=0
+        <if test="state!=null and  state!=''">
+            <if test=" state==1">and examine=0</if>
+            <if test=" state==2">and examine=1</if>
+            <if test=" state==3">and examine=2</if>
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND report_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND report_time <![CDATA[<=]]> #{endTime}
+        </if>
+        ORDER BY report_time DESC
+    </select>
+
+    <!-- 查询订单列表数量-->
+    <select id="getStorelistCount" parameterType="java.util.Map" resultType="int">
+        SELECT count(*) FROM mkl_mail_info
+        where
+        channel_code=#{channel_code} and isDelete=0
+        <if test="state != null and state != ''">
+            <if test="state==2 ">and (state=0 or state=1 or state=2 or state=3 )</if>
+            <if test="state==3 ">and state=4</if>
+            <if test="state==4 ">and (state=5 or state=6)</if>
+        </if>
+        <if test="searchMsg != null and searchMsg != ''">
+            AND id like concat(concat(#{searchMsg}),'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND createTime <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND createTime <![CDATA[<=]]> #{endTime}
+        </if>
+        ORDER BY shipTime DESC
+    </select>
+
+    <!-- 查询订单列表-->
+    <select id="findStoreList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM mkl_mail_info
+        where
+        channel_code=#{channel_code} and isDelete=0
+        <if test="state != null and state != ''">
+            <if test="state==2 ">and (state=0 or state=1 or state=2 or state=3 )</if>
+            <if test="state==3 ">and state=4</if>
+            <if test="state==4 ">and (state=5 or state=6)</if>
+        </if>
+        <if test="searchMsg != null and searchMsg != ''">
+            AND id like concat(concat(#{searchMsg}),'%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND createTime <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND createTime <![CDATA[<=]]> #{endTime}
+        </if>
+        ORDER BY shipTime DESC LIMIT #{jiazai},5
+    </select>
+
+    <select id="findStoreListDetails" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM mkl_mail_info WHERE channel_code=#{channel_code} AND id=#{id} AND isDelete=0 
 	</select>
-		<select id="findStoreAllDetails" parameterType="java.util.Map" resultType="java.util.Map">
+
+    <select id="findStoreAllDetails" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM mkl_store_demand WHERE channel_code=#{channel_code} AND id=#{id} AND isdelete=0 
 	</select>
-		
+
 </mapper>

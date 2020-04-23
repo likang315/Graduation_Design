@@ -3,6 +3,7 @@
 <!DOCTYPE >
 <html>
 	<head>
+		<title>app-login—02</title>
 		<%@include file="/common/common-app-head.jsp" %>
 	</head>
 	<body >

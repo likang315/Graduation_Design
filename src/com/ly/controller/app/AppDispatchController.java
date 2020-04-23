@@ -69,31 +69,7 @@ public class AppDispatchController {
 		return appDispatchService.getUserInfor(accountName);
 	}
 	
-	/**
-	 * 获取验证码
-	 * @author zhangzhi
-	 * @date 2018年4月20日下午3:04:48
-	 * @param
-	 * @throws Exception 
-	 */
-	@RequestMapping(value="getCode",method={RequestMethod.GET,RequestMethod.POST},produces ="application/json;charset=utf-8")
-	@ResponseBody
-	public Object getCode(String accountName,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		return appDispatchService.getCode(accountName,request,response);
-	}
-	
-	/**
-	 * 验证验证码
-	 * @author zhangzhi
-	 * @date 2018年4月20日下午3:04:48
-	 * @param
-	 */
-	@RequestMapping(value="testCode",method={RequestMethod.GET,RequestMethod.POST},produces ="application/json;charset=utf-8")
-	@ResponseBody
-	public Object testCode(String tellPhone,String code){
-		return appDispatchService.testCode(tellPhone,code);
-	}
-	
+
 	/**
 	 * 修改密码
 	 * @author zhangzhi

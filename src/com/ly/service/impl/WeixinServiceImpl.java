@@ -37,24 +37,6 @@ public class WeixinServiceImpl implements WeixinService {
 	}
 
 	@Override
-	public List<Smslog> testCode(String tellPhone, String code) {
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("tellPhone",tellPhone);
-		map.put("code", code);
-		return weixinMapper.testCode(map);
-	}
-
-	@Override
-	public void addSmslog(Smslog smslog) {
-		weixinMapper.addSmslog(smslog);
-	}
-
-	@Override
-	public int weixinDelete(String phone) {
-		return weixinMapper.weixinDelete(phone);
-	}
-
-	@Override
 	public List<Account> loginAgainInWeixinBinDing(String username, String password) {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("accountName", username);

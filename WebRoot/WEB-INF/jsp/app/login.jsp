@@ -25,11 +25,9 @@
 	<body  class="bjs-blue">
 
 	    <div class="container ">
-	               <div class="p15"><img src="${pageContext.request.contextPath}/images/china_mobile.png" class="w200" style="width:200px;" />  </div>
+	               <div class="p15"><img src="${pageContext.request.contextPath}/images/appLoginLogo.png" class="w200" style="width:200px; margin-left: 20%; margin-top: 10%;" />  </div>
 	
 	        <div class="login_page text-center">
-				<div style="text-align:center;width:100%;height:80px;font-size:35px;color:white;font-family:幼圆"> 和·物达
-				</div>
 	            <div>
 	            	<form id="loginForm" action="${pageContext.request.contextPath}/app/login/checkLogin.html" method="post">
 		                <div class="form-group">
@@ -41,14 +39,11 @@
 		                <div class="form-group">
 		                 <div id="drag"></div>
                 		</div>
-						<span id="hint1">${result.info }</span>
+						<span id="hint1">${result.info}</span>
 		               	<!-- <div class="form-group">
 		                    <button id="login"  class="btn btn-block btn-lg btn_login">登录</button>
 		                </div> -->
 	                </form>
-	               <div class="form-group">
-	                    <p class="rember_psw"><a class="pull-right" href="${pageContext.request.contextPath }/app/user/forgetPassword.html">忘记密码</a></p>
-	                </div>
 	                
 	            </div>
 	        </div>

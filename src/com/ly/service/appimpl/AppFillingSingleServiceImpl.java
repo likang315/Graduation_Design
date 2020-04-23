@@ -15,7 +15,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.ly.entity.SmsSend;
 import com.ly.entity.app.MailInformation;
 import com.ly.entity.app.Store;
 import com.ly.entity.app.Vendor;
@@ -205,20 +204,6 @@ public class AppFillingSingleServiceImpl implements AppFillingSingleService {
 				resultState.put("info", "no");
 			}
 			session.removeAttribute("myMaterial");//释放session
-			//给快递员发短息提醒
-			SmsSend send = new SmsSend();
-			for (int j = 0; j < result.size(); j++) {
-				Map<String, Object> map = result.get(j);
-				String[] size = map.get("number").toString().split(",");
-				String msg = "您有  "+size.length+"条新订单,订单编码分别是:" + "\n" + "【"+map.get("number").toString()+"】";
-				System.out.println(msg);
-				boolean flag = send.sendSms(map.get("expressPhone").toString(), msg, null);
-				if (flag) {
-					System.out.println("验证码发送成功");
-				} else {
-					System.out.println("验证码发送失败");
-				}
-			}
 			return resultState;
 		}
 	}
