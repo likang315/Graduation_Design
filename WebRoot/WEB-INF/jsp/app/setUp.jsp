@@ -4,6 +4,7 @@
 <!DOCTYPE >
 <html>
 	<head>
+		<title>我的-个人设置</title>
 		<%@include file="/common/common-app-head.jsp" %>
 	</head>
 	<body class="bjs-gary">
@@ -57,7 +58,7 @@
 <script>
 	$(function(){
 		var user = API.getUserInfo();
-		
+
 		if(user.accountName == null)
 			window.document.location.href=API.httpserver + "/app/login.html";
 		$("#sec_username").html(user.real_name);
@@ -74,7 +75,7 @@
 				$("#sec_Express").html(data.company_name);
 				$("#myExpress").css('display','block');
 			}).error(function(data){});
-			
+
 		} else {
 			$("#sec_accountType").html("管理员");
 		}
@@ -85,9 +86,9 @@
 			API.clearAllStore();
 			window.document.location.href=API.httpserver + "/app/login.html";
 		})
-		
+
 	})
-	
+
 	$("#ModifyPassword").click(function(){
 		window.location.href="${pageContext.request.contextPath}/app/user/toUpdatePasswordView.html";
 	})

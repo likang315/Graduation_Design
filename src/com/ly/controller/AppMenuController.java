@@ -28,8 +28,7 @@ import com.ly.util.Common;
 import com.ly.util.FTPLinuxUtils;
 
 /**
- * 微信端菜单权限控制
- * @author wf
+ * app 菜单权限控制
  *
  */
 @Controller
@@ -39,7 +38,56 @@ public class AppMenuController {
 	@Autowired
 	private AppMenuService appMenuService;
 
-	//微信端页面访问权限开始
+	/**
+	 * 01.获取当前用户组所有的菜单
+	 *
+	 * @param groupId
+	 * @param vendorId
+	 * @param brandId
+	 * @return
+	 */
+	@RequestMapping("/getWxMenuByAll")
+	@ResponseBody
+	public Object getWxMenuByAll(int groupId,int vendorId,int brandId){
+		Map<String,Object> parameter = new HashMap<String,Object>();
+		parameter.put("groupId", groupId);
+		parameter.put("vendorId", vendorId);
+		parameter.put("brandId", brandId);
+		AppWxMenuShare wxMenuS = appMenuService.getWxMenuByAllInfo(parameter);
+		if( wxMenuS!= null){
+			List<AppWxMenu> LWxMenu =  new ArrayList<AppWxMenu>();
+			parameter.put("ids",wxMenuS.getLeft_menu());
+			LWxMenu = appMenuService.getWxMenuByAll(parameter);
+			parameter.put("info", LWxMenu);
+
+			LWxMenu =  new ArrayList<AppWxMenu>();
+			parameter.put("ids",wxMenuS.getIndex());
+			LWxMenu = appMenuService.getWxMenuByAll(parameter);
+			parameter.put("index_menu", LWxMenu);
+
+			LWxMenu =  new ArrayList<AppWxMenu>();
+			String bottom_id = wxMenuS.getBottom_menu();
+			String[] bottom_ids =bottom_id.split(",");
+			if(!bottom_ids[0].equals("0")){
+				for (int i = 0; i < bottom_ids.length; i++) {
+					parameter.put("ids",bottom_ids[i]);
+					List<AppWxMenu> LWxMenus = appMenuService.getWxMenuByAll(parameter);
+					LWxMenu.add(LWxMenus.get(0));
+				}
+				parameter.put("bottom_menu", LWxMenu);
+			}
+			parameter.put("bottom_menu", LWxMenu);
+			parameter.put("state", "ok");
+			parameter.put("menuId", wxMenuS.getId());
+			parameter.put("groupId", wxMenuS.getGroupId());
+		}else{
+			parameter.put("state", "no");
+		}
+		return parameter;
+	}
+
+
+
 	@RequestMapping()
 	public String jumpWXmenu(Model model){
 		List<AppWxMenu> LWxMenu = appMenuService.getAll_wxMenu();
@@ -73,48 +121,8 @@ public class AppMenuController {
 		model.addAttribute("LWxMenu", LWxMenu);
 		return Common.BACKGROUND_PATH + "/AppMenu/menuShior";
 	}
-	
-	//获取当前用户组所有的菜单
-	@RequestMapping("/getWxMenuByAll")
-	@ResponseBody
-	public Object getWxMenuByAll(int groupId,int vendorId,int brandId){
-		Map<String,Object> parameter = new HashMap<String,Object>();
-		parameter.put("groupId", groupId);
-		parameter.put("vendorId", vendorId);
-		parameter.put("brandId", brandId);
-		AppWxMenuShare wxMenuS = appMenuService.getWxMenuByAllInfo(parameter);
-		if( wxMenuS!= null){
-			List<AppWxMenu> LWxMenu =  new ArrayList<AppWxMenu>();
-			parameter.put("ids",wxMenuS.getLeft_menu());
-			LWxMenu = appMenuService.getWxMenuByAll(parameter);
-			parameter.put("info", LWxMenu);
-			
-			LWxMenu =  new ArrayList<AppWxMenu>();
-			parameter.put("ids",wxMenuS.getIndex());
-			LWxMenu = appMenuService.getWxMenuByAll(parameter);
-			parameter.put("index_menu", LWxMenu);
 
-			LWxMenu =  new ArrayList<AppWxMenu>();
-			String bottom_id = wxMenuS.getBottom_menu();
-			String[] bottom_ids =bottom_id.split(",");
-			if(!bottom_ids[0].equals("0")){
-				for (int i = 0; i < bottom_ids.length; i++) {
-					parameter.put("ids",bottom_ids[i]);
-					List<AppWxMenu> LWxMenus = appMenuService.getWxMenuByAll(parameter);
-					LWxMenu.add(LWxMenus.get(0));
-				}
-				parameter.put("bottom_menu", LWxMenu);
-			}
-			parameter.put("bottom_menu", LWxMenu);
-			parameter.put("state", "ok");
-			parameter.put("menuId", wxMenuS.getId());
-			parameter.put("groupId", wxMenuS.getGroupId());
-		}else{
-			parameter.put("state", "no");
-		}
-		return parameter;
-	}
-	
+
 	@RequestMapping("/addWxMenuByAll")
 	@ResponseBody
 	public Object addWxMenuByAll(AppWxMenuShare wxMenuS){

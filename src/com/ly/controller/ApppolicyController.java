@@ -19,6 +19,12 @@ import com.ly.service.ActivityService;
 import com.ly.util.Common;
 
 
+/**
+ * app 端 政策控制器
+ *
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-04-21 11:05
+ */
 @RequestMapping("/app/policy")
 @Controller
 public class ApppolicyController extends AppBaseController {

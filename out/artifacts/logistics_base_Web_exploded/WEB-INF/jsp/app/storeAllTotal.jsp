@@ -6,6 +6,7 @@
 <!DOCTYPE >
 <html>
 	<head>
+		<title>门店-需求上报列表</title>
 		<%@include file="/common/common-app-head.jsp" %>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/logistics.css">
 		<script src="${pageContext.request.contextPath}/js/moment-with-locales.js"></script>
@@ -227,21 +228,16 @@
 			if(examine == 0){
 				return "未审核";
 			} else if(examine == 1){
-				return "二级审核通过";
+				return "审核通过";
 			} else if(examine == 2){
-				return "二级审核驳回";
+				return "审核驳回";
 			} else if(examine == 3){
-				return "一级审核通过";
+				return "审核通过";
 			} else if(examine == 4){
-				return "一级审核驳回";
+				return "审核驳回";
 			}
 		}
-	/* 	function  appendTable(channel_code,state,startTime,endTime){
-		
-			window.location.href="${pageContext.request.contextPath}/app/storeSupplies/StoreAllTotal.html?channel_code="+channel_code+"&&state="+state
-			+"&&startTime="+startTime+"&&endTime="+endTime;
-		
-		} */
+
 		function tiaozhuan(id,channel_code){
 			
 			window.location.href="${pageContext.request.contextPath}/app/storeSupplies/storeAllDetails.html?channel_code="+channel_code+"&&courierPhone="+user.accountName+"&&id="+id;

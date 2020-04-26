@@ -22,6 +22,12 @@ import com.ly.service.SmslogService;
 import com.ly.util.Common;
 import com.ly.util.PropertiesUtils;
 
+/**
+ * app 我的个人设置
+ *
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-04-23 10:45
+ */
 @Controller
 @RequestMapping("/app/user/")
 public class UserController extends AppBaseController {
@@ -37,12 +43,45 @@ public class UserController extends AppBaseController {
 	
 	@Autowired
 	private SmslogMapper smslogMapper;
-	
-	//跳转到忘记密码页面
+
+	/**
+	 * 01.跳转到忘记密码页面
+	 *
+	 */
 	@RequestMapping("forgetPassword")
 	public String toForgetPasswordView(){
 		return Common.APP_PATH + "/forgetPassword";
 	}
+
+	/**
+	 * 02.跳转到修改密码页面
+	 */
+	@RequestMapping("/toUpdatePasswordView")
+	public String toUpdatePasswordView(){
+		return Common.APP_PATH + "/updatePassword";
+	}
+
+
+	/**
+	 * 03.修改密码
+	 *
+	 * @param tellPhone
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping("updatePassword")
+	@ResponseBody
+	public Object updatePassword(String tellPhone,String password){
+		if(accountService.updatePassword(tellPhone, password)){
+			setResult(Common.OK);
+			result.put("info","修改成功");
+		}else{
+			setResult(Common.NO);
+			result.put("info","账号不存在");
+		}
+		return result;
+	}
+
 
 	/**
 	 * 判断手机号是否注册
@@ -59,8 +98,14 @@ public class UserController extends AppBaseController {
 		}
 		return result;
 	}
-	
-	//获取6位验证码
+
+	/**
+	 * 获取6位验证码
+	 *
+	 * @param tellPhone
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("getCode")
 	@ResponseBody
 	public Object getCode(String tellPhone,HttpServletRequest request){
@@ -148,27 +193,17 @@ public class UserController extends AppBaseController {
 		}
 		return result;
 	}
-	
-	@RequestMapping("updatePassword")
-	@ResponseBody
-	public Object updatePassword(String tellPhone,String password){
-		if(accountService.updatePassword(tellPhone, password)){
-			setResult(Common.OK);
-			result.put("info","修改成功");
-		}else{
-			setResult(Common.NO);
-			result.put("info","账号不存在");
-		}
-		return result;
-	}
-	
-	//跳转到修改密码页面
-	@RequestMapping("/toUpdatePasswordView")
-	public String toUpdatePasswordView(){
-		return Common.APP_PATH + "/updatePassword";
-	}
-	
-	//修改密码
+
+
+	/**
+	 * 修改密码
+	 *
+	 * @param username
+	 * @param password
+	 * @param password1
+	 * @param password2
+	 * @return
+	 */
 	@RequestMapping("changepassword")
 	@ResponseBody
 	public Object changePassword(String username,String password,String password1,String password2){

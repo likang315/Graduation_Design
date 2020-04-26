@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ly.util.Common;
 
+
 @RequestMapping("/app/index")
 @Controller
 public class AppIndexController {

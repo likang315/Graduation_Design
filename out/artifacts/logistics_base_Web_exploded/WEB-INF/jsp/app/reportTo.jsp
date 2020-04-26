@@ -4,6 +4,7 @@
 <!DOCTYPE >
 <html>
 <head>
+	<title>门店-报需</title>
 	<%@include file="/common/common-app-head.jsp" %>
 	<link rel="stylesheet"  href="${pageContext.servletContext.contextPath }/css/defaultTheme.css"/>
 	<link rel="stylesheet"  href="${pageContext.servletContext.contextPath }/css/myTheme.css"/>

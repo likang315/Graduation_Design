@@ -49,6 +49,13 @@ public class AppLoginController {
         return Common.APP_PATH + "/login";
     }
 
+    /**
+     * 检查用户登录
+     *
+     * @param model
+     * @param account
+     * @return
+     */
     @RequestMapping("/checkLogin")
     public String appLogin(Model model, Account account) {
 
@@ -89,6 +96,21 @@ public class AppLoginController {
         model.addAttribute("userName", account.getAccountName());
         return Common.APP_PATH + "/login";
     }
+
+    /**
+     * 获取归属公司iD
+     *
+     * @param companyId
+     * @return
+     */
+    @RequestMapping("/getBycompanyId")
+    @ResponseBody
+    public Object getBycompanyId(String companyId) {
+        Map<String, Object> parameter = appLoginService.getBycompanyId(companyId);
+        return parameter;
+    }
+
+
 
     @RequestMapping("/toRegister")
     public String toRegister(Account account) {
@@ -136,13 +158,4 @@ public class AppLoginController {
         int re = appLoginService.add(account);
         return Common.APP_PATH + "/login";
     }
-
-    //得到归属快递公司
-    @RequestMapping("/getBycompanyId")
-    @ResponseBody
-    public Object getBycompanyId(String companyId) {
-        Map<String, Object> parameter = appLoginService.getBycompanyId(companyId);
-        return parameter;
-    }
-
 }

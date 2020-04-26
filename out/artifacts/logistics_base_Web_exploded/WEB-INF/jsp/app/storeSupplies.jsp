@@ -4,6 +4,7 @@
 <!DOCTYPE >
 <html>
 <head>
+	<title>门店-报需-需求上报页面</title>
 	<%@include file="/common/common-app-head.jsp" %>
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/defaultTheme.css"/>
     <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/myTheme.css"/>
@@ -173,7 +174,13 @@ $("#addMaterial").click(function(){
 	}
 });
 
-//数据拼接页面公用方法
+//删除物资信息
+function mydelete(materialId){
+	var data = {"materialId":materialId, "operation":"remove"};
+	appendView(data);
+}
+
+//添加或者删除物资
 function appendView(data){
 	$.post("${pageContext.request.contextPath}/app/storeSupplies/appendOrRemove.html", data).done(function(data){
 		$("#mytbody").html("");
@@ -187,12 +194,6 @@ function appendView(data){
 		}
 		$("#mytbody").append(mytbody);
 	});
-}
-
-//删除物资信息
-function mydelete(materialId){
-	var data = {"materialId":materialId, "operation":"remove"};
-	appendView(data);
 }
 
 //提交数据
@@ -213,7 +214,7 @@ $("#mysubmit").click(function(){
 	});
 });
 
-//提交数据
+// 提交需求上报数据
 function myConfirm(){
 	$("#channel_code").val(user.code);
 	$("#store_shopowner_phone").val(user.accountName);
