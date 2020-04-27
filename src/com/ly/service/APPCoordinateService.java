@@ -12,40 +12,40 @@ import com.ly.entity.app.MailInformation;
 
 public interface APPCoordinateService {
 
-	public List<Map<String, Object>> findIncomplete(String courierPhone);
-	
-	public Map<String, Object> findbyList(String logistics);
-	
-	public Map<String,	Object> findStore(Map<String, Object> m);
-	
-	//验证验证码是否正确
-	public	boolean testCode(String tellPhone, String code);
-		
-   public boolean testCode2(String tellPhone, String code);
-   
-  public boolean updateOrder(Map<String, Object> m);
+    public List<Map<String, Object>> findIncomplete(String courierPhone);
 
-  public boolean updateState(String id);
-  
-  public boolean addCourierstore(APPCourierStore appCourierStore);
-  
-  public boolean addCourierTime(Map<String, Object> m);
-  
-  public boolean updateCourierstore(Map<String, Object> m);
-  
-  public boolean addStoremail(Map<String, Object> m);
-  
-  public boolean addStoreinfo(Map<String, Object> m);
-  
-  
-	public List<Map<String, Object>> findtotal(Map<String, Object> m);
-	
-	public List<Map<String, Object>> CourierAllTotal(Map<String, Object> m);
-	
-	public Integer getCourierlistCount(Map<String, Object> m);
-	
-	//添加图片信息如order
-	public boolean addImgForOrder(MultipartFile orderImg, MultipartFile storeImg,
-			Map<String, Object> m);
-		
+    Map<String, Object> findbyList(String logistics);
+
+    Map<String, Object> findStore(Map<String, Object> m);
+
+    //验证验证码是否正确
+    public boolean testCode(String tellPhone, String code);
+
+    public boolean testCode2(String tellPhone, String code);
+
+    public boolean updateOrder(Map<String, Object> m);
+
+    boolean updateState(String id);
+
+    boolean addCourierstore(APPCourierStore appCourierStore);
+
+    boolean addCourierTime(Map<String, Object> m);
+
+    boolean updateCourierstore(Map<String, Object> m);
+
+    public boolean addStoremail(Map<String, Object> m);
+
+    public boolean addStoreinfo(Map<String, Object> m);
+
+
+    public List<Map<String, Object>> findtotal(Map<String, Object> m);
+
+    List<Map<String, Object>> CourierAllTotal(Map<String, Object> m);
+
+    Integer getCourierlistCount(Map<String, Object> m);
+
+    //添加图片信息如order
+    public boolean addImgForOrder(MultipartFile orderImg, MultipartFile storeImg,
+                                  Map<String, Object> m);
+
 }
