@@ -19,11 +19,12 @@ public interface APPCoordinateService {
     Map<String, Object> findStore(Map<String, Object> m);
 
     //验证验证码是否正确
-    public boolean testCode(String tellPhone, String code);
+    boolean testCode(String tellPhone, String code);
 
     public boolean testCode2(String tellPhone, String code);
 
-    public boolean updateOrder(Map<String, Object> m);
+    // 确认收货时修改状态
+    boolean updateOrder(Map<String, Object> m);
 
     boolean updateState(String id);
 
@@ -33,9 +34,9 @@ public interface APPCoordinateService {
 
     boolean updateCourierstore(Map<String, Object> m);
 
-    public boolean addStoremail(Map<String, Object> m);
+    boolean addStoremail(Map<String, Object> m);
 
-    public boolean addStoreinfo(Map<String, Object> m);
+    boolean addStoreinfo(Map<String, Object> m);
 
 
     public List<Map<String, Object>> findtotal(Map<String, Object> m);
@@ -44,8 +45,14 @@ public interface APPCoordinateService {
 
     Integer getCourierlistCount(Map<String, Object> m);
 
-    //添加图片信息如order
-    public boolean addImgForOrder(MultipartFile orderImg, MultipartFile storeImg,
-                                  Map<String, Object> m);
+    /**
+     * 上传图片入库
+     *
+     * @param orderImg
+     * @param storeImg
+     * @param m
+     * @return
+     */
+    boolean addImgForOrder(MultipartFile orderImg, MultipartFile storeImg, Map<String, Object> m);
 
 }

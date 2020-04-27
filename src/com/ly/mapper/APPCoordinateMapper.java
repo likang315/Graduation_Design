@@ -18,12 +18,11 @@ public interface APPCoordinateMapper {
     Map<String, Object> findStore(Map<String, Object> m);
 
     //验证验证码是否正确
-    public List<com.ly.entity.app.Smslog> testCode(String tellPhone, String code);
+    List<com.ly.entity.app.Smslog> testCode(String tellPhone, String code);
 
-    public List<Map<String, String>> testCode2(String tellPhone, String code, String time);
+    List<Map<String, String>> testCode2(String tellPhone, String code, String time);
 
-
-    public int updateOrder(Map<String, Object> m);
+    int updateOrder(Map<String, Object> m);
 
     int updateState(String id);
 
@@ -39,10 +38,10 @@ public interface APPCoordinateMapper {
 
     Integer getCourierlistCount(Map<String, Object> m);
 
-    public int addStoremail(Map<String, Object> m);
+    int addStoremail(Map<String, Object> m);
 
-    public int addStoreinfo(Map<String, Object> m);
+    int addStoreinfo(Map<String, Object> m);
 
     //
-    public Integer addImgForOrder(Map<String, Object> m);
+    Integer addImgForOrder(Map<String, Object> m);
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.LoginMapper">
+
+	<!--mybatis ehcache缓存配置 -->
+	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />  -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+	<!-- 以下与实体类的中字段一致 -->
+	<sql id="selectId">
+		id,
+		accountName,
+		(select group_concat(name) from sys_role
+		where sys_role.id
+		in (SELECT role_id FROM sys_acc_role WHERE
+		acc_id=sys_account.id) ) roleName,
+		password,
+		description,
+		state,
+		createTime,
+		orgId,
+		groupId,
+		auth_flag
+	</sql>
+
+	<!-- 验证用户登陆 -->
+	<select id="UserLogin" parameterType="Account" resultType="Account">
+		select
+		<include refid="selectId" />
+		from sys_account where
+		accountName=#{accountName} and password=#{password} and deletestatus = 0 and auth_flag = 2
+	</select>
+	
+	<!-- 根据用户名查出id -->
+	<select id="querySingleAccount" parameterType="String" resultType="Account">
+		select
+		<include refid="selectId" />
+		from sys_account where accountName=#{accountName} and deletestatus = 0 and auth_flag = 2
+	</select>
+</mapper>

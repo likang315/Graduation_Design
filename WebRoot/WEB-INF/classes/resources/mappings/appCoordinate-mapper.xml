@@ -29,11 +29,12 @@
     <select id="testCode2" parameterType="String" resultType="com.ly.entity.app.Smslog">
 	    select * from sys_smslog where mobile = #{0} and code = #{1} and TIMESTAMPDIFF(MINUTE,createtime,#{2}) &lt; 5
 	</select>
+
     <!-- 修改状态 -->
     <update id="updateOrder" parameterType="java.util.Map">
         UPDATE mkl_mail_info 
         SET 
-        state=6,
+        state = 6,
         signPeople=#{signPeople},
         signPhone=#{signPhone}, 
         leadTime=#{leadTime},
@@ -66,18 +67,21 @@
 		WHERE logistics=#{logistics} and courier_Phone=#{courier_Phone}
 	</update>
 
-    <!--修改门店坐标  -->
+    <!--修改门店收货时间  -->
     <update id="addCourierTime" parameterType="java.util.Map">
         UPDATE mkl_mail_info SET recipientTime=#{recipientTime} WHERE id=#{id}
     </update>
+
     <!--修改门店坐标  -->
     <update id="addStoremail" parameterType="java.util.Map">
         UPDATE mkl_mail_info SET store_longitude=#{store_longitude},store_latitude=#{store_latitude} WHERE id=#{id}
     </update>
+
     <!--修改门店坐标  -->
     <update id="addStoreinfo" parameterType="java.util.Map">
         UPDATE mkl_store_info SET store_longitude=#{store_longitude},store_latitude=#{store_latitude} WHERE channel_code=#{channel_code}
     </update>
+
     <!-- 查询-->
     <select id="findtotal" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT COUNT(1) AS num,

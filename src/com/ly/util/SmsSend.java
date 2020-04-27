@@ -133,7 +133,7 @@ public class SmsSend {
         WebResource webResource = client.resource("http://sms-api.luosimao.com/v1/send.json");
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
         formData.add("mobile", mobile);
-        formData.add("message", message + "【马卡鲁科技】");
+        formData.add("message", message + "【XUPT】");
         ClientResponse response =  webResource.type( MediaType.APPLICATION_FORM_URLENCODED ).post(ClientResponse.class, formData);
         String textEntity = response.getEntity(String.class);
         int status = response.getStatus();

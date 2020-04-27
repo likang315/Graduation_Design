@@ -119,8 +119,8 @@
         <div class="show-content"
              style=" height:20px; color: red;font-size:12px;text-align: center; margin-bottom: 5px"></div>
         <div style="text-align: center;">
-            <!-- TODO(likang): -->
-            <input type="button" class="btn btn-success" id="uploadimgs" value="上传信息"/>
+            <!-- TODO(likang): 服务器上传地址需要修改 -->
+            <!--<input type="button" class="btn btn-success" id="uploadimgs" value="上传信息"/>-->
             &nbsp;&nbsp;
             <input type="button" class="btn  btn-warning" id="qurenshouhuo" value="确认门店收货"/>
         </div>
@@ -147,9 +147,7 @@
 <script type="text/javascript">
 
     $("#uploadimgs").click(function () {
-
         location.href = "${pageContext.request.contextPath}/app/coordinate/goCourierUpload.html?logistics=" + API.getParam('logistics') + "&&channel_code=" + API.getParam('channel_code') + "&&courierPhone=" + user.accountName;
-
     })
 
     $("#xianshi").hide();
@@ -195,14 +193,19 @@
     function dingwei() {
         console.log("加载了...");
         var geolocation = new BMap.Geolocation();
+        // 获取定位
         geolocation.getCurrentPosition(function (r) {
             store_longitudeA = r.point.lng;
             store_latitudeA = r.point.lat;
             if (this.getStatus() == BMAP_STATUS_SUCCESS) {
                 var output = "";
                 var output1 = "";
-                var myP1 = new BMap.Point(r.point.lng, r.point.lat);    //起点
-                var myP2 = new BMap.Point(store_longitude, store_latitude);    //终点
+                // 查看派送地图之后，实时获取的坐标，起点
+                var myP1 = new BMap.Point(r.point.lng, r.point.lat);
+                // 订单列表中store的坐标 终点
+                // TODO(likang)：门店的坐标是怎么到表中的
+
+                var myP2 = new BMap.Point(store_longitude, store_latitude);
 
                 // 当快递员的坐标与订单中门店坐标相同是显示
                 var searchComplete = function (r) {
@@ -217,6 +220,7 @@
                     if (mi == "米") {
                         var reg = /\d+/g;
                         var ms = lucheng.match(reg);
+                        // 距离小于100 时显示收货窗口
                         if (ms < 100) {
                             $("#xianshi").show();
                             $("#mengban").show();
@@ -267,8 +271,7 @@
             }
         }, {enableHighAccuracy: true});
     }
-
-
+    // 显示确认货物窗口
     $("#xianshi").click(function () {
         $("#mengban").show();
         $("#motaikuang").show();
@@ -285,8 +288,7 @@
         $("#motaikuang1").hide();
 
     })
-
-
+    // 获取验证码
     function acquireCode() {
         $.ajax({
             type: "POST",
@@ -301,7 +303,6 @@
 
                 } else {
                     $(".show-content").html("验证码发送失败！");
-                    //window.location.href="${pageContext.request.contextPath}/app/coordinate/goCourierUpload.html";
                 }
             }
         });
@@ -309,7 +310,6 @@
     }
 
     var times_index = 60;
-
     function getIdentifyingCodeTime() {
         if (times_index > 0) {
             times_index--;
@@ -325,10 +325,11 @@
         }
     }
 
+    // 输入验证码，确认收货
     $("#qurenshouhuo").click(function () {
         confirmreceipt();
     });
-
+    // 修改订单配送成功状态
     function confirmreceipt() {
         var yangzhenmazz = /^\d{6}$/;
         var yanzhengma = $("#code").val();
@@ -366,7 +367,6 @@
                         $(".show-content").html("");
                         $(".show-content").html("货物已送达,3秒之后跳转！");
                         setTimeout("location.href='${pageContext.request.contextPath}/app/coordinate/tocourierList.html'", 3000);
-                        //108.953452,34.265728
                     }
 
 

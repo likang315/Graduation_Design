@@ -39,7 +39,6 @@ public class AppCoordinateServiceImpl implements APPCoordinateService {
 
     @Override
     public Map<String, Object> findStore(Map<String, Object> m) {
-        // TODO Auto-generated method stub
         return appCoordinateMapper.findStore(m);
     }
 
@@ -66,7 +65,6 @@ public class AppCoordinateServiceImpl implements APPCoordinateService {
         try {
             appCoordinateMapper.updateOrder(m);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
             flag = false;
         }
@@ -151,7 +149,6 @@ public class AppCoordinateServiceImpl implements APPCoordinateService {
         try {
             appCoordinateMapper.addStoreinfo(m);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
             flag = false;
         }
@@ -165,7 +162,6 @@ public class AppCoordinateServiceImpl implements APPCoordinateService {
         try {
             appCoordinateMapper.updateCourierstore(m);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
             flag = false;
         }
@@ -220,7 +216,6 @@ public class AppCoordinateServiceImpl implements APPCoordinateService {
      * 获取文件的后缀名
      *
      * @return
-     * @author 殷瑜泰 2017年4月1日上午11:35:26
      */
     public String getSuffix(MultipartFile file) {
         //获取文件的名称

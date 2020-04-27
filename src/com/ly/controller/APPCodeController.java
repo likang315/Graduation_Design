@@ -18,10 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * 
- * @Author lfy
- * @content 验证码
- *
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-04-27 22:43
  */
 @Controller
 @RequestMapping("/app/code")
@@ -33,16 +31,25 @@ public class APPCodeController extends AppBaseController {
 	private APPCoordinateService  appCoordinateService;
 	@Autowired
 	private SmslogMapper smslogMapper;
-	
 
-	//获取6位验证码
+
+	/**
+	 * 获取6位验证码
+	 */
 	@RequestMapping(value="/getCode")
 	@ResponseBody
 	public Object getCode(String tellPhone,HttpServletRequest request){
 		return getCode(tellPhone,6,request);
 	}
 
-	//获取3位验证码
+
+	/**
+	 * 获取3位验证码
+	 *
+	 * @param tellPhone
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/getCode2")
 	@ResponseBody
 	public Object getCode2(String tellPhone,HttpServletRequest request){
@@ -87,6 +94,8 @@ public class APPCodeController extends AppBaseController {
 		}
 		return result;
 	}
+
+
 	public Object getCode(String tellPhone,int num,HttpServletRequest request){
 		String ip="";
 		 if(request.getHeader("x-forwarded-for") == null) { 
@@ -102,7 +111,7 @@ public class APPCodeController extends AppBaseController {
 		}
 		SmsSend ss = new SmsSend();
 		PropertiesUtils.findPropertiesKey("whtsufix");
-		ss.sendSmsCustomer(tellPhone, "验证码："+code+"【马卡鲁科技】");//发送验证码给对应的用户
+		ss.sendSmsCustomer(tellPhone, "验证码："+code+"【XUPT】");//发送验证码给对应的用户
 		SmsSendlog smsSendlog = new SmsSendlog();
  		smsSendlog.setPhone(tellPhone);
 		smsSendlog.setSuccess("Y");

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.WeixinMapper">
+	<select id="getWeixinInfoUserTell" parameterType="java.lang.String" resultType="com.ly.entity.app.WeixinBinding">
+		 select * from wn_weixin_binding where userPhone=#{userPhone} and openid != ""
+	</select>
+	
+	<select id="loginAgain" parameterType="String" resultType="Account">
+	    select * from sys_account where accountName = #{0} and auth_flag != "3" and deletestatus = "0"
+	</select>
+	
+	<select id="loginAgainInWeixinBinDing" parameterType="java.util.Map" resultType="com.ly.entity.background.Account">
+	    select * from sys_account where accountName = #{accountName} and password = #{password} and auth_flag != "3" and deletestatus = "0"
+	</select>
+	
+	<update id="updateLogin" parameterType="java.util.Map">
+	    update sys_account set token=#{token} where accountName = #{accountName}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from wn_weixin_binding where userPhone = #{username}
+	</delete>
+	
+	<insert id="add" parameterType="com.ly.entity.app.WeixinBinding">
+		insert into wn_weixin_binding(
+							openid,
+							nickname,
+							userPhone,
+							userName,
+							cardid,
+							create_time
+						)values (
+							#{openid},
+							#{nickname},
+							#{userPhone},
+							#{userName},
+							#{cardid},
+							#{create_time}
+						)
+	</insert>
+	
+	<insert id="addSmslog" parameterType="com.ly.entity.Smslog">
+		insert into sys_smslog (
+						deviceId,
+						mobile,
+						msg,
+						createtime,
+						code
+					)values(
+						#{deviceId},
+						#{mobile},
+						#{msg},
+						#{createtime},
+						#{code}
+					)
+	</insert>
+	
+	<select id="testCode" parameterType="java.util.Map" resultType="com.ly.entity.Smslog">
+	    select * from sys_smslog where mobile = #{tellPhone} and code = #{code}
+	</select>
+	
+	<delete id="weixinDelete" parameterType="java.lang.String">
+		delete from wn_weixin_binding where userPhone = #{phone}
+	</delete>
+</mapper>
