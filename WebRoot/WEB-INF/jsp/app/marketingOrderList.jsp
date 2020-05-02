@@ -4,6 +4,7 @@
 <!DOCTYPE >
 <html>
 <head>
+	<title>管理员-index-派送列表</title>
 	<%@include file="/common/common-app-head.jsp" %>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/logistics.css">
@@ -14,7 +15,7 @@
 <body class="bgd">
 	<header id="weixin_header">
 		<script>
-			API.settingHeard("订单列表");//修改“个人设置”这个参数为你本页面的功能名
+			API.settingHeard("派送列表");
 		</script>
 	</header>
 	<div class="btDiv">按状态和编号查询</div>
@@ -47,17 +48,6 @@
 	var user = API.getUserInfo();
 	$(function(){
 		API.checkLogin();
-		/* $("#startTime").datepicker({
-			format: "yyyy-mm-dd",
-			language: "zh-CN",
-			autoclose: true
-		});
-			
-		$("#endTime").datepicker({
-			format: "yyyy-mm-dd",
-			language: "zh-CN",
-			autoclose: true
-		}); */
 		var parameter = {"userPhone":user.accountName};
 		appendTable(parameter);
 	});
@@ -120,8 +110,7 @@
 		}
 	});
 	
-	//数据拼接公用方法
-	 function appendTable(parameter){
+	function appendTable(parameter){
 		$.post("${pageContext.request.contextPath}/app/fillingSingle/getOrderList.html", parameter).done(function(data){
 			$("#myDDDiv").html("");
 			$("#myDiv1").html("");
@@ -179,9 +168,9 @@
 	function judgeState(state){
 		if(state < 3){
 			return "已发货";
-		} else if(state >= 3 && state < 6){
+		} else if(state >= 3 && state < 4){
 			return "派送中";
-		} else if(state >= 6){
+		} else if(state >= 4){
 			return "已送达";
 		}
 	}

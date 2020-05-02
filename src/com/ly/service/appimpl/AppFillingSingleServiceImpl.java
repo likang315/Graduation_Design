@@ -25,7 +25,12 @@ import com.ly.mapper.AppFillingSingleMapper;
 import com.ly.service.AppFillingSingleService;
 import com.ly.util.Common;
 
-
+ /**
+  * 管理员-功能接口定义
+  *
+  * @Author kangkang.li@qunar.com
+  * @Date 2020-01-04 09:23
+  */
 @Service("appFillingSingleService")
 public class AppFillingSingleServiceImpl implements AppFillingSingleService {
 
@@ -210,8 +215,9 @@ public class AppFillingSingleServiceImpl implements AppFillingSingleService {
 			for (int j = 0; j < result.size(); j++) {
 				Map<String, Object> map = result.get(j);
 				String[] size = map.get("number").toString().split(",");
-				String msg = "您有  "+size.length+"条新订单,订单编码分别是:" + "\n" + "【"+map.get("number").toString()+"】";
+				String msg = "您有  "+ size.length+"条新订单,订单编码分别是:" + "\n" + "【"+map.get("number").toString()+"】";
 				System.out.println(msg);
+				// TODO(likang)：验证码发送失败....
 				boolean flag = send.sendSms(map.get("expressPhone").toString(), msg, null);
 				if (flag) {
 					System.out.println("验证码发送成功");
@@ -284,7 +290,7 @@ public class AppFillingSingleServiceImpl implements AppFillingSingleService {
 	 */
 	@Override
 	public List<Map<String, Object>> getReportDatas(String startTime, String endTime) {
-		//如果时间为空，给时间默认赋值查询最近一周的信息
+		// 如果时间为空，给时间默认赋值查询最近一周的信息
 		if(startTime == null){
 			endTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date().getTime() + (1*24*60*60*1000) );
 			startTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date().getTime() - (7*24*60*60*1000));
@@ -292,7 +298,6 @@ public class AppFillingSingleServiceImpl implements AppFillingSingleService {
 			try {
 				endTime = new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("yyyy-MM-dd").parse(endTime).getTime() + (1*24*60*60*1000) );
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -374,10 +379,5 @@ public class AppFillingSingleServiceImpl implements AppFillingSingleService {
 		
 		return null;
 	}
-	
-	
-	
-	
-	
 	
 }

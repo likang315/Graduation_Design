@@ -17,7 +17,13 @@ public interface APPCoordinateMapper {
 
     Map<String, Object> findStore(Map<String, Object> m);
 
-    //验证验证码是否正确
+    /**
+     * 验证验证码是否正确
+     *
+     * @param tellPhone
+     * @param code
+     * @return
+     */
     List<com.ly.entity.app.Smslog> testCode(String tellPhone, String code);
 
     List<Map<String, String>> testCode2(String tellPhone, String code, String time);
@@ -32,7 +38,7 @@ public interface APPCoordinateMapper {
 
     int updateCourierstore(Map<String, Object> m);
 
-    public List<Map<String, Object>> findtotal(Map<String, Object> m);
+    List<Map<String, Object>> findtotal(Map<String, Object> m);
 
     List<Map<String, Object>> CourierAllTotal(Map<String, Object> m);
 

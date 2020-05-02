@@ -82,15 +82,15 @@
         UPDATE mkl_store_info SET store_longitude=#{store_longitude},store_latitude=#{store_latitude} WHERE channel_code=#{channel_code}
     </update>
 
-    <!-- 查询-->
+    <!-- TODO（likang）：SQL语句查询-->
     <select id="findtotal" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT COUNT(1) AS num,
         CASE state
         WHEN 0 THEN '已接单'
         WHEN 1 THEN '已接单'
         WHEN 2 THEN '已接单'
-        WHEN 3 THEN '已接单'
-        WHEN 4 THEN '派送中'
+        WHEN 3 THEN '派送中'
+        WHEN 4 THEN '已派送'
         WHEN 5 THEN '已派送'
         WHEN 6 THEN '已派送'
         END as 'states'

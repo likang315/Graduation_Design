@@ -21,12 +21,15 @@ import com.ly.service.AppFillingSingleService;
 import com.ly.util.Common;
 
 /**
- * 营销中心安排物资配送
- * @author wangleiqi
+ * 集团中心控制器
+ *
  * 	1:门店选择;
  * 	2:配送物资选择;
  * 	3:快递员选择;
  * 	4:信息发布查阅;
+ *
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-01-04 09:23
  */
 @Controller
 @RequestMapping("/app/fillingSingle")
@@ -34,47 +37,144 @@ public class AppFillingSingleController {
 	
 	@Autowired
 	private AppFillingSingleService appFillingSingleService;
-	
+
 	/**
-	 * 填单信息跳转
+	 * 01.登录index - 跳转到派送列表
+	 * */
+	@RequestMapping("/orderList")
+	public String orderList(){
+		return Common.APP_PATH + "/marketingOrderList";
+	}
+
+	/**
+	 * 02.派送列表
+	 *
+	 * @param searchMsg 搜索条件
+	 * @param orderState 订单状态
+	 * @param pageNo 当前页
+	 * @param userPhone 当前登录人的电话(集团中心)
+	 * */
+	@RequestMapping("/getOrderList")
+	@ResponseBody
+	public Object getOrderList(String userPhone,
+							   String searchMsg,
+							   String orderState,
+							   String startTime,
+							   String endTime,
+							   String pageNo){
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		// 查询出发件人都是集团中心订单
+		Integer count = appFillingSingleService.getByListCount(userPhone, searchMsg, orderState, startTime, endTime);
+		NowPage<Map<String, Object>> page = new NowPage<>(pageNo, count, 3);
+		List<Map<String, Object>> orders = appFillingSingleService
+				.findByList(userPhone, searchMsg, orderState, startTime, endTime, (page.getPageNo() * page.getSize()));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		for (int i = 0; i < orders.size(); i++) {
+			Map<String, Object> m = orders.get(i);
+			try {
+				if(m.get("createTime") != null){
+					m.put("createTime", dateFormat.format(dateFormat.parse(m.get("createTime").toString())));
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		parameter.put("orders", orders);
+		parameter.put("count", count);
+		parameter.put("pageNo", page.getPageNo());
+		return parameter;
+	}
+
+	/**
+	 * 03.派送订单详情
+	 */
+	@RequestMapping("/getOrderDetail")
+	public String getOrderDetail(String orderNumber, Model model){
+		Map<String, Object> orderDetail = appFillingSingleService.getOrderDetail(orderNumber);
+		model.addAttribute("orderDetail", orderDetail);
+		return Common.APP_PATH + "/marketingOrderDetail";
+	}
+
+
+	/**
+	 * 04.订单统计
+	 */
+	@RequestMapping("/toMarketingOrderTotalView")
+	public String toMarketingOrderTotalView(){
+		return Common.APP_PATH + "/toMarketingOrderTotal";
+	}
+
+
+	/**
+	 * 05.集团中心统计报表
+	 *
+	 * @param startTime
+	 * @param endTime
+	 * @param model
 	 * @return
+	 */
+	@RequestMapping("/getMarketingOrderTotal")
+	public String getMarketingOrderTotal(String startTime, String endTime, Model model){
+		// 获取到报表所需要的数据
+		List<Map<String,Object>> ls =  appFillingSingleService.getReportDatas(startTime,endTime);
+		//当ls不为空的时候将数据传到页面
+		if(ls != null){
+			List<Map<String,Object>> ls1 = (List<Map<String, Object>>) ls.get(0).get("materialAndNumLs");
+			model.addAttribute("ls", ls);
+			model.addAttribute("size", ls1.size());
+		} else {
+			model.addAttribute("ls", null);
+		}
+		model.addAttribute("startTime", startTime);
+		model.addAttribute("endTime", endTime);
+
+		return Common.APP_PATH + "/reportMarket";
+	}
+
+	/**
+	 * 06.派送index
+	 *
+	 * @return String
 	 */
 	@RequestMapping("/toStoreInformation")
 	public String toStoreInformation(){
 		return Common.APP_PATH+"/storeInformation";
 		
 	}
-	
+
 	/**
-	 * 获取品牌信息
+	 * 07.获取品牌信息
+	 *
 	 * @return
 	 */
 	@RequestMapping("/getVendor")
 	@ResponseBody
 	public Object getVendor(){
 		Map<String,Object> map = new HashMap<String,Object>();
-		List<Vendor> vendors = appFillingSingleService.getVendor();//加载品牌信息
+		List<Vendor> vendors = appFillingSingleService.getVendor();
 		map.put("vendor", vendors);
 		return map;
 		
 	}
 	
 	/**
-	 * 获取所有门店信息
+	 * 08.获取所有门店信息
+	 *
 	 * @return
 	 */
 	@RequestMapping("/getStoreAll")
 	@ResponseBody
 	public Object getStoreAll(){
 		Map<String,Object> map = new HashMap<String,Object>();
-		List<Store> stores = appFillingSingleService.getStoreAll();//加载门店信息
+		List<Store> stores = appFillingSingleService.getStoreAll();
 		map.put("store", stores);
 		return map;
 		
 	}
 	
 	/**
-	 * 根据品牌id和门店类型获取信息
+	 * 09.根据品牌id和门店类型获取信息
+	 *
 	 * @param vendor_id 品牌id
 	 * @param type 门店类型（直营，现金）
 	 * @return
@@ -85,12 +185,13 @@ public class AppFillingSingleController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<Store> stores = appFillingSingleService.getStoreById(vendor_id, type);
 		map.put("store", stores);
+
 		return map;
-		
 	}
 	
 	/**
-	 * 门店名称模糊查询
+	 * 10.门店名称关键字模糊查询
+	 *
 	 * @param vendor 品牌id
 	 * @param type 门店类型（直营，现金）
 	 * @param mohuchaxun 门店名称
@@ -107,26 +208,29 @@ public class AppFillingSingleController {
 	}
 	 
 	/**
-	 * 物资跳转页面
+	 * 11.门店下一步-物资跳转页面
+	 *
 	 * @return
 	 */
 	@RequestMapping("/toMaterialInformation")
 	public String toMaterialInformation(String store, Model model, HttpSession session){
-		if(StringUtils.isEmpty(store) || store.indexOf("null") != -1){//没选择门店
+		if(StringUtils.isEmpty(store) || store.indexOf("null") != -1){
 			return "redirect:toStoreInformation.html";
 		} else {
 			model.addAttribute("store", store);
 			//加载物资名称
 			List<Map<String, Object>> materials = appFillingSingleService.getMaterial();
 			model.addAttribute("material", materials);
-			session.removeAttribute("myMaterial");//防止购物车残留
+			// 防止购物车残留
+			session.removeAttribute("myMaterial");
 			return Common.APP_PATH + "/materialInformation";
 		}
 	}
 	
 	
 	/**
-	 * 处理物资拼接问题
+	 * 12.添加或者删除物资
+	 *
 	 * @param num 物资数量
 	 * @param material 物资id
 	 * @param materialName 物资名称
@@ -135,7 +239,13 @@ public class AppFillingSingleController {
 	 * */
 	@RequestMapping("/appendOrRemove")
 	@ResponseBody
-	public Object appendOrRemove(String num, String material, String materialName, String store, String operation, String predictTime, HttpSession session){
+	public Object appendOrRemove(String num,
+								 String material,
+								 String materialName,
+								 String store,
+								 String operation,
+								 String predictTime,
+								 HttpSession session){
 		List<Map<String, Object>> mList; 
 		mList = (List<Map<String, Object>>) session.getAttribute("myMaterial");//物资信息
 		if("append".equals(operation)){//拼接操作
@@ -186,8 +296,13 @@ public class AppFillingSingleController {
 		}
 		return mList;
 	}
-	
-	//验证有没有添加物资
+
+	/**
+	 * 13.物资信息下一步，存储于session中
+	 *
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/checkMaterial")
 	@ResponseBody
 	public Object checkMaterial(HttpSession session){
@@ -202,7 +317,8 @@ public class AppFillingSingleController {
 	}
 	
 	/**
-	 * 快递员跳转页面
+	 * 14.快递员页面
+	 *
 	 * @return
 	 */
 	@RequestMapping("/toCourier")
@@ -214,7 +330,7 @@ public class AppFillingSingleController {
 	}
 	
 	/**
-	 * 获取快递员信息
+	 * 15. 根据选择的快递公司，获取快递员信息
 	 * @return
 	 */
 	@RequestMapping("/getCourier")
@@ -225,12 +341,11 @@ public class AppFillingSingleController {
 		map.put("courierList", courierList);
 		return map;
 	}
-	
-	
+
 	/**
-	 * 生成订单记录
+	 * 16. 生成订单记录
 	 * @param courierPhones 快递员电话
-	 * @param chinaMobiles 生成该次订单任务的营销中心人员电话
+	 * @param accountPhone 生成该次订单任务的集团人员电话
 	 * @param session 得到已经生成的物资信息和门店信息
 	 * @return
 	 */
@@ -254,99 +369,13 @@ public class AppFillingSingleController {
 	}
 	
 	/**
-	 * 跳转订单生成成功提示页面
-	 * */
+	 * 17.跳转订单生成成功提示页面
+	 */
 	@RequestMapping("/toSuccessView")
 	public String toSuccessView(){
 		return Common.APP_PATH + "/success";
 	}
-	
-	/**
-	 * 跳转到订单列表
-	 * */
-	@RequestMapping("/orderList")
-	public String orderList(){
-		return Common.APP_PATH + "/marketingOrderList";
-	}
-	
-	/**
-	 * 订单列表
-	 * @param searchMsg 搜索条件
-	 * @param orderState 订单状态
-	 * @param pageNo 当前页
-	 * @param userPhone 当前登录人的电话(营销中心)
-	 * */
-	@RequestMapping("/getOrderList")
-	@ResponseBody
-	public Object getOrderList(String userPhone, String searchMsg, String orderState, String startTime, String endTime, String pageNo){
-		Map<String, Object> parameter = new HashMap<String, Object>();
-		Integer count = appFillingSingleService.getByListCount(userPhone, searchMsg, orderState, startTime, endTime);
-		NowPage<Map<String, Object>> page = new NowPage<>(pageNo, count, 3);
-		List<Map<String, Object>> orders = appFillingSingleService.findByList(userPhone, searchMsg, orderState, startTime, endTime, (page.getPageNo() * page.getSize()));
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		for (int i = 0; i < orders.size(); i++) {
-			Map<String, Object> m = orders.get(i);
-			try {
-				if(m.get("createTime") != null){
-					m.put("createTime", dateFormat.format(dateFormat.parse(m.get("createTime").toString())));
-				}
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		parameter.put("orders", orders);
-		parameter.put("count", count);
-		parameter.put("pageNo", page.getPageNo());
-		return parameter;
-	}
-	
-	/**
-	 * 订单详情
-	 * */
-	@RequestMapping("/getOrderDetail")
-	public String getOrderDetail(String orderNumber, Model model){
-		Map<String, Object> orderDetail = appFillingSingleService.getOrderDetail(orderNumber);
-		model.addAttribute("orderDetail", orderDetail);
-		return Common.APP_PATH + "/marketingOrderDetail";
-	}
-	
-	
-	/**
-	 * 订单统计
-	 * */
-	@RequestMapping("/toMarketingOrderTotalView")
-	public String toMarketingOrderTotalView(){
-		return Common.APP_PATH + "/toMarketingOrderTotal";
-	}
-	
-	
-	/**
-	 * @author 殷瑜泰 2017年4月15日下午1:52:08
-	 * 营销中心统计报表
-	 * @param userPhone
-	 * @param startTime
-	 * @param endTime
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/getMarketingOrderTotal")
-	public String getMarketingOrderTotal(String startTime, String endTime, Model model){
-		
-		//获取到报表所需要的数据
-		 List<Map<String,Object>> ls =  appFillingSingleService.getReportDatas(startTime,endTime);
-		 //当ls不为空的时候将数据传到页面
-		 if(ls != null){
-			List<Map<String,Object>> ls1 = (List<Map<String, Object>>) ls.get(0).get("materialAndNumLs");
-			 model.addAttribute("ls", ls);
-			 model.addAttribute("size", ls1.size());
-		 } else {
-			 model.addAttribute("ls", null);
-		 }
-		model.addAttribute("startTime", startTime);
-		model.addAttribute("endTime", endTime);
-		return Common.APP_PATH + "/reportMarket";
-		
-		
-	}
+
+
+
 }

@@ -15,15 +15,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import sun.misc.BASE64Decoder;
 
 import com.ly.entity.app.APPCourierStore;
 import com.ly.service.APPCoordinateService;
@@ -385,6 +381,36 @@ public class APPCoordinateController {
         return map;
     }
 
+    /**
+     * 12. 统计index，跳转至订单统计页面
+     *
+     * @return
+     */
+    @RequestMapping("goCourierTotal")
+    public String goStoreTotal() {
+        return Common.APP_PATH + "/toCourierTotal";
+    }
+
+    /**
+     * 13.订单统计页面
+     */
+    @RequestMapping(value = "toCourierTotal")
+    public String toStoreTotal(Model model, String accountName, String startTime, String endTime) {
+        Map<String, Object> m = new HashMap<String, Object>();
+        m.put("accountName", accountName);
+        m.put("startTime", startTime);
+        m.put("endTime", endTime);
+
+        List<Map<String, Object>> map = appCoordinateService.findtotal(m);
+
+        model.addAttribute("map", map);
+        model.addAttribute("accountName", accountName);
+        model.addAttribute("startTime", startTime);
+        model.addAttribute("endTime", endTime);
+
+        return Common.APP_PATH + "/courierTotal";
+
+    }
 
 
     /**
@@ -425,51 +451,6 @@ public class APPCoordinateController {
 //		}
 //		return map;
 //	}
-
-
-    @RequestMapping("goCourierTotal")
-    public String goStoreTotal() {
-        return Common.APP_PATH + "/toCourierTotal";
-    }
-
-    /**
-     * 跳转订单统计页面
-     */
-    @RequestMapping(value = "toCourierTotal")
-    public String toStoreTotal(Model model, String accountName, String startTime, String endTime) {
-        Map<String, Object> m = new HashMap<String, Object>();
-        m.put("accountName", accountName);
-        m.put("startTime", startTime);
-        m.put("endTime", endTime);
-
-        List<Map<String, Object>> map = appCoordinateService.findtotal(m);
-
-        model.addAttribute("map", map);
-        model.addAttribute("accountName", accountName);
-        model.addAttribute("startTime", startTime);
-        model.addAttribute("endTime", endTime);
-
-        return Common.APP_PATH + "/courierTotal";
-
-    }
-
-    /**
-     * 查找订单统计数据
-     */
-    @RequestMapping(value = "CourierAllTotal")
-    public String CourierAllTotal(Model model, String accountName, String state) {
-
-        Map<String, Object> m = new HashMap<String, Object>();
-        m.put("state", state);
-        m.put("accountName", accountName);
-        List<Map<String, Object>> map = appCoordinateService.CourierAllTotal(m);
-
-        model.addAttribute("state", state);
-        model.addAttribute("map", map);
-
-        return Common.APP_PATH + "/courierAllTotal";
-
-    }
 
 
 }

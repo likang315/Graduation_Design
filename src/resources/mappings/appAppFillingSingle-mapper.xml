@@ -67,7 +67,7 @@
 		<if test="phone != null and phone != ''">
 			AND a.accountName like concat(concat('%',#{phone}),'%')
 		</if>
-		GROUP BY a.accountName
+		GROUP BY a.accountName, a.real_name, e.company_name
 	</select>
 	
 	<!-- 得到快递员现在的派送量 -->
@@ -87,7 +87,7 @@
 			SELECT * FROM mkl_mail_info WHERE state >= 2
 		) B
 		ON A.accountName = B.courierPhone
-		GROUP BY A.accountName
+		GROUP BY A.accountName, A.real_name
 		ORDER BY con
 	</select>
 	
@@ -147,10 +147,10 @@
 		SELECT COUNT(1) FROM mkl_mail_info WHERE shipper = #{userPhone} AND isDelete = 0
 		<if test="orderState != null and orderState != ''">
 			<if test="orderState == 2">
-				AND state &lt; 3
+				AND state &lt; 4
 			</if>
 			<if test="orderState == 3">
-				AND state <![CDATA[>=]]> 3 AND state &lt; 6
+				AND state <![CDATA[>=]]> 4 AND state &lt; 6
 			</if>
 			<if test="orderState == 6">
 				AND state = #{orderState}
@@ -172,10 +172,10 @@
 		SELECT * FROM mkl_mail_info WHERE shipper = #{userPhone} and isDelete=0
 		<if test="orderState != null and orderState != ''">
 			<if test="orderState == 2">
-				AND state &lt; 3
+				AND state &lt; 4
 			</if>
 			<if test="orderState == 3">
-				AND state <![CDATA[>=]]> 3 AND state &lt; 6
+				AND state <![CDATA[>=]]> 4 AND state &lt; 6
 			</if>
 			<if test="orderState == 6">
 				AND state = #{orderState}
@@ -237,7 +237,7 @@
 			and m.serviceTime > #{startTime}
 			and m.serviceTime &lt; #{endTime}
 			and m.isDelete = '0'
-			GROUP BY  m.channel_code
+			GROUP BY  m.channel_code, m.store, m.state
 	</select>
 	
 	<!-- 根据渠道编码查询出渠道的物资信息 -->
@@ -278,11 +278,11 @@
 	
 	<!-- 从临时表获取当前查询的信息 -->
 	<select id="getStoreInfo" parameterType="java.lang.String" resultType="java.util.Map">
-	SELECT m.channel_code,
-			m.store 	from mkl_mail_report_temp m
+	SELECT m.channel_code, m.store
+	FROM mkl_mail_report_temp m
 	where 1=1
 	and m.createUserStr = #{createUserStr}
-	GROUP BY m.channel_code;
+	GROUP BY m.channel_code, m.store;
 	</select>
 	<!-- 获取派送次数信息 -->
 	<select id="getSendNum" parameterType="java.lang.String" resultType="java.util.Map">
@@ -305,16 +305,6 @@
 	
 	<!-- 获取物资和数量信息 -->
 	<select id="getMaterialNum" parameterType="java.lang.String" resultType="java.util.HashMap">
-	<!-- SELECT m.material_name,
-			IFNULL(A.materialNameNum,'0') as 'materialNameNum'
-	from mkl_material_info m
-	LEFT JOIN (SELECT m.materialName,
-					SUM(m.materialNumber) AS 'materialNameNum' from mkl_mail_report_temp m
-		where 1=1
-		and m.channel_code = #{channel_code}
-		and m.createUserStr = #{createUserStr}
-		GROUP BY m.materialName
-	) A on A.materialName = m.material_name -->
 		SELECT m.material_name, A.materialNameNum
 	from mkl_material_info m
 	LEFT JOIN (SELECT m.materialName,

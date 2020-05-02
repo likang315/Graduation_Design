@@ -8,8 +8,8 @@
         <div class="yclogo"><img src="${pageContext.request.contextPath}/images/member_img.png" width="100%"/></div>
         <div class="xingming">
         	<div >账户：<label id="userPhone"></label></div>
+            <div >类型：<label id="userType"></label></div>
             <div >所属：<label id="userCity"></label></div>
-            <div >账户类型：<label id="userType"></label></div>
         </div>
         <div class="tuichudtb"><img src="${pageContext.request.contextPath}/images/accessdenied.png" width="100%"/></div>		
     </div>
@@ -66,13 +66,16 @@ $(document).ready(function(){
 	//加载个人信息
 	var user = API.getUserInfo();
 	$('#userPhone').html(user.accountName);
-	$('#userCity').html(user.city);
+	//$('#userCity').html(user.city);
 	if(user.accountType=='1'){
-		$('#userType').html('门店');
+        $('#userCity').html("门店中心");
+        $('#userType').html('门店');
 	}else if(user.accountType=='2'){
-		$('#userType').html('快递员');
+        $('#userCity').html("快递员中心");
+        $('#userType').html('快递员');
 	}else if(user.accountType=='3'){
-		$('#userType').html('管理员');
+        $('#userCity').html("集团中心");
+        $('#userType').html('管理员');
 	}
 	
 

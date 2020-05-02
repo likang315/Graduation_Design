@@ -14,7 +14,7 @@
 	<script type="text/javascript">
 		 API.checkLogin();
 		var user = API.getUserInfo(); 
-		location.href = "${pageContext.request.contextPath}/app/fillingSingle/getMarketingOrderTotal.html?userPhone="+ user;	
+		location.href = "${pageContext.request.contextPath}/app/fillingSingle/getMarketingOrderTotal.html";
 	</script>
 </body>
 </html>

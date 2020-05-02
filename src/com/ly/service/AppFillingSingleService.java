@@ -7,6 +7,10 @@ import com.ly.entity.app.MailInformation;
 import com.ly.entity.app.Store;
 import com.ly.entity.app.Vendor;
 
+/**
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-01-04 09:23
+ */
 public interface AppFillingSingleService {
 
 	List<Vendor> getVendor();
@@ -34,8 +38,10 @@ public interface AppFillingSingleService {
 	List<Map<String, Object>> getMarketingOrderTotal(String userPhone, String startTime, String endTime);
 
 	Integer getByListCount(String userPhone, String searchMsg, String orderState, String startTime, String endTime);
-	
-	//根据时间筛选获取到报表所需要数据
+
+	/**
+	 * 根据时间筛选获取到报表所需要数据
+	 */
 	List getReportDatas(String startTime, String endTime);
 	
 }

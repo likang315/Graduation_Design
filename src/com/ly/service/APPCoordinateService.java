@@ -1,14 +1,11 @@
 package com.ly.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ly.entity.app.APPCourierStore;
-import com.ly.entity.app.MailInformation;
 
 public interface APPCoordinateService {
 
@@ -18,12 +15,19 @@ public interface APPCoordinateService {
 
     Map<String, Object> findStore(Map<String, Object> m);
 
-    //验证验证码是否正确
+    /**
+     * 验证验证码是否正确
+     */
     boolean testCode(String tellPhone, String code);
 
     public boolean testCode2(String tellPhone, String code);
 
-    // 确认收货时修改状态
+    /**
+     * 确认收货时修改状态
+     *
+     * @param m
+     * @return
+     */
     boolean updateOrder(Map<String, Object> m);
 
     boolean updateState(String id);
@@ -38,8 +42,7 @@ public interface APPCoordinateService {
 
     boolean addStoreinfo(Map<String, Object> m);
 
-
-    public List<Map<String, Object>> findtotal(Map<String, Object> m);
+    List<Map<String, Object>> findtotal(Map<String, Object> m);
 
     List<Map<String, Object>> CourierAllTotal(Map<String, Object> m);
 

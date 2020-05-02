@@ -15,10 +15,6 @@ import com.ly.service.GroupService;
 import com.ly.util.Common;
 
 /**
- * 
- * @Author 文军
- * @Date 2016年1月29日 下午1:58:43 
- * @E-mail wenjun_chen@sohu.com
  * @content app 基础控制器
  *
  */
