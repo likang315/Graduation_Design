@@ -5,6 +5,7 @@
 <div class="mengban"></div>
 <div class="sidebar-left">
 	<div class="yctop">
+        <!--TODO(likang): 后期图片更换... SuNing-->
         <div class="yclogo"><img src="${pageContext.request.contextPath}/images/member_img.png" width="100%"/></div>
         <div class="xingming">
         	<div >账户：<label id="userPhone"></label></div>

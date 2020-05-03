@@ -1,8 +1,5 @@
 package com.ly.service.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,34 +7,21 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.ly.entity.background.Account;
 import com.ly.mapper.BackReportMapper;
-import com.ly.mapper.BackStoreMapper;
 import com.ly.service.BackReportService;
-import com.ly.service.BackStoreService;
-import com.ly.util.FTPLinuxUtils;
 
 /**
- * 门店的后台处理 实现
- * 
- * @author 殷瑜泰 2017年3月16日上午11:06:51
+ * 报表开发相关
  *
+ * @Author kangkang.li@qunar.com
+ * @Date 2020-04-17 09:56
  */
 @Transactional
 @Service("backReportService")
@@ -45,11 +29,6 @@ public class BackReportServiceImpl implements BackReportService {
 	@Autowired
 	private BackReportMapper backReportMapper; 
 
-	@Override
-	public List<Map<String, Object>> getOrder(Map m) {
-		
-		return backReportMapper.getOrder(m);
-	}
 	/**
 	 * 获取报表数据
 	 */
@@ -63,7 +42,6 @@ public class BackReportServiceImpl implements BackReportService {
 			try {
 				endTime = new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("yyyy-MM-dd").parse(endTime).getTime() + (1*24*60*60*1000) );
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -37,7 +37,7 @@
 			and m.serviceTime > #{startTime}
 			and m.serviceTime &lt; #{endTime}
 			and m.isDelete = '0'
-			GROUP BY  m.channel_code
+			GROUP BY  m.channel_code, m.store, m.state
 	</select>
 	
 	<!-- 根据渠道编码查询出渠道的物资信息 -->
@@ -78,12 +78,13 @@
 	
 	<!-- 从临时表获取当前查询的信息 -->
 	<select id="getStoreInfo" parameterType="java.lang.String" resultType="java.util.Map">
-	SELECT m.channel_code,
-			m.store 	from mkl_mail_report_temp m
+	SELECT m.channel_code, m.store
+	from mkl_mail_report_temp m
 	where 1=1
 	and m.createUserStr = #{createUserStr}
-	GROUP BY m.channel_code;
+	GROUP BY m.channel_code, m.store;
 	</select>
+
 	<!-- 获取派送次数信息 -->
 	<select id="getSendNum" parameterType="java.lang.String" resultType="java.util.Map">
 		SELECT A.OrderAll,
@@ -105,19 +106,9 @@
 	
 	<!-- 获取物资和数量信息 -->
 	<select id="getMaterialNum" parameterType="java.lang.String" resultType="java.util.HashMap">
-	<!-- SELECT m.material_name,
-			IFNULL(A.materialNameNum,'0') as 'materialNameNum'
-	from mkl_material_info m
-	LEFT JOIN (SELECT m.materialName,
-					SUM(m.materialNumber) AS 'materialNameNum' from mkl_mail_report_temp m
-		where 1=1
-		and m.channel_code = #{channel_code}
-		and m.createUserStr = #{createUserStr}
-		GROUP BY m.materialName
-	) A on A.materialName = m.material_name -->
 		SELECT m.material_name, A.materialNameNum
-	from mkl_material_info m
-	LEFT JOIN (SELECT m.materialName,
+	    from mkl_material_info m
+	    LEFT JOIN (SELECT m.materialName,
 					SUM(m.materialNumber) AS materialNameNum from mkl_mail_report_temp m
 		where 1=1
 		and m.channel_code = #{channel_code}

@@ -7,7 +7,7 @@ import java.util.Map;
 import net.sf.json.JSONObject;
 
 /**
- * 获取经纬度
+ * TODO(likang):获取经纬度
  *
  */
 public class CourierNumber {

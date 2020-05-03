@@ -140,6 +140,7 @@ public class APPCoordinateController {
         Map<String, Object> m = new HashMap<String, Object>();
         m.put("id", logistics);
         m.put("recipientTime", recipientTime);
+        // TODO(likang): 查看派送地图是坐标获取错误，后期修改
         m.put("courier_longitude", courier_longitude);
         m.put("courier_latitude", courier_latitude);
         Map<String, Object> map = new HashMap<String, Object>();
