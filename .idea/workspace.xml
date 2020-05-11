@@ -6,12 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8af70565-15df-4457-8c0f-fdc6f056ae30" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/WebRoot/images/china_mobile.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/images/china_mobile.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/images/m_logo_bottom.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/images/m_logo_bottom.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebRoot/images/member_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/images/member_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ly/controller/BackOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ly/controller/BackOrderController.java" afterDir="false" />
-    </list>
+    <list default="true" id="8af70565-15df-4457-8c0f-fdc6f056ae30" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,25 +34,7 @@
     <favorites_list name="logisitics_prod" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/ly/controller/BackOrderController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="359" column="16" selection-start-line="359" selection-end-line="360" />
-              <folding>
-                <element signature="method#list#0;class#BackOrderController#0" expanded="true" />
-                <element signature="method#updateLogistics#0;class#BackOrderController#0" expanded="true" />
-                <element signature="method#sendOrder#0;class#BackOrderController#0" expanded="true" />
-                <element signature="method#addOrder#0;class#BackOrderController#0" expanded="true" />
-                <element signature="method#checkMaterial#0;class#BackOrderController#0" expanded="true" />
-                <element signature="method#checkcourierPhone#0;class#BackOrderController#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -183,9 +160,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1440" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="832" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -207,24 +184,6 @@
             <path>
               <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ly" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="logisitics_prod" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ly" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -380,7 +339,7 @@
       <workItem from="1587990880709" duration="18340000" />
       <workItem from="1588468711834" duration="4269000" />
       <workItem from="1588668169002" duration="5000" />
-      <workItem from="1588851651065" duration="11270000" />
+      <workItem from="1588851651065" duration="11784000" />
     </task>
     <task id="LOCAL-00001" summary="delete: delete unuse file">
       <created>1587114225550</created>
@@ -400,7 +359,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188340000" />
+    <option name="totallyTimeSpent" value="188854000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -412,10 +371,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1440" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="832" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4962853" visible="true" weight="0.1687966" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4962853" visible="true" weight="0.2267525" />
       <window_info id="Structure" order="1" sideWeight="0.5024311" side_tool="true" weight="0.16773163" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -425,14 +383,14 @@
       <window_info id="Web" order="7" sideWeight="0.50067294" side_tool="true" weight="0.185836" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32953367" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15958549" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41841003" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946752" weight="0.626943" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32914925" />
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32775453" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.32914925" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.8601036" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.41980475" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5005325" side_tool="true" weight="0.32953367" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3046632" />
@@ -966,7 +924,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/controller/BackOrderController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="291">
           <caret line="359" column="16" selection-start-line="359" selection-end-line="360" />
           <folding>
             <element signature="method#list#0;class#BackOrderController#0" expanded="true" />
