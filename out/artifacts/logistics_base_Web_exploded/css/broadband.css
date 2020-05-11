@@ -1,0 +1,34 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0px;padding:0px;}
+body{background:#eee;}
+.all{background:#fff; padding:0px;}
+
+
+
+.highest{color:#F00;font-size:40px;font-weight:bold;margin-top:30px;border:0px solid #fff; } 
+.zuimaxdiv{height:50px;margin-top:20px;border:0px solid #fff; }
+.maxdiv{ width:15%; height:35px; float:left; }
+.name{ width:30%; height:35px; float:left; font-size:20px; font-weight:bold;}
+.mindiv{width:70%; height:35px; float:left; }
+
+.hr{ border-bottom:5px solid #ed7d31; width:95%; margin-top:30px; margin-left:2%;margin-bottom:30px;}
+
+caption{ font-size:40px;color:#4979df; font-weight:bold; padding-left:2%;}
+select{ width:120px;  height:30px; border-radius:5px; padding-left:5px;}
+tr{ height:50px;}
+th{text-align:center;} 
+.text{ height:30px; border-radius:5px; border:1px solid #ccc; width:150px;}
+
+
+
+
+
+
+
+
+
+
+
+
+

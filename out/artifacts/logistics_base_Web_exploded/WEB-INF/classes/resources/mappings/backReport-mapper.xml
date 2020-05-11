@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.mapper.BackReportMapper">
+
+<select id="getOrder" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT A.states as 'name',
+				count(1) as 'value' from 
+	(
+	SELECT  CASE mmi.state
+					WHEN '0' THEN '已发货'
+					WHEN '1' THEN '已发货'
+					WHEN '2' THEN '已发货'
+					WHEN '3' THEN '派送中'
+					WHEN '4' THEN '派送中'
+					WHEN '5' THEN '派送中'
+					WHEN '6' THEN '已送达'
+					END AS 'states'
+	 from mkl_mail_info mmi
+	where 1=1
+	and mmi.isDelete = '0'
+	<if test="startDate != null and startDate != ''">
+	and mmi.createTime >= #{startDate}
+	and mmi.createTime &lt;= #{endDate}
+	</if>
+	) A
+	GROUP BY A.states
+</select>
+    
+ <!-- 根据传入的时间段查询派送完成了的渠道编码信息 -->
+	<select id="getChannelCode" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT m.channel_code,
+				m.store,
+				m.state
+				 FROM mkl_mail_info m 
+			where 1=1
+			and m.serviceTime > #{startTime}
+			and m.serviceTime &lt; #{endTime}
+			and m.isDelete = '0'
+			GROUP BY  m.channel_code, m.store, m.state
+	</select>
+	
+	<!-- 根据渠道编码查询出渠道的物资信息 -->
+	<select id="getMaterials" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT m.materialContent,
+			m.materialNumber,
+			m.createTime,
+			m.serviceTime
+			from mkl_mail_info m
+		where 1=1
+		and m.serviceTime > #{startTime}
+		and m.serviceTime &lt; #{endTime}
+		and m.isDelete = '0'
+		and m.channel_code = #{channel_code}
+	</select>
+	
+	<!-- 获取到的信息插入到临时表中 -->
+	<insert id="insertTemp" parameterType="java.util.Map">
+	INSERT INTO mkl_mail_report_temp 
+	(channel_code,
+	store,
+	state,
+	materialName,
+	materialNumber,
+	createUserStr) VALUES
+	<foreach collection="list" item="ls" index="index" separator=",">
+	(
+	#{ls.channel_code},
+	#{ls.store},
+	#{ls.state},
+	#{ls.materialName},
+	#{ls.materialNumber},
+	#{ls.createUserStr}
+	)
+	</foreach>
+		
+	</insert>
+	
+	<!-- 从临时表获取当前查询的信息 -->
+	<select id="getStoreInfo" parameterType="java.lang.String" resultType="java.util.Map">
+	SELECT m.channel_code, m.store
+	from mkl_mail_report_temp m
+	where 1=1
+	and m.createUserStr = #{createUserStr}
+	GROUP BY m.channel_code, m.store;
+	</select>
+
+	<!-- 获取派送次数信息 -->
+	<select id="getSendNum" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT A.OrderAll,
+			B.doneOrder from 
+			(SELECT count(1) as 'OrderAll' from mkl_mail_info m
+			where 1=1
+			and m.channel_code = #{channel_code}
+			and m.state in('6','7')
+			and m.isDelete = '0') A,
+			(
+			SELECT count(1) as 'doneOrder' from mkl_mail_info m
+			where 1=1
+			and m.channel_code = #{channel_code}
+			and m.state = '6'
+			and m.isDelete = '0'
+			) B
+	
+	</select>
+	
+	<!-- 获取物资和数量信息 -->
+	<select id="getMaterialNum" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT m.material_name, A.materialNameNum
+	    from mkl_material_info m
+	    LEFT JOIN (SELECT m.materialName,
+					SUM(m.materialNumber) AS materialNameNum from mkl_mail_report_temp m
+		where 1=1
+		and m.channel_code = #{channel_code}
+		and m.createUserStr = #{createUserStr}
+		GROUP BY m.materialName
+	) A on A.materialName = m.material_name
+	</select>
+
+
+	<!-- 删除临时表的数据 -->
+	<delete id="deleteTemp" parameterType="java.lang.String">
+		DELETE from mkl_mail_report_temp 
+		where 1=1
+		and createUserStr = #{createUserStr}
+	</delete>
+ 
+ 
+ 
+ 
+</mapper>
