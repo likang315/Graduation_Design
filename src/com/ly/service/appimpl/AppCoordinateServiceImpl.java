@@ -105,7 +105,6 @@ public class AppCoordinateServiceImpl implements APPCoordinateService {
         try {
             appCoordinateMapper.updateState(id);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
             flag = false;
         }
